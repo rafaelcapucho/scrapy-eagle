@@ -1,0 +1,2 @@
+redis
+scrapy>=1.1.0
