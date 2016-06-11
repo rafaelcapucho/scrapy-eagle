@@ -13,5 +13,20 @@ It could be easy made by running the code bellow,
 .. code-block:: console
 
     $ pip install scrapy-eagle
+    
+You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-eagle.ini) containing:
+
+.. code-block:: console
+
+    [redis]
+    host = 10.10.10.10
+    port = 6379
+    db = 0
+    
+Then you will be able to execute the `eagle_server` command like,
+
+.. code-block:: console
+
+    eagle_server --config=/etc/scrapy-eagle.ini
 
 Note: Scrapy Eagle use parts of https://github.com/rolando/scrapy-redis
