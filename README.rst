@@ -12,7 +12,6 @@ It could be easy made by running the code bellow,
 
 .. code-block:: console
 
-    $ # Start up a local environment
     $ pip install scrapy-eagle
 
 Note: Scrapy Eagle use parts of https://github.com/rolando/scrapy-redis
