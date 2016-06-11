@@ -6,7 +6,7 @@ LONG_DESC = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 
 setup(name='scrapy-eagle',
-    version='0.0.2',
+    version='0.0.3',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
