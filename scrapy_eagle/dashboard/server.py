@@ -7,6 +7,8 @@ except ImportError:
 
 import redis
 
+from scrapy_eagle.dashboard.utils import ip
+
 redis_pool, redis_conn = (None, None)
 
 
@@ -23,6 +25,14 @@ def main():
 
     config = configparser.ConfigParser()
     config.read(args.config_file)
+
+    print('discovering your external entrypoint address... ', end='', flush=True)
+
+    public_ip = ip.get_external_ip()
+
+    print(public_ip)
+
+    hostname = ip.get_hostname()
 
     redis_pool = redis.ConnectionPool(
         host=config['redis']['host'],
