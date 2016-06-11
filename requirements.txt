@@ -1,0 +1,3 @@
+-r requirements/worker.txt
+-r requirements/dashboard.txt
+
