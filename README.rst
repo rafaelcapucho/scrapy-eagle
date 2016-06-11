@@ -8,7 +8,7 @@ Scrapy Eagle is a tool that allow us to run any Scrapy based project in a distri
 Installation
 ------------
 
-It could be easy made by running the code bellow,
+It could be easily made by running the code bellow,
 
 .. code-block:: console
 
