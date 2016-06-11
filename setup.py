@@ -6,7 +6,7 @@ LONG_DESC = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 
 setup(name='scrapy-eagle',
-    version='0.0.5',
+    version='0.0.6',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
@@ -14,7 +14,14 @@ setup(name='scrapy-eagle',
     url='http://github.com/rafaelcapucho/scrapy-eagle',
     packages=find_packages(),
     license='BSD',
-    install_requires=['Scrapy>=1.1.0', 'redis>=2.10.0'],
+    install_requires=[
+        'Scrapy>=1.1.0',
+        'redis>=2.10.0',
+        'flask',
+        'redis',
+        'pymongo',
+        'requests'
+    ],
     entry_points = {
         'console_scripts': ['eagle_server=scrapy_eagle.dashboard.server:main'],
     },
