@@ -1,18 +1,18 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 LONG_DESC = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 
 setup(name='scrapy-eagle',
-    version='0.0.4',
+    version='0.0.5',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
     author_email='rafael.capucho@gmail.com',
     url='http://github.com/rafaelcapucho/scrapy-eagle',
-    packages=['scrapy_eagle.worker', 'scrapy_eagle.dashboard'],
+    packages=find_packages(),
     license='BSD',
     install_requires=['Scrapy>=1.1.0', 'redis>=2.10.0'],
     entry_points = {
