@@ -6,7 +6,7 @@ LONG_DESC = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
 
 setup(name='scrapy-eagle',
-    version='0.0.1',
+    version='0.0.2',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
@@ -19,7 +19,7 @@ setup(name='scrapy-eagle',
         'console_scripts': ['eagle_server=scrapy_eagle.dashboard.server:main'],
     },
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
+        'Development Status :: 3 - Alpha',
         'Framework :: Scrapy',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
