@@ -5,6 +5,13 @@ Scrapy Eagle is a tool that allow us to run any Scrapy based project in a distri
 
 **This project is Under Development, don't use it yet**
 
+Requeriments
+------------
+
+Scrapy Eagle uses Redis_ as Distributed Queue, so you will need a redis instance running.
+
+.. _Redis: http://mail.python.org/pipermail/doc-sig/
+
 Installation
 ------------
 
