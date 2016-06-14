@@ -73,4 +73,13 @@ Enable the components in your `settings.py` of your Scrapy project:
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
   REDIS_URL = 'redis://user:pass@hostname:9001'
 
+Development
+-----------
+
+.. code-block:: console
+
+    cd scrapy-eagle/dashboard
+    npm install 
+
+
 **Note**: Until now the Scrapy Eagle is mostly based on https://github.com/rolando/scrapy-redis.
