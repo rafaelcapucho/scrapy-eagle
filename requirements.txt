@@ -1,5 +1,4 @@
 flask
-redis
 pymongo
 requests
 redis
