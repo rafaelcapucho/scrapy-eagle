@@ -4,7 +4,7 @@ from scrapy.exceptions import DontCloseSpider
 from . import connection
 
 
-class RedisMixin(object):
+class DistributedMixin(object):
     """Mixin class to implement reading urls from a redis queue."""
     redis_key = None  # use default '<spider>:start_urls'
 
@@ -51,7 +51,7 @@ class RedisMixin(object):
         self.schedule_next_request()
 
 
-class RedisSpider(RedisMixin, Spider):
+class DistributedSpider(RedisMixin, Spider):
     """Spider that reads urls from redis queue when idle."""
 
     def _set_crawler(self, crawler):
