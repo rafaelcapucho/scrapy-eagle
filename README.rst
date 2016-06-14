@@ -82,6 +82,8 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
     
     class YourSpider(RedisMixin, CrawlSpider):
     
+        name = "domain.com"
+    
         # start_urls = ['http://www.domain.com/']
         redis_key = 'domain.com:start_urls'
         
