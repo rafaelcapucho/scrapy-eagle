@@ -78,9 +78,9 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
 .. code-block:: python
 
     from scrapy.spiders import CrawlSpider, Rule
-    from scrapy_eagle.worker.spiders import RedisMixin
+    from scrapy_eagle.worker.spiders import DistributedMixin
     
-    class YourSpider(RedisMixin, CrawlSpider):
+    class YourSpider(DistributedMixin, CrawlSpider):
     
         name = "domain.com"
     
@@ -94,7 +94,7 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
         
         def _set_crawler(self, crawler):
             CrawlSpider._set_crawler(self, crawler)
-            RedisMixin.setup_redis(self)
+            DistributedMixin.setup_redis(self)
 
 
 Dashboard Development
