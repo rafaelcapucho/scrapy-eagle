@@ -73,8 +73,13 @@ Enable the components in your `settings.py` of your Scrapy project:
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
   REDIS_URL = 'redis://user:pass@hostname:9001'
 
-Development
------------
+Dashboard Development
+---------------------
+
+If you would like to change the client-side then you'll need to have NPM_ installed because we use ReactJS_ to build our interface. Installing all dependencies locally:
+
+.. _ReactJS: https://facebook.github.io/react/
+.. _NPM: https://www.npmjs.com/
 
 .. code-block:: console
 
