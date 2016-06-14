@@ -1,6 +1,8 @@
 .. image:: docs/images/logo_readme.jpg
 ======================================
 
+.. image:: https://travis-ci.org/rafaelcapucho/scrapy-eagle.svg?branch=master
+
 Scrapy Eagle is a tool that allow us to run any Scrapy_ based project in a distributed fashion and monitor how it is going on and how many resources it is consuming on each server.
 
 .. _Scrapy: http://scrapy.org
