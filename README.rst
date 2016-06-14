@@ -41,8 +41,8 @@ Then you will be able to execute the `eagle_server` command like,
 
     eagle_server --config=/etc/scrapy-eagle.ini
     
-Usage
------
+Changes into your Scrapy project
+--------------------------------
 
 Enable the components in your `settings.py` of your Scrapy project:
 
