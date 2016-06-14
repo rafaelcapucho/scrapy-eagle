@@ -86,5 +86,14 @@ If you would like to change the client-side then you'll need to have NPM_ instal
     cd scrapy-eagle/dashboard
     npm install 
 
+Then you can run ``npm start`` to compile and start monitoring any changes and recompiling automatically.
+
+To be easier to test the Dashboard you could use one a simple http server instead of run the ``eagle_server``, like:
+
+.. code-block:: console
+
+    sudo npm install -g http-server
+    cd scrapy-eagle/dashboard
+    http-server templates/
 
 **Note**: Until now the Scrapy Eagle is mostly based on https://github.com/rolando/scrapy-redis.
