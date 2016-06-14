@@ -2,6 +2,7 @@
 ======================================
 
 .. image:: https://travis-ci.org/rafaelcapucho/scrapy-eagle.svg?branch=master
+    :target: https://travis-ci.org/rafaelcapucho/scrapy-eagle
 
 Scrapy Eagle is a tool that allow us to run any Scrapy_ based project in a distributed fashion and monitor how it is going on and how many resources it is consuming on each server.
 
@@ -71,5 +72,14 @@ Enable the components in your `settings.py` of your Scrapy project:
   # Specify the full Redis URL for connecting (optional).
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
   REDIS_URL = 'redis://user:pass@hostname:9001'
+
+Development
+-----------
+
+.. code-block:: console
+
+    cd scrapy-eagle/dashboard
+    npm install 
+
 
 **Note**: Until now the Scrapy Eagle is mostly based on https://github.com/rolando/scrapy-redis.
