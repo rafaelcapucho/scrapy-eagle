@@ -72,6 +72,28 @@ Enable the components in your `settings.py` of your Scrapy project:
   # Specify the full Redis URL for connecting (optional).
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
   REDIS_URL = 'redis://user:pass@hostname:9001'
+  
+Once the configuration is finished, you should adapt each spider to use our Mixin:
+
+.. code-block:: python
+
+    from scrapy.spiders import CrawlSpider, Rule
+    from scrapy_eagle.worker.spiders import RedisMixin
+    
+    class YourSpider(RedisMixin, CrawlSpider):
+    
+        # start_urls = ['http://www.domain.com/']
+        redis_key = 'domain.com:start_urls'
+        
+        rules = (
+            Rule(...),
+            Rule(...),
+        )
+        
+        def _set_crawler(self, crawler):
+            CrawlSpider._set_crawler(self, crawler)
+            RedisMixin.setup_redis(self)
+
 
 Dashboard Development
 ---------------------
