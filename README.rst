@@ -39,7 +39,7 @@ Then you will be able to execute the `eagle_server` command like,
 
 .. code-block:: console
 
-    eagle_server --config=/etc/scrapy-eagle.ini
+    eagle_server --config-file=/etc/scrapy-eagle.ini
     
 Changes into your Scrapy project
 --------------------------------
