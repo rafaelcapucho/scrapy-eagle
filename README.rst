@@ -51,6 +51,9 @@ Enable the components in your `settings.py` of your Scrapy project:
   # Enables scheduling storing requests queue in redis.
   SCHEDULER = "scrapy_eagle.worker.scheduler.DistributedScheduler"
 
+  # Ensure all spiders share same duplicates filter through redis.
+  DUPEFILTER_CLASS = "scrapy_eagle.worker.dupefilter.RFPDupeFilter"
+
   # Schedule requests using a priority queue. (default)
   SCHEDULER_QUEUE_CLASS = 'sscrapy_eagle.worker.queue.SpiderPriorityQueue'
 
