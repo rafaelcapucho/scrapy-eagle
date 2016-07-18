@@ -5,3 +5,4 @@ redis
 scrapy>=1.1.0
 flask-socketio
 flask-cors
+gevent
