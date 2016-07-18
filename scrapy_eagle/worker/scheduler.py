@@ -6,7 +6,7 @@ from scrapy.utils.misc import load_object
 from . import connection
 
 
-class DistribuedScheduler(object):
+class DistributedScheduler(object):
     """Redis-based scheduler"""
 
     def __init__(self, server,
