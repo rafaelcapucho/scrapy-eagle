@@ -13,9 +13,9 @@ class DistribuedScheduler(object):
                  persist=False,
                  flush_on_start=False,
                  queue_key='%(spider)s:requests',
-                 queue_cls='scrapy_redis.queue.SpiderPriorityQueue',
+                 queue_cls='scrapy_eagle.worker.queue.SpiderPriorityQueue',
                  dupefilter_key='%(spider)s:dupefilter',
-                 dupefilter_cls='scrapy_redis.dupefilter.RFPDupeFilter',
+                 dupefilter_cls='scrapy_eagle.worker.dupefilter.RFPDupeFilter',
                  idle_before_close=0,
                  serializer=None):
         """Initialize scheduler.
