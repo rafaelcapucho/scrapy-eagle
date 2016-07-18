@@ -1,59 +1,134 @@
-from scrapy import Spider, signals
+from scrapy import signals
 from scrapy.exceptions import DontCloseSpider
+from scrapy.spiders import Spider, CrawlSpider
 
 from . import connection
 
 
+# Default batch size matches default concurrent requests setting.
+DEFAULT_START_URLS_BATCH_SIZE = 16
+DEFAULT_START_URLS_KEY = '%(name)s:start_urls'
+
+
 class DistributedMixin(object):
     """Mixin class to implement reading urls from a redis queue."""
-    redis_key = None  # use default '<spider>:start_urls'
+    # Per spider redis key, default to DEFAULT_KEY.
+    redis_key = None
+    # Fetch this amount of start urls when idle. Default to DEFAULT_BATCH_SIZE.
+    redis_batch_size = None
+    # Redis client instance.
+    server = None
 
-    def setup_redis(self):
+    def start_requests(self):
+        """Returns a batch of start requests from redis."""
+        return self.next_requests()
+
+    def setup_redis(self, crawler=None):
         """Setup redis connection and idle signal.
 
         This should be called after the spider has set its crawler object.
         """
-        if not self.redis_key:
-            self.redis_key = '%s:start_urls' % self.name
+        if self.server is not None:
+            return
 
-        self.server = connection.from_settings(self.crawler.settings)
-        # idle signal is called when the spider has no requests left,
+        if crawler is None:
+            # We allow optional crawler argument to keep backwards
+            # compatibility.
+            # XXX: Raise a deprecation warning.
+            crawler = getattr(self, 'crawler', None)
+
+        if crawler is None:
+            raise ValueError("crawler is required")
+
+        settings = crawler.settings
+
+        if self.redis_key is None:
+            self.redis_key = settings.get(
+                'REDIS_START_URLS_KEY', DEFAULT_START_URLS_KEY,
+            )
+
+        self.redis_key = self.redis_key % {'name': self.name}
+
+        if not self.redis_key.strip():
+            raise ValueError("redis_key must not be empty")
+
+        if self.redis_batch_size is None:
+            self.redis_batch_size = settings.getint(
+                'REDIS_START_URLS_BATCH_SIZE', DEFAULT_START_URLS_BATCH_SIZE,
+            )
+
+        try:
+            self.redis_batch_size = int(self.redis_batch_size)
+        except (TypeError, ValueError):
+            raise ValueError("redis_batch_size must be an integer")
+
+        self.logger.info("Reading start URLs from redis key '%(redis_key)s' "
+                         "(batch size: %(redis_batch_size)s)", self.__dict__)
+
+        self.server = connection.from_settings(crawler.settings)
+        # The idle signal is called when the spider has no requests left,
         # that's when we will schedule new requests from redis queue
-        self.crawler.signals.connect(self.spider_idle, signal=signals.spider_idle)
-        self.crawler.signals.connect(self.item_scraped, signal=signals.item_scraped)
-        self.log("Reading URLs from redis list '%s'" % self.redis_key)
+        crawler.signals.connect(self.spider_idle, signal=signals.spider_idle)
 
-    def next_request(self):
+    def next_requests(self):
         """Returns a request to be scheduled or none."""
-        use_set = self.settings.getbool('REDIS_SET')
+        use_set = self.settings.getbool('REDIS_START_URLS_AS_SET')
+        fetch_one = self.server.spop if use_set else self.server.lpop
+        # XXX: Do we need to use a timeout here?
+        found = 0
+        while found < self.redis_batch_size:
+            data = fetch_one(self.redis_key)
+            print(data, type(data))
+            if data:
+                data = data.decode('utf-8')
+            else:
+                # Queue empty.
+                break
+            req = self.make_request_from_data(data)
+            if req:
+                yield req
+                found += 1
+            else:
+                self.logger.debug("Request not made from data: %r", data)
 
-        if use_set:
-            url = self.server.spop(self.redis_key)
+        if found:
+            self.logger.debug("Read %s requests from '%s'", found, self.redis_key)
+
+    def make_request_from_data(self, data):
+        # By default, data is an URL.
+        if '://' in data:
+            return self.make_requests_from_url(data)
         else:
-            url = self.server.lpop(self.redis_key)
+            self.logger.error("Unexpected URL from '%s': %r", self.redis_key, data)
 
-        if url:
-            return self.make_requests_from_url(url)
-
-    def schedule_next_request(self):
+    def schedule_next_requests(self):
         """Schedules a request if available"""
-        req = self.next_request()
-        if req:
+        for req in self.next_requests():
             self.crawler.engine.crawl(req, spider=self)
 
     def spider_idle(self):
         """Schedules a request if available, otherwise waits."""
-        self.schedule_next_request()
+        # XXX: Handle a sentinel to close the spider.
+        self.schedule_next_requests()
         raise DontCloseSpider
 
-    def item_scraped(self, *args, **kwargs):
-        """Avoids waiting for the spider to  idle before scheduling the next request"""
-        self.schedule_next_request()
 
-
-class DistributedSpider(RedisMixin, Spider):
+class DistributedSpider(DistributedMixin, Spider):
     """Spider that reads urls from redis queue when idle."""
 
-    def _set_crawler(self, crawler):
-        super(RedisSpider, self)._set_crawler(crawler)
-        self.setup_redis()
+    @classmethod
+    def from_crawler(self, crawler, *args, **kwargs):
+        obj = super(RedisSpider, self).from_crawler(crawler, *args, **kwargs)
+        obj.setup_redis(crawler)
+        return obj
+
+
+class DistributedCrawlSpider(DistributedMixin, CrawlSpider):
+    """Spider that reads urls from redis queue when idle."""
+
+    @classmethod
+    def from_crawler(self, crawler, *args, **kwargs):
+        obj = super(RedisCrawlSpider, self).from_crawler(crawler, *args, **kwargs)
+        obj.setup_redis(crawler)
+        return obj
+
