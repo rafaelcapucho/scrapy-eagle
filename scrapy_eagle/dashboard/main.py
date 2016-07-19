@@ -22,29 +22,23 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-from scrapy_eagle.dashboard.config import setup
-from scrapy_eagle.dashboard.memory import get_connection
-from scrapy_eagle.dashboard.green_threads import heartbeat
+# from scrapy_eagle.dashboard.config import setup, get_hostname, get_public_ip
+from scrapy_eagle.dashboard import config
+from scrapy_eagle.dashboard import memory
+from scrapy_eagle.dashboard.green_threads import heartbeat, stats
 
 
 app = flask.Flask(__name__)
 
+subprocess_pids = set()
+
 def main():
 
     # Install the arguments and config file inside the config module
-    args, config = setup()
+    _args, _config = config.setup()
 
-    print('discovering your external entrypoint address... ', end='', flush=True)
-
-    public_ip = ip.get_external_ip()
-
-    print(public_ip)
-
-    hostname = ip.get_hostname()
-
-    redis_conn = get_connection()
-
-    gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
+    # gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
+    # gevent.spawn(stats.send_resources_info, socketio, subprocess_pids, public_ip)
 
 
 @app.route('/')
@@ -58,6 +52,15 @@ def shutdown():
 
     sys.exit(0)
 
+
+def start_periodics(socketio):
+
+    redis_conn = memory.get_connection()
+    public_ip = config.get_public_ip()
+    hostname = config.get_hostname()
+
+    gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
+    gevent.spawn(stats.send_resources_info, socketio, subprocess_pids, public_ip)
 
 def entry_point():
 
@@ -83,6 +86,8 @@ def entry_point():
         CORS(app)
 
         socketio = SocketIO(app, async_mode='gevent')
+
+        start_periodics(socketio)
 
         # use_reloader: avoid Flask execute twice
         socketio.run(app, host='0.0.0.0', port=5001, use_reloader=False)
