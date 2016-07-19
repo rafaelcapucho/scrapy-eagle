@@ -8,8 +8,6 @@ from scrapy_eagle.dashboard.memory import get_connection
 
 servers = flask.Blueprint('servers', __name__)
 
-# @servers.route('/', defaults={'page': 'index'})
-# @servers.route('/<page>')
 @servers.route('/')
 def show():
 
