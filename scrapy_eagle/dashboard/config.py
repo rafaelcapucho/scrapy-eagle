@@ -7,6 +7,10 @@ except ImportError:
 
 from scrapy_eagle.dashboard.utils import ip
 
+buffers = {}
+
+queue_info_global = []
+
 # Never import these directly
 # Use get_config and get_args instead
 _args = None
