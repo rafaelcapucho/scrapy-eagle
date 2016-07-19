@@ -5,24 +5,17 @@ import sys
 import signal
 import threading
 
-from datetime import datetime
-
-import redis
 import flask
-import json
 import gevent
 
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit
-
-from scrapy_eagle.dashboard.utils import ip
+from flask_socketio import SocketIO
 
 try:
     import configparser
 except ImportError:
     import ConfigParser as configparser
 
-# from scrapy_eagle.dashboard.config import setup, get_hostname, get_public_ip
 from scrapy_eagle.dashboard import config
 from scrapy_eagle.dashboard import memory
 from scrapy_eagle.dashboard.green_threads import heartbeat, stats
@@ -35,16 +28,7 @@ subprocess_pids = set()
 def main():
 
     # Install the arguments and config file inside the config module
-    _args, _config = config.setup()
-
-    # gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
-    # gevent.spawn(stats.send_resources_info, socketio, subprocess_pids, public_ip)
-
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
+    _, _ = config.setup()
 
 def shutdown():
 
@@ -73,8 +57,6 @@ def entry_point():
     main()
 
     try:
-
-        print("Executing the server...")
 
         app.config['SECRET_KEY'] = 'ha74%ahtus342'
         app.config['DEBUG'] = True
