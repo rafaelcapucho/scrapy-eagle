@@ -20,11 +20,10 @@ except ImportError:
 from scrapy_eagle.dashboard import config
 from scrapy_eagle.dashboard import memory
 from scrapy_eagle.dashboard.green_threads import heartbeat, stats
+from scrapy_eagle.dashboard.utils import process
 
 
 app = flask.Flask(__name__)
-
-subprocess_pids = set()
 
 
 def main():
@@ -36,7 +35,7 @@ def main():
 def shutdown():
 
     # Send a signal to all opened subprocess, closing them.
-    for pid, _, _, _ in subprocess_pids:
+    for pid, _, _, _ in config.subprocess_pids:
 
         print('killing subprocess: {pid}'.format(pid=pid))
 
@@ -47,64 +46,23 @@ def shutdown():
     sys.exit(0)
 
 
-def new_subprocess(base_dir, command=None, spider=''):
-
-    import subprocess
-
-    if not command:
-        command = ['python', '-u', 'generator.py']
-    # command = ['galculator']
-    # command = ['/usr/bin/scrapy-py35', 'crawl', '{spider}'.format(spider)]
-
-    with subprocess.Popen(
-            command,
-            cwd=base_dir,
-            stdout=subprocess.PIPE,
-            bufsize=1,
-            universal_newlines=True
-    ) as p:
-
-        identifier = (p.pid, spider, " ".join(command), base_dir)
-
-        subprocess_pids.add(identifier)
-
-        config.buffers[p.pid] = {'finished': False, 'lines': []}
-
-        if spider:
-            gevent.spawn(
-                heartbeat.heartbeat_subprocess,
-                p.pid,
-                spider,
-                max_seconds_idle=20,
-                max_size_limit=15,
-                queue_info_global=config.queue_info_global
-            )
-
-        for line in p.stdout:
-
-            # TODO: remove empty lines
-
-            config.buffers[p.pid]['lines'].append(line)
-
-            pass
-            # print(line, end='', flush=True)
-
-    config.buffers[p.pid]['finished'] = True
-
-    subprocess_pids.remove(identifier)
-
-
 def start_periodics(socketio):
 
     redis_conn = memory.get_connection()
     public_ip = config.get_public_ip()
     hostname = config.get_hostname()
 
-    gevent.spawn(new_subprocess, base_dir='.')
-    gevent.spawn(new_subprocess, base_dir='.')
-    gevent.spawn(new_subprocess, base_dir='.')
+    for i in range(3):
+        gevent.spawn(
+            process.new_subprocess,
+            base_dir='.',
+            subprocess_pids=config.subprocess_pids,
+            queue_info_global=config.queue_info_global,
+            buffers=config.buffers
+        )
+
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
-    gevent.spawn(stats.send_resources_info, socketio, subprocess_pids, public_ip)
+    gevent.spawn(stats.send_resources_info, socketio, config.subprocess_pids, public_ip)
 
 
 def entry_point():

@@ -2,7 +2,57 @@
 # -*- coding:utf-8 -*-
 
 import os
+import subprocess
+
 import psutil
+import gevent
+
+from scrapy_eagle.dashboard.green_threads import heartbeat
+
+def new_subprocess(base_dir, subprocess_pids, queue_info_global, command=None, spider=None, buffers={}):
+
+    if not command:
+        command = ['python', '-u', 'generator.py']
+    # command = ['galculator']
+    # command = ['/usr/bin/scrapy-py35', 'crawl', '{spider}'.format(spider)]
+
+    with subprocess.Popen(
+            command,
+            cwd=base_dir,
+            stdout=subprocess.PIPE,
+            bufsize=1,
+            universal_newlines=True
+    ) as p:
+
+        identifier = (p.pid, spider, " ".join(command), base_dir)
+
+        subprocess_pids.add(identifier)
+
+        buffers[p.pid] = {'finished': False, 'lines': []}
+
+        if spider:
+            gevent.spawn(
+                heartbeat.heartbeat_subprocess,
+                p.pid,
+                spider,
+                max_seconds_idle=20,
+                max_size_limit=15,
+                queue_info_global=queue_info_global
+            )
+
+        for line in p.stdout:
+
+            # TODO: remove empty lines
+
+            buffers[p.pid]['lines'].append(line)
+
+            pass
+            # print(line, end='', flush=True)
+
+    buffers[p.pid]['finished'] = True
+
+    subprocess_pids.remove(identifier)
+
 
 def _get_info_from_pid(pid=None):
 
@@ -17,6 +67,7 @@ def _get_info_from_pid(pid=None):
     cpu = process.cpu_percent(interval=0.5)
 
     return pid, mem, cpu
+
 
 def get_resources_info_from_server():
 

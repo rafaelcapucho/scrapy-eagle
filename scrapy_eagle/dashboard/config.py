@@ -11,6 +11,8 @@ buffers = {}
 
 queue_info_global = []
 
+subprocess_pids = set()
+
 # Never import these directly
 # Use get_config and get_args instead
 _args = None
