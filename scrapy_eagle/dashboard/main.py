@@ -26,10 +26,12 @@ app = flask.Flask(__name__)
 
 subprocess_pids = set()
 
+
 def main():
 
     # Install the arguments and config file inside the config module
     _, _ = config.setup()
+
 
 def shutdown():
 
@@ -73,19 +75,19 @@ def new_subprocess(base_dir, command=None, spider=''):
                 heartbeat.heartbeat_subprocess,
                 p.pid,
                 spider,
-                max_seconds_idle = 20,
-                max_size_limit = 15,
+                max_seconds_idle=20,
+                max_size_limit=15,
                 queue_info_global=config.queue_info_global
             )
 
         for line in p.stdout:
 
-            #TODO: remove empty lines
+            # TODO: remove empty lines
 
             config.buffers[p.pid]['lines'].append(line)
 
             pass
-            #print(line, end='', flush=True)
+            # print(line, end='', flush=True)
 
     config.buffers[p.pid]['finished'] = True
 
@@ -103,6 +105,7 @@ def start_periodics(socketio):
     gevent.spawn(new_subprocess, base_dir='.')
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
     gevent.spawn(stats.send_resources_info, socketio, subprocess_pids, public_ip)
+
 
 def entry_point():
 
@@ -140,4 +143,3 @@ def entry_point():
 if __name__ == "__main__":
 
     entry_point()
-
