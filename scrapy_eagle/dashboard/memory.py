@@ -10,8 +10,6 @@ def init_memory():
 
     config = get_config()
 
-    print(config['redis']['host'])
-
     redis_pool = redis.ConnectionPool(
         host=config['redis']['host'],
         port=config['redis']['port'],
