@@ -23,7 +23,7 @@ setup(name='scrapy-eagle',
         'requests'
     ],
     entry_points = {
-        'console_scripts': ['eagle_server=scrapy_eagle.dashboard.server:main'],
+        'console_scripts': ['eagle_server=scrapy_eagle.dashboard.main:entry_point'],
     },
     classifiers=[
         'Development Status :: 3 - Alpha',

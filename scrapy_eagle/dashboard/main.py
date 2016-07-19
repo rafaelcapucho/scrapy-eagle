@@ -6,9 +6,13 @@ import signal
 import argparse
 import threading
 
+from datetime import datetime
+
 import redis
 import flask
+import json
 import gevent
+
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 
@@ -19,15 +23,9 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-app = flask.Flask(__name__)
-app.config['SECRET_KEY'] = 'ha74%ahtus342'
-app.config['DEBUG'] = True
-CORS(app)
-
-socketio = SocketIO(app, async_mode='gevent')
-
 redis_pool, redis_conn = (None, None)
 
+app = flask.Flask(__name__)
 
 def main():
 
@@ -59,7 +57,30 @@ def main():
 
     redis_conn = redis.Redis(connection_pool=redis_pool)
 
-    print("Executing the server...")
+    globals()['redis_pool'] = redis_pool
+    globals()['redis_conn'] = redis_conn
+
+@app.route('/servers')
+def get_servers_list():
+
+    now = datetime.now()
+
+    servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
+
+    results = []
+
+    for entry in servers:
+        ip, hostname = entry.decode('utf-8').split("-")
+        results.append({'public_ip': ip, 'hostname': hostname})
+
+    # Set in Redis usually returns in random order, sort by hostname
+    results = sorted(results, key=lambda x: x['hostname'])
+
+    return flask.Response(
+        response=json.dumps(results, sort_keys=True),
+        status=200,
+        mimetype="application/json"
+    )
 
 @app.route('/')
 def hello_world():
@@ -71,7 +92,7 @@ def shutdown():
 
     sys.exit(0)
 
-if __name__ == "__main__":
+def entry_point():
 
     # Graceful shutdown when kill are received
     signal.signal(signal.SIGTERM, lambda sig, frame: shutdown())
@@ -83,8 +104,21 @@ if __name__ == "__main__":
 
     try:
 
+        print("Executing the server...")
+
+        app.config['SECRET_KEY'] = 'ha74%ahtus342'
+        app.config['DEBUG'] = True
+        CORS(app)
+
+        socketio = SocketIO(app, async_mode='gevent')
+
         # use_reloader: avoid Flask execute twice
         socketio.run(app, host='0.0.0.0', port=5001, use_reloader=False)
 
     except (KeyboardInterrupt, SystemExit):
         shutdown()
+
+if __name__ == "__main__":
+
+    entry_point()
+
