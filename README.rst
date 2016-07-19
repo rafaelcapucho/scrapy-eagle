@@ -55,13 +55,13 @@ Enable the components in your `settings.py` of your Scrapy project:
   DUPEFILTER_CLASS = "scrapy_eagle.worker.dupefilter.RFPDupeFilter"
 
   # Schedule requests using a priority queue. (default)
-  SCHEDULER_QUEUE_CLASS = 'sscrapy_eagle.worker.queue.SpiderPriorityQueue'
+  SCHEDULER_QUEUE_CLASS = "scrapy_eagle.worker.queue.SpiderPriorityQueue"
 
   # Schedule requests using a queue (FIFO).
-  SCHEDULER_QUEUE_CLASS = 'scrapy_eagle.worker.queue.SpiderQueue'
+  SCHEDULER_QUEUE_CLASS = "scrapy_eagle.worker.queue.SpiderQueue"
 
   # Schedule requests using a stack (LIFO).
-  SCHEDULER_QUEUE_CLASS = 'scrapy_eagle.worker.queue.SpiderStack'
+  SCHEDULER_QUEUE_CLASS = "scrapy_eagle.worker.queue.SpiderStack"
 
   # Max idle time to prevent the spider from being closed when distributed crawling.
   # This only works if queue class is SpiderQueue or SpiderStack,
@@ -74,7 +74,7 @@ Enable the components in your `settings.py` of your Scrapy project:
 
   # Specify the full Redis URL for connecting (optional).
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
-  REDIS_URL = 'redis://user:pass@hostname:9001'
+  REDIS_URL = "redis://user:pass@hostname:9001"
   
 Once the configuration is finished, you should adapt each spider to use our Mixin:
 
