@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 import gevent
 
+
 def heartbeat_servers(redis_conn, ip, hostname):
 
     while True:
@@ -16,15 +17,14 @@ def heartbeat_servers(redis_conn, ip, hostname):
             int(future.timestamp())
         )
 
-        now = datetime.now()
-
-        servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
+        # now = datetime.now()
+        # servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
 
         gevent.sleep(3)
 
+
 def heartbeat_subprocess(pid, spider, max_seconds_idle, max_size_limit, queue_info_global):
 
-    last_time_zero = datetime.now()
     last_processed = None
 
     max_size = 0
@@ -52,6 +52,5 @@ def heartbeat_subprocess(pid, spider, max_seconds_idle, max_size_limit, queue_in
                 os.kill(pid, signal.SIGHUP)
 
                 break
-
 
         gevent.sleep(2)
