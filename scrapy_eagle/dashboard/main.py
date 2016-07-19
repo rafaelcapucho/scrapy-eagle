@@ -24,6 +24,7 @@ except ImportError:
 
 from scrapy_eagle.dashboard.config import setup
 from scrapy_eagle.dashboard.memory import get_connection
+from scrapy_eagle.dashboard.green_threads import heartbeat
 
 
 app = flask.Flask(__name__)
@@ -40,6 +41,10 @@ def main():
     print(public_ip)
 
     hostname = ip.get_hostname()
+
+    redis_conn = get_connection()
+
+    gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
 
 
 @app.route('/')

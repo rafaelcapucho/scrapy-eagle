@@ -23,7 +23,7 @@ def show():
         ip, hostname = entry.decode('utf-8').split("-")
         results.append({'public_ip': ip, 'hostname': hostname})
 
-    # Set in Redis usually returns in random order, sort by hostname
+    # Sets in Redis usually returns in random order, sort by hostname
     results = sorted(results, key=lambda x: x['hostname'])
 
     return flask.Response(
