@@ -34,6 +34,12 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
     host = 10.10.10.10
     port = 6379
     db = 0
+
+    [server]
+    debug = True
+    secret_key = ha74h3hdh42a
+    host = 0.0.0.0
+    port = 5000
     
 Then you will be able to execute the `eagle_server` command like,
 
