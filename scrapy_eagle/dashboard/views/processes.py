@@ -104,9 +104,13 @@ def start_spider(spider):
 
     command = ['/worker_venv/bin/scrapy', 'crawl', spider]
 
+    config = settings.get_config_file()
+
+    # TODO: Verify if base_dir is set before use it
+
     gevent.spawn(
         processkit.new_subprocess,
-        base_dir='/worker_venv/beauty_worker/beauty_worker',
+        base_dir=config['scrapy']['base_dir'],
         command=command,
         spider=spider,
         subprocess_pids=settings.subprocess_pids,
