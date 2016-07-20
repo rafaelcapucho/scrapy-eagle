@@ -20,7 +20,8 @@ def show():
     results = []
 
     for entry in servers:
-        ip, hostname = entry.decode('utf-8').split("-")
+        parts = entry.decode('utf-8').split("-")
+        ip, hostname = parts[0], "-".join(parts[1:])
         results.append({'public_ip': ip, 'hostname': hostname})
 
     # Sets in Redis usually returns in random order, sort by hostname
