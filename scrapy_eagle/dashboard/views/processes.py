@@ -102,9 +102,9 @@ def kill_subprocess(pid):
 @processes.route('/start_spider/<spider>')
 def start_spider(spider):
 
-    command = ['/worker_venv/bin/scrapy', 'crawl', spider]
-
     config = settings.get_config_file()
+
+    command = [config['scrapy']['binary'], 'crawl', spider]
 
     # TODO: Verify if base_dir is set before use it
 
