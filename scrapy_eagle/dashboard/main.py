@@ -79,7 +79,7 @@ def entry_point():
 
         _config = settings.get_config_file()
 
-        app.config['SECRET_KEY'] = _config['server']['secret_key']
+        app.config['SECRET_KEY'] = _config['server']['cookie_secret_key']
         app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')
 
         from scrapy_eagle.dashboard.views import servers, processes

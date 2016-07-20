@@ -37,7 +37,7 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
 
     [server]
     debug = True
-    secret_key = ha74h3hdh42a
+    cookie_secret_key = ha74h3hdh42a
     host = 0.0.0.0
     port = 5000
     
