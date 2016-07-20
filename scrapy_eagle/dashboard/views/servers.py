@@ -8,6 +8,7 @@ from scrapy_eagle.dashboard.memory import get_connection
 
 servers = flask.Blueprint('servers', __name__)
 
+
 @servers.route('/')
 def show():
 
@@ -15,11 +16,11 @@ def show():
 
     redis_conn = get_connection()
 
-    servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
+    _servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
 
     results = []
 
-    for entry in servers:
+    for entry in _servers:
         parts = entry.decode('utf-8').split("-")
         ip, hostname = parts[0], "-".join(parts[1:])
         results.append({'public_ip': ip, 'hostname': hostname})
