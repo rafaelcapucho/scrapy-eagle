@@ -98,3 +98,28 @@ def kill_subprocess(pid):
         status=200,
         mimetype="application/json"
     )
+
+@processes.route('/start_spider/<spider>')
+def start_spider(spider):
+
+    command = ['/worker_venv/bin/scrapy', 'crawl', spider]
+
+    gevent.spawn(
+        processkit.new_subprocess,
+        base_dir='/worker_venv/beauty_worker/beauty_worker',
+        command=command,
+        spider=spider,
+        subprocess_pids=settings.subprocess_pids,
+        queue_info_global=settings.queue_info_global,
+        buffers=settings.buffers
+    )
+
+    result = {
+        'status': True
+    }
+
+    return flask.Response(
+        response=json.dumps(result, sort_keys=True),
+        status=200,
+        mimetype="application/json"
+    )
