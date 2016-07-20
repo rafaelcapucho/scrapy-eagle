@@ -77,7 +77,7 @@ def entry_point():
 
     try:
 
-        _config = settings.get_config()
+        _config = settings.get_config_file()
 
         app.config['SECRET_KEY'] = _config['server']['secret_key']
         app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')

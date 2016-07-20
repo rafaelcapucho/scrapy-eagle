@@ -54,7 +54,7 @@ def get_public_ip():
 def get_hostname():
     return _hostname
 
-def get_config():
+def get_config_file():
     return _config
 
 def get_args():

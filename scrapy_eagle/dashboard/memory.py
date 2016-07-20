@@ -1,6 +1,6 @@
 import redis
 
-from scrapy_eagle.dashboard.settings import get_config
+from scrapy_eagle.dashboard.settings import get_config_file
 
 redis_pool = None
 
@@ -8,7 +8,7 @@ def init_memory():
 
     global redis_pool
 
-    config = get_config()
+    config = get_config_file()
 
     redis_pool = redis.ConnectionPool(
         host=config['redis']['host'],
