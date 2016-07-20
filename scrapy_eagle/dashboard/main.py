@@ -20,7 +20,7 @@ except ImportError:
 from scrapy_eagle.dashboard import config
 from scrapy_eagle.dashboard import memory
 from scrapy_eagle.dashboard.green_threads import heartbeat, stats
-from scrapy_eagle.dashboard.utils import process
+from scrapy_eagle.dashboard.utils import processkit
 
 
 app = flask.Flask(__name__)
@@ -54,7 +54,7 @@ def start_periodics(socketio):
 
     for i in range(3):
         gevent.spawn(
-            process.new_subprocess,
+            processkit.new_subprocess,
             base_dir='.',
             subprocess_pids=config.subprocess_pids,
             queue_info_global=config.queue_info_global,
@@ -82,9 +82,10 @@ def entry_point():
         app.config['SECRET_KEY'] = _config['server']['secret_key']
         app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')
 
-        from scrapy_eagle.dashboard.views import servers
+        from scrapy_eagle.dashboard.views import servers, processes
 
         app.register_blueprint(servers.servers, url_prefix='/servers')
+        app.register_blueprint(processes.processes, url_prefix='/processes')
 
         CORS(app)
 

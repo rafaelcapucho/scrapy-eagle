@@ -4,7 +4,7 @@ monkey.patch_all()
 import gevent
 import gevent.pool
 
-from scrapy_eagle.dashboard.utils.process import get_resources_info_from_pid, get_resources_info_from_server
+from scrapy_eagle.dashboard.utils.processkit import get_resources_info_from_pid, get_resources_info_from_server
 
 def send_redis_queue_info(socketio, redis_conn, spiders, queue_info_global):
 
