@@ -1,4 +1,6 @@
+import os
 import json
+import signal
 
 import flask
 import gevent
@@ -31,6 +33,7 @@ def exec_command():
         mimetype="application/json"
     )
 
+
 @processes.route('/read_buffer/<int:pid>')
 def read_buffer(pid):
 
@@ -62,4 +65,36 @@ def read_buffer(pid):
         response=generate(),
         status=200,
         mimetype="text/plain"
+    )
+
+
+@processes.route('/kill_subprocess/<int:pid>')
+def kill_subprocess(pid):
+
+    safe = False
+
+    for _pid, _, _, _ in settings.subprocess_pids:
+
+        if pid == _pid:
+            safe = True
+            break
+
+    if safe:
+        os.kill(pid, signal.SIGHUP)
+
+        result = {
+            'status': True,
+            'msg': 'SIGHUP signal sent to PID {0}'.format(pid)
+        }
+
+    else:
+        result = {
+            'status': False,
+            'msg': 'PID Not Found'
+        }
+
+    return flask.Response(
+        response=json.dumps(result, sort_keys=True),
+        status=200,
+        mimetype="application/json"
     )
