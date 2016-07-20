@@ -40,6 +40,10 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
     cookie_secret_key = ha74h3hdh42a
     host = 0.0.0.0
     port = 5000
+
+    [scrapy]
+    base_dir = /project_venv/project/project
+    binary = /project_venv/bin/scrapy
     
 Then you will be able to execute the `eagle_server` command like,
 
