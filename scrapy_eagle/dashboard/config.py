@@ -33,7 +33,7 @@ def setup():
         print('You should specify a config file using --config-file parameter.')
         exit(0)
 
-    _config = configparser.ConfigParser()
+    _config = configparser.RawConfigParser()
     _config.read(_args.config_file)
 
     globals()['config'] = _config

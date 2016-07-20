@@ -77,8 +77,10 @@ def entry_point():
 
     try:
 
-        app.config['SECRET_KEY'] = 'ha74%ahtus342'
-        app.config['DEBUG'] = True
+        _config = config.get_config()
+
+        app.config['SECRET_KEY'] = _config['server']['secret_key']
+        app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')
 
         from scrapy_eagle.dashboard.views import servers
 
@@ -91,7 +93,12 @@ def entry_point():
         start_periodics(socketio)
 
         # use_reloader: avoid Flask execute twice
-        socketio.run(app, host='0.0.0.0', port=5001, use_reloader=False)
+        socketio.run(
+            app=app,
+            host=_config['server'].get('host', '0.0.0.0'),
+            port=int(_config['server'].get('port', 5000)),
+            use_reloader=False
+        )
 
     except (KeyboardInterrupt, SystemExit):
 
