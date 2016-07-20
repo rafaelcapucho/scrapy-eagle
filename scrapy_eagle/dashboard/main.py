@@ -17,7 +17,7 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-from scrapy_eagle.dashboard import config
+from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard import memory
 from scrapy_eagle.dashboard.green_threads import heartbeat, stats
 from scrapy_eagle.dashboard.utils import processkit
@@ -29,13 +29,13 @@ app = flask.Flask(__name__)
 def main():
 
     # Install the arguments and config file inside the config module
-    _, _ = config.setup()
+    _, _ = settings.setup()
 
 
 def shutdown():
 
     # Send a signal to all opened subprocess, closing them.
-    for pid, _, _, _ in config.subprocess_pids:
+    for pid, _, _, _ in settings.subprocess_pids:
 
         print('killing subprocess: {pid}'.format(pid=pid))
 
@@ -49,20 +49,20 @@ def shutdown():
 def start_periodics(socketio):
 
     redis_conn = memory.get_connection()
-    public_ip = config.get_public_ip()
-    hostname = config.get_hostname()
+    public_ip = settings.get_public_ip()
+    hostname = settings.get_hostname()
 
     for i in range(3):
         gevent.spawn(
             processkit.new_subprocess,
             base_dir='.',
-            subprocess_pids=config.subprocess_pids,
-            queue_info_global=config.queue_info_global,
-            buffers=config.buffers
+            subprocess_pids=settings.subprocess_pids,
+            queue_info_global=settings.queue_info_global,
+            buffers=settings.buffers
         )
 
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
-    gevent.spawn(stats.send_resources_info, socketio, config.subprocess_pids, public_ip)
+    gevent.spawn(stats.send_resources_info, socketio, settings.subprocess_pids, public_ip)
 
 
 def entry_point():
@@ -77,7 +77,7 @@ def entry_point():
 
     try:
 
-        _config = config.get_config()
+        _config = settings.get_config()
 
         app.config['SECRET_KEY'] = _config['server']['secret_key']
         app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')

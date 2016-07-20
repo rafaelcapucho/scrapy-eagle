@@ -1,6 +1,6 @@
 import redis
 
-from scrapy_eagle.dashboard.config import get_config
+from scrapy_eagle.dashboard.settings import get_config
 
 redis_pool = None
 
