@@ -30,3 +30,36 @@ def exec_command():
         status=200,
         mimetype="application/json"
     )
+
+@processes.route('/read_buffer/<int:pid>')
+def read_buffer(pid):
+
+    if not settings.buffers.get(pid):
+        return flask.Response(
+            response=json.dumps(
+                {'status': False, 'msg': 'PID Not Found'},
+                sort_keys=True
+            ),
+            status=200,
+            mimetype="application/json"
+        )
+
+    def generate():
+
+        sent = 0
+
+        while not settings.buffers[pid]['finished']:
+
+            for i, row in enumerate(settings.buffers[pid]['lines'][sent:]):
+
+                sent += 1
+
+                yield row
+
+            gevent.sleep(0.5)
+
+    return flask.Response(
+        response=generate(),
+        status=200,
+        mimetype="text/plain"
+    )
