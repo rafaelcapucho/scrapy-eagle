@@ -31,7 +31,7 @@ var ServerSet = React.createClass({
 
     var server_set_new = new Array();
 
-    this.serversRequest = $.get("http://" + document.domain + ":5000/servers", function(data) {
+    this.serversRequest = $.get("http://" + document.domain + ":5000/servers/list", function(data) {
 
       data.forEach(function(elem, index){
         server_set_new.push({public_ip: elem.public_ip, hostname: elem.hostname})

@@ -7,13 +7,13 @@ var ServerSubProcess = React.createClass({
   },
   onClickKill: function(){
 
-    $.get("http://" + this.props.public_ip + ":5000/kill_subprocess/" + this.props.pid, function(data) {
+    $.get("http://" + this.props.public_ip + ":5000/processes/kill_subprocess/" + this.props.pid, function(data) {
 
     });
 
   },
   componentDidMount: function(){
-    this.setState({'link_open_buffer': "http://"+this.props.public_ip+":5000/read_buffer/"+this.props.pid});
+    this.setState({'link_open_buffer': "http://"+this.props.public_ip+":5000/processes/read_buffer/"+this.props.pid});
   },
   render: function(){
     return (

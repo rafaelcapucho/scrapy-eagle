@@ -9,8 +9,8 @@ from scrapy_eagle.dashboard.memory import get_connection
 servers = flask.Blueprint('servers', __name__)
 
 
-@servers.route('/')
-def show():
+@servers.route('/list')
+def list():
 
     now = datetime.now()
 

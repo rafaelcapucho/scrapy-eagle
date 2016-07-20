@@ -55,14 +55,14 @@ var ServerNode = React.createClass({
   },
   onClickExecCommand: function(e){
 
-    $.get("http://" + this.state.public_ip + ":5000/exec_command", function(data) {
+    $.get("http://" + this.state.public_ip + ":5000/processes/exec_command", function(data) {
 
     });
 
   },
   onClickStartWorker: function(e){
 
-    $.get("http://" + this.state.public_ip + ":5000/start_worker/" + this.state.selected_spider, function(data) {
+    $.get("http://" + this.state.public_ip + ":5000/processes/start_spider/" + this.state.selected_spider, function(data) {
 
     });
 
