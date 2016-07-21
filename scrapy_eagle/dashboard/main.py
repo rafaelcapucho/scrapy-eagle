@@ -23,7 +23,7 @@ from scrapy_eagle.dashboard.green_threads import heartbeat, stats
 from scrapy_eagle.dashboard.utils import processkit
 
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_folder='templates/static')
 
 
 def main():
@@ -82,8 +82,9 @@ def entry_point():
         app.config['SECRET_KEY'] = _config['server']['cookie_secret_key']
         app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')
 
-        from scrapy_eagle.dashboard.views import servers, processes
+        from scrapy_eagle.dashboard.views import servers, processes, root
 
+        app.register_blueprint(root.root, url_prefix='/')
         app.register_blueprint(servers.servers, url_prefix='/servers')
         app.register_blueprint(processes.processes, url_prefix='/processes')
 

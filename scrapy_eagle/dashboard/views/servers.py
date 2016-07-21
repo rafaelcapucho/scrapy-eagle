@@ -10,7 +10,7 @@ servers = flask.Blueprint('servers', __name__)
 
 
 @servers.route('/list')
-def list():
+def listing():
 
     now = datetime.now()
 
