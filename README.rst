@@ -133,4 +133,6 @@ To be easier to test the Dashboard you could use one simple http server instead 
     cd scrapy-eagle/dashboard
     http-server templates/
 
+It would be available for you at http://127.0.0.1:8080
+
 **Note**: Until now the Scrapy Eagle is mostly based on https://github.com/rolando/scrapy-redis.
