@@ -87,8 +87,8 @@ def entry_point():
 
         app.register_blueprint(root.root, url_prefix='/')
         app.register_blueprint(servers.servers, url_prefix='/servers')
-        app.register_blueprint(spiders.spiders, url_prefix='/spiders')
         app.register_blueprint(processes.processes, url_prefix='/processes')
+        # app.register_blueprint(spiders.spiders, url_prefix='/spiders')
 
         CORS(app)
 
