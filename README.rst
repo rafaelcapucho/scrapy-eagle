@@ -39,6 +39,7 @@ It could be easily made by running the code bellow,
 
 .. code-block:: console
 
+    $ virtualenv eagle_venv; cd eagle_venv; source bin/activate
     $ pip install scrapy-eagle
     
 You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-eagle.ini) containing:
