@@ -78,7 +78,6 @@ class DistributedMixin(object):
         found = 0
         while found < self.redis_batch_size:
             data = fetch_one(self.redis_key)
-            print(data, type(data))
             if data:
                 data = data.decode('utf-8')
             else:
