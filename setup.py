@@ -1,12 +1,22 @@
+# -*- coding: utf-8 -*-
+
 import os
+import io
 from setuptools import setup, find_packages
 
 
 LONG_DESC = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 
+def read_file(filename):
+    with io.open(filename) as fp:
+        return fp.read().strip()
+
+def read_requirements(filename):
+    return [line.strip() for line in read_file(filename).splitlines()
+        if not line.startswith('#')]
 
 setup(name='scrapy-eagle',
-    version='0.0.16',
+    version='0.0.17',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
@@ -14,14 +24,7 @@ setup(name='scrapy-eagle',
     url='http://github.com/rafaelcapucho/scrapy-eagle',
     packages=find_packages(),
     license='BSD',
-    install_requires=[
-        'Scrapy>=1.1.0',
-        'redis>=2.10.0',
-        'flask',
-        'redis',
-        'pymongo',
-        'requests'
-    ],
+    install_requires=read_requirements('requirements.txt'),
     entry_points = {
         'console_scripts': ['eagle_server=scrapy_eagle.dashboard.main:entry_point'],
     },
