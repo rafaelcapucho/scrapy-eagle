@@ -19,6 +19,7 @@ _args = None
 _config = None
 _public_ip = None
 _hostname = None
+_spiders = None
 
 def setup():
 
@@ -59,3 +60,6 @@ def get_config_file():
 
 def get_args():
     return _args
+
+def get_spiders():
+    return _spiders

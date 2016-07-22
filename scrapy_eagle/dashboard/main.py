@@ -20,7 +20,7 @@ except ImportError:
 from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard import memory
 from scrapy_eagle.dashboard.green_threads import heartbeat, stats
-from scrapy_eagle.dashboard.utils import processkit
+from scrapy_eagle.dashboard.utils import processkit, spiders
 
 
 app = flask.Flask(__name__, static_folder='templates/static')
@@ -30,6 +30,12 @@ def main():
 
     # Install the arguments and config file inside the config module
     _, _ = settings.setup()
+
+    # Open the process and execute scrapy's list command
+    _spiders = spiders.find_spiders()
+
+    # Install the list of spiders names
+    settings._spiders = _spiders
 
 
 def shutdown():

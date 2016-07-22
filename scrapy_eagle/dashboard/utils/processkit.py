@@ -44,9 +44,8 @@ def new_subprocess(base_dir, subprocess_pids, queue_info_global, command=None, s
 
             # TODO: remove empty lines
 
-            buffers[p.pid]['lines'].append(line)
+            buffers[p.pid]['lines'].append(line.strip())
 
-            pass
             # print(line, end='', flush=True)
 
     buffers[p.pid]['finished'] = True
