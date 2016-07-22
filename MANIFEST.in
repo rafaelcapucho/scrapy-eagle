@@ -1,0 +1,10 @@
+graft docs
+
+include *.in
+include *.ini
+include *.rst
+include *.txt
+
+recursive-include scrapy_eagle/dashboard/templates *
+
+global-exclude __pycache__ *.py[cod]

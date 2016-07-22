@@ -28,6 +28,7 @@ setup(name='scrapy-eagle',
     packages=find_packages(),
     license='BSD',
     install_requires=read_requirements('requirements.txt'),
+    include_package_data=True,
     entry_points={
         'console_scripts': ['eagle_server=scrapy_eagle.dashboard.main:entry_point'],
     },
