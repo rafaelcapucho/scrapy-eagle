@@ -3,17 +3,18 @@ var ServerSubProcess = require('./ServerSubProcess.jsx');
 
 var ServerNode = React.createClass({
   getInitialState: function() {
-      return {
-        pid: "",
-        public_ip: "",
-        cpu_percent: "",
-        memory_available_mb: "",
-        memory_total_mb: "",
-        memory_used_mb: "",
-        memory_used_server_mb: "",
-        cpus: [],
-        subprocesses: []
-      };
+    return {
+      pid: "",
+      public_ip: "",
+      cpu_percent: "",
+      memory_available_mb: "",
+      memory_total_mb: "",
+      memory_used_mb: "",
+      memory_used_server_mb: "",
+      cpus: [],
+      subprocesses: [],
+      spiders: []
+    };
   },
   componentWillMount: function() {
 
@@ -41,9 +42,10 @@ var ServerNode = React.createClass({
         memory_used_server_mb: msg.data.memory_used_server_mb,
         cpus: buff,
         subprocesses: msg.data.sub,
+        spiders: msg.data.spiders
       });
 
-      console.log(msg.data.cpus);
+      // console.log(msg.data.cpus);
 
     }.bind(this));
 
@@ -74,16 +76,22 @@ var ServerNode = React.createClass({
   },
   render: function(){
 
-    var listSubProcesses = this.state.subprocesses.map(function(item) {
-        return <ServerSubProcess
-          key={item.pid}
-          pid={item.pid}
-          cpu_percent={item.cpu_percent}
-          spider={item.spider}
-          public_ip={this.state.public_ip}
-          base_dir={item.base_dir}
-          command={item.command}
-          memory_used_mb={item.memory_used_mb} />;
+    var listSubProcesses = this.state.subprocesses.map(function (item) {
+      return <ServerSubProcess
+        key={item.pid}
+        pid={item.pid}
+        cpu_percent={item.cpu_percent}
+        spider={item.spider}
+        public_ip={this.state.public_ip}
+        base_dir={item.base_dir}
+        command={item.command}
+        memory_used_mb={item.memory_used_mb} />;
+    }.bind(this));
+
+    var listSpiders = this.state.spiders.map(function (item) {
+      return (
+          <option value={item}>{item}</option>
+      );
     }.bind(this));
 
     return (
@@ -101,8 +109,7 @@ var ServerNode = React.createClass({
           <li>
             <select onChange={this.onChangeDataProvider}>
               <option value="">--- choose a spider</option>
-              <option value="epocacosmeticos.com.br">epocacosmeticos.com.br</option>
-              <option value="belezanaweb.com.br">belezanaweb.com.br</option>
+              {listSpiders}
             </select>
             <button onClick={this.onClickStartWorker}>Start Worker</button></li>
           <ul>{listSubProcesses}</ul>

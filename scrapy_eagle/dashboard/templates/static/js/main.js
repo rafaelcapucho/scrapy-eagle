@@ -20928,7 +20928,8 @@ var ServerNode = React.createClass({
       memory_used_mb: "",
       memory_used_server_mb: "",
       cpus: [],
-      subprocesses: []
+      subprocesses: [],
+      spiders: []
     };
   },
   componentWillMount: function () {
@@ -20955,10 +20956,11 @@ var ServerNode = React.createClass({
         memory_used_mb: msg.data.memory_used_mb,
         memory_used_server_mb: msg.data.memory_used_server_mb,
         cpus: buff,
-        subprocesses: msg.data.sub
+        subprocesses: msg.data.sub,
+        spiders: msg.data.spiders
       });
 
-      console.log(msg.data.cpus);
+      // console.log(msg.data.cpus);
     }.bind(this));
   },
   componentWillUnmount: function () {
@@ -20989,6 +20991,14 @@ var ServerNode = React.createClass({
         base_dir: item.base_dir,
         command: item.command,
         memory_used_mb: item.memory_used_mb });
+    }.bind(this));
+
+    var listSpiders = this.state.spiders.map(function (item) {
+      return React.createElement(
+        'option',
+        { value: item },
+        item
+      );
     }.bind(this));
 
     return React.createElement(
@@ -21074,16 +21084,7 @@ var ServerNode = React.createClass({
               { value: '' },
               '--- choose a spider'
             ),
-            React.createElement(
-              'option',
-              { value: 'epocacosmeticos.com.br' },
-              'epocacosmeticos.com.br'
-            ),
-            React.createElement(
-              'option',
-              { value: 'belezanaweb.com.br' },
-              'belezanaweb.com.br'
-            )
+            listSpiders
           ),
           React.createElement(
             'button',

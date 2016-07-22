@@ -4,6 +4,7 @@ monkey.patch_all()
 import gevent
 import gevent.pool
 
+from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard.utils.processkit import get_resources_info_from_pid, get_resources_info_from_server
 
 def send_redis_queue_info(socketio, redis_conn, spiders, queue_info_global):
@@ -59,7 +60,11 @@ def send_resources_info(socketio, subprocess_pids, public_ip):
         # sometime to subprocess_pids remove PIDs that finishs.
         dict_info['sub'] = [x for x in dict_info['sub'] if x]
 
-        print('\n\npids: ', dict_info, '\n\n')
+        _spiders = settings.get_spiders()
+
+        dict_info['spiders'] = _spiders or []
+
+        print('\n\ndict_info: ', dict_info, '\n\n')
 
         socketio.emit('resources_info', {'data': dict_info}, namespace="/resources", broadcast=True)
 
