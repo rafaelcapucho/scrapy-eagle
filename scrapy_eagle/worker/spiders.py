@@ -118,7 +118,7 @@ class DistributedSpider(DistributedMixin, Spider):
 
     @classmethod
     def from_crawler(self, crawler, *args, **kwargs):
-        obj = super(RedisSpider, self).from_crawler(crawler, *args, **kwargs)
+        obj = super(DistributedSpider, self).from_crawler(crawler, *args, **kwargs)
         obj.setup_redis(crawler)
         return obj
 
@@ -128,7 +128,7 @@ class DistributedCrawlSpider(DistributedMixin, CrawlSpider):
 
     @classmethod
     def from_crawler(self, crawler, *args, **kwargs):
-        obj = super(RedisCrawlSpider, self).from_crawler(crawler, *args, **kwargs)
+        obj = super(DistributedCrawlSpider, self).from_crawler(crawler, *args, **kwargs)
         obj.setup_redis(crawler)
         return obj
 
