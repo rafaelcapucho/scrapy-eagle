@@ -7,6 +7,17 @@
 .. image:: https://img.shields.io/pypi/v/scrapy-eagle.svg
     :target: https://pypi.python.org/pypi/scrapy-eagle
     :alt: PyPI Version
+    
+.. image:: https://img.shields.io/pypi/pyversions/scrapy-eagle.svg
+    :target: https://pypi.python.org/pypi/scrapy-eagle
+    
+.. image:: https://landscape.io/github/rafaelcapucho/scrapy-eagle/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/rafaelcapucho/scrapy-eagle/master
+    :alt: Code Quality Status
+    
+.. image:: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements.svg?branch=master
+     :target: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements/?branch=master
+     :alt: Requirements Status
 
 Scrapy Eagle is a tool that allow us to run any Scrapy_ based project in a distributed fashion and monitor how it is going on and how many resources it is consuming on each server.
 
