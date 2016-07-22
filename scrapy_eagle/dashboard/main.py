@@ -19,8 +19,8 @@ except ImportError:
 
 from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard import memory
-from scrapy_eagle.dashboard.green_threads import heartbeat, stats
-from scrapy_eagle.dashboard.utils import processkit, spiders
+from scrapy_eagle.dashboard.green_threads import heartbeat, stats, find_new_spiders
+from scrapy_eagle.dashboard.utils import processkit
 
 
 app = flask.Flask(__name__, static_folder='templates/static')
@@ -30,12 +30,6 @@ def main():
 
     # Install the arguments and config file inside the config module
     _, _ = settings.setup()
-
-    # Open the process and execute scrapy's list command
-    _spiders = spiders.find_spiders()
-
-    # Install the list of spiders names
-    settings._spiders = _spiders
 
 
 def shutdown():
@@ -69,6 +63,7 @@ def start_periodics(socketio):
 
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
     gevent.spawn(stats.send_resources_info, socketio, settings.subprocess_pids, public_ip)
+    gevent.spawn(find_new_spiders)
 
 
 def entry_point():
@@ -88,10 +83,11 @@ def entry_point():
         app.config['SECRET_KEY'] = _config.get('server', 'cookie_secret_key')
         app.config['DEBUG'] = _config.getboolean('server', 'debug', fallback=True)
 
-        from scrapy_eagle.dashboard.views import servers, processes, root
+        from scrapy_eagle.dashboard.views import servers, processes, root, spiders
 
         app.register_blueprint(root.root, url_prefix='/')
         app.register_blueprint(servers.servers, url_prefix='/servers')
+        app.register_blueprint(spiders.spiders, url_prefix='/spiders')
         app.register_blueprint(processes.processes, url_prefix='/processes')
 
         CORS(app)
