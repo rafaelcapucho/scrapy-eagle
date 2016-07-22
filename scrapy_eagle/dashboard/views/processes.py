@@ -102,15 +102,15 @@ def kill_subprocess(pid):
 @processes.route('/start_spider/<spider>')
 def start_spider(spider):
 
-    config = settings.get_config_file()
+    _config = settings.get_config_file()
 
-    command = [config['scrapy']['binary'], 'crawl', spider]
+    command = [_config.get('scrapy', 'binary'), 'crawl', spider]
 
     # TODO: Verify if base_dir is set before use it
 
     gevent.spawn(
         processkit.new_subprocess,
-        base_dir=config['scrapy']['base_dir'],
+        base_dir=_config.get('scrapy', 'base_dir'),
         command=command,
         spider=spider,
         subprocess_pids=settings.subprocess_pids,

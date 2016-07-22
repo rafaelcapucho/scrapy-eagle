@@ -79,8 +79,8 @@ def entry_point():
 
         _config = settings.get_config_file()
 
-        app.config['SECRET_KEY'] = _config['server']['cookie_secret_key']
-        app.config['DEBUG'] = bool(_config['server'].get('debug', True) == 'True')
+        app.config['SECRET_KEY'] = _config.get('server', 'cookie_secret_key')
+        app.config['DEBUG'] = _config.getboolean('server', 'debug', fallback=True)
 
         from scrapy_eagle.dashboard.views import servers, processes, root
 
@@ -97,8 +97,8 @@ def entry_point():
         # use_reloader: avoid Flask execute twice
         socketio.run(
             app=app,
-            host=_config['server'].get('host', '0.0.0.0'),
-            port=int(_config['server'].get('port', 5000)),
+            host=_config.get('server', 'host', fallback='0.0.0.0'),
+            port=_config.getint('server', 'port', fallback=5000),
             use_reloader=False
         )
 
