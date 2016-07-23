@@ -18,6 +18,10 @@
 .. image:: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements.svg?branch=master
      :target: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements/?branch=master
      :alt: Requirements Status
+     
+ .. image:: https://badge.waffle.io/rafaelcapucho/scrapy-eagle.svg?label=ready&title=Ready
+    :target: https://waffle.io/rafaelcapucho/scrapy-eagle
+    :alt: 'Stories in Ready' 
 
 Scrapy Eagle is a tool that allow us to run any Scrapy_ based project in a distributed fashion and monitor how it is going on and how many resources it is consuming on each server.
 
