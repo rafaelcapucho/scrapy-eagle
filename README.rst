@@ -129,6 +129,16 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
             CrawlSpider._set_crawler(self, crawler)
             DistributedMixin.setup_redis(self)
 
+Feeding a Spider from Redis
+---------------------------
+
+The class `scrapy_redis.spiders.RedisSpider` enables a spider to read the
+urls from redis. The urls in the redis queue will be processed one
+after another.
+
+Then, push urls to redis::
+
+    redis-cli lpush domain.com:start_urls http://domain.com/
 
 Dashboard Development
 ---------------------
