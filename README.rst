@@ -132,7 +132,7 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
 Feeding a Spider from Redis
 ---------------------------
 
-The class `scrapy_redis.spiders.RedisSpider` enables a spider to read the
+The class `scrapy_eagle.worker.spiders.DistributedMixin` enables a spider to read the
 urls from redis. The urls in the redis queue will be processed one
 after another.
 
