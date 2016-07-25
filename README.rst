@@ -16,14 +16,18 @@
     :alt: Code Quality Status
     
 .. image:: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements.svg?branch=master
-     :target: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements/?branch=master
-     :alt: Requirements Status
+    :target: https://requires.io/github/rafaelcapucho/scrapy-eagle/requirements/?branch=master
+    :alt: Requirements Status
 
 Scrapy Eagle is a tool that allow us to run any Scrapy_ based project in a distributed fashion and monitor how it is going on and how many resources it is consuming on each server.
 
 .. _Scrapy: http://scrapy.org
 
 **This project is Under Development, don't use it yet**
+
+.. image:: https://badge.waffle.io/rafaelcapucho/scrapy-eagle.svg?label=ready&title=Ready
+    :target: https://waffle.io/rafaelcapucho/scrapy-eagle
+    :alt: 'Stories in Ready' 
 
 Requeriments
 ------------
@@ -39,6 +43,7 @@ It could be easily made by running the code bellow,
 
 .. code-block:: console
 
+    $ virtualenv eagle_venv; cd eagle_venv; source bin/activate
     $ pip install scrapy-eagle
     
 You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-eagle.ini) containing:
@@ -124,6 +129,16 @@ Once the configuration is finished, you should adapt each spider to use our Mixi
             CrawlSpider._set_crawler(self, crawler)
             DistributedMixin.setup_redis(self)
 
+Feeding a Spider from Redis
+---------------------------
+
+The class `scrapy_eagle.worker.spiders.DistributedMixin` enables a spider to read the
+urls from redis. The urls in the redis queue will be processed one
+after another.
+
+Then, push urls to redis::
+
+    redis-cli lpush domain.com:start_urls http://domain.com/
 
 Dashboard Development
 ---------------------
