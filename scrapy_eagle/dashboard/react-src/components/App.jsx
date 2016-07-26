@@ -3,8 +3,6 @@ var ReactRouter = require('react-router');
 
 var Link = ReactRouter.Link;
 
-var Home = require('./Home.jsx');
-
 var App = React.createClass({
     render: function() {
         return (
@@ -14,7 +12,7 @@ var App = React.createClass({
                     <li><Link to="/monitoring" activeClassName="active">/Monitoring</Link></li>
                 </ul>
 
-                {this.props.children || <Home/>}
+                {this.props.children}
 
             </div>
         );

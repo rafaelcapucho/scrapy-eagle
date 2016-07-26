@@ -25765,8 +25765,6 @@ var ReactRouter = require('react-router');
 
 var Link = ReactRouter.Link;
 
-var Home = require('./Home.jsx');
-
 var App = React.createClass({
     displayName: 'App',
 
@@ -25796,14 +25794,14 @@ var App = React.createClass({
                     )
                 )
             ),
-            this.props.children || React.createElement(Home, null)
+            this.props.children
         );
     }
 });
 
 module.exports = App;
 
-},{"./Home.jsx":236,"react":232,"react-router":82}],236:[function(require,module,exports){
+},{"react":232,"react-router":82}],236:[function(require,module,exports){
 var React = require('react');
 
 var Home = React.createClass({
@@ -26197,10 +26195,11 @@ var ReactRouter = require('react-router');
 
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
+var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 
 var ServerSet = require('./components/ServerSet.jsx');
-
+var Home = require('./components/Home.jsx');
 var App = require('./components/App.jsx');
 
 // ReactDOM.render(<ServerNode public_ip="127.0.0.1" />, document.getElementById('server_node'));
@@ -26211,8 +26210,9 @@ ReactDOM.render(React.createElement(
   React.createElement(
     Route,
     { path: '/', component: App },
+    React.createElement(IndexRoute, { component: Home }),
     React.createElement(Route, { path: '/monitoring', component: ServerSet })
   )
 ), document.getElementById('app'));
 
-},{"./components/App.jsx":235,"./components/ServerSet.jsx":238,"react":232,"react-dom":52,"react-router":82}]},{},[240]);
+},{"./components/App.jsx":235,"./components/Home.jsx":236,"./components/ServerSet.jsx":238,"react":232,"react-dom":52,"react-router":82}]},{},[240]);
