@@ -25765,38 +25765,62 @@ var ReactRouter = require('react-router');
 
 var Link = ReactRouter.Link;
 
+var Home = require('./Home.jsx');
+
 var App = React.createClass({
     displayName: 'App',
 
     render: function () {
         return React.createElement(
-            'ul',
+            'div',
             null,
             React.createElement(
-                'li',
+                'ul',
                 null,
                 React.createElement(
-                    Link,
-                    { to: '/' },
-                    '/'
+                    'li',
+                    null,
+                    React.createElement(
+                        Link,
+                        { to: '/', activeClassName: 'active' },
+                        '/'
+                    )
+                ),
+                React.createElement(
+                    'li',
+                    null,
+                    React.createElement(
+                        Link,
+                        { to: '/monitoring', activeClassName: 'active' },
+                        '/Monitoring'
+                    )
                 )
             ),
-            React.createElement(
-                'li',
-                null,
-                React.createElement(
-                    Link,
-                    { to: '/monitoring' },
-                    '/Monitoring'
-                )
-            )
+            this.props.children || React.createElement(Home, null)
         );
     }
 });
 
 module.exports = App;
 
-},{"react":232,"react-router":82}],236:[function(require,module,exports){
+},{"./Home.jsx":236,"react":232,"react-router":82}],236:[function(require,module,exports){
+var React = require('react');
+
+var Home = React.createClass({
+    displayName: 'Home',
+
+    render: function () {
+        return React.createElement(
+            'div',
+            null,
+            'Home'
+        );
+    }
+});
+
+module.exports = Home;
+
+},{"react":232}],237:[function(require,module,exports){
 var React = require('react');
 var ServerSubProcess = require('./ServerSubProcess.jsx');
 
@@ -25989,7 +26013,7 @@ var ServerNode = React.createClass({
 
 module.exports = ServerNode;
 
-},{"./ServerSubProcess.jsx":238,"react":232}],237:[function(require,module,exports){
+},{"./ServerSubProcess.jsx":239,"react":232}],238:[function(require,module,exports){
 var React = require('react');
 var ServerNode = require('./ServerNode.jsx');
 
@@ -26066,7 +26090,7 @@ var ServerSet = React.createClass({
 
 module.exports = ServerSet;
 
-},{"./ServerNode.jsx":236,"react":232}],238:[function(require,module,exports){
+},{"./ServerNode.jsx":237,"react":232}],239:[function(require,module,exports){
 var React = require('react');
 
 var ServerSubProcess = React.createClass({
@@ -26166,7 +26190,7 @@ var ServerSubProcess = React.createClass({
 
 module.exports = ServerSubProcess;
 
-},{"react":232}],239:[function(require,module,exports){
+},{"react":232}],240:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactRouter = require('react-router');
@@ -26184,8 +26208,11 @@ var App = require('./components/App.jsx');
 ReactDOM.render(React.createElement(
   Router,
   { history: hashHistory },
-  React.createElement(Route, { path: '/', component: App }),
-  React.createElement(Route, { path: '/monitoring', component: ServerSet })
+  React.createElement(
+    Route,
+    { path: '/', component: App },
+    React.createElement(Route, { path: '/monitoring', component: ServerSet })
+  )
 ), document.getElementById('app'));
 
-},{"./components/App.jsx":235,"./components/ServerSet.jsx":237,"react":232,"react-dom":52,"react-router":82}]},{},[239]);
+},{"./components/App.jsx":235,"./components/ServerSet.jsx":238,"react":232,"react-dom":52,"react-router":82}]},{},[240]);

@@ -14,7 +14,8 @@ var App = require('./components/App.jsx');
 //ReactDOM.render(<ServerSet />, document.getElementById('server_set'));
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}/>
-    <Route path="/monitoring" component={ServerSet}/>
+    <Route path="/" component={App}>
+        <Route path="/monitoring" component={ServerSet}/>
+    </Route>
   </Router>
 ), document.getElementById('app'))
