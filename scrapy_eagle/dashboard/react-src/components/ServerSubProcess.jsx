@@ -17,7 +17,7 @@ var ServerSubProcess = React.createClass({
   },
   render: function(){
     return (
-      <li>
+      <li key={this.props.pid}>
         <ul>
           <li>Command: {this.props.command}</li>
           <li>PID: {this.props.pid}</li>

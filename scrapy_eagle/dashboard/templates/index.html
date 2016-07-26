@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CommonJS React Skeleton</title>
+    <title>Scrapy Eagle</title>
     <style media="screen">
       body {
         font-size: 12px;
@@ -16,6 +16,9 @@
       div#server_set li#server-node {
         margin-bottom: 20px;
       }
+      .active {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -23,11 +26,11 @@
     <h1>Distributed Scrapy</h1>
     <h2>Monitoring Dashboard</h2>
 
-    <div id="server_set"></div>
+    <div id="app"></div>
 
     <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-    <script src="static/js/main.js"></script>
+    <script src="/static/js/main.js"></script>
 
   </body>
 </html>
