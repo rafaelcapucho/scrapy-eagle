@@ -25764,6 +25764,7 @@ var React = require('react');
 var ReactRouter = require('react-router');
 
 var Link = ReactRouter.Link;
+var IndexLink = ReactRouter.IndexLink;
 
 var App = React.createClass({
     displayName: 'App',
@@ -25779,8 +25780,8 @@ var App = React.createClass({
                     'li',
                     null,
                     React.createElement(
-                        Link,
-                        { to: '/', activeClassName: 'active' },
+                        IndexLink,
+                        { to: '/app/', activeClassName: 'active' },
                         '/'
                     )
                 ),
@@ -25789,7 +25790,7 @@ var App = React.createClass({
                     null,
                     React.createElement(
                         Link,
-                        { to: '/monitoring', activeClassName: 'active' },
+                        { to: '/app/monitoring', activeClassName: 'active' },
                         '/Monitoring'
                     )
                 )
@@ -26197,6 +26198,7 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
+var browserHistory = ReactRouter.browserHistory;
 
 var ServerSet = require('./components/ServerSet.jsx');
 var Home = require('./components/Home.jsx');
@@ -26206,12 +26208,12 @@ var App = require('./components/App.jsx');
 //ReactDOM.render(<ServerSet />, document.getElementById('server_set'));
 ReactDOM.render(React.createElement(
   Router,
-  { history: hashHistory },
+  { history: browserHistory },
   React.createElement(
     Route,
-    { path: '/', component: App },
+    { path: '/app/', component: App },
     React.createElement(IndexRoute, { component: Home }),
-    React.createElement(Route, { path: '/monitoring', component: ServerSet })
+    React.createElement(Route, { path: '/app/monitoring', component: ServerSet })
   )
 ), document.getElementById('app'));
 

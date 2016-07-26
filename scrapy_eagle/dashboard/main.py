@@ -83,9 +83,10 @@ def entry_point():
         app.config['SECRET_KEY'] = _config.get('server', 'cookie_secret_key')
         app.config['DEBUG'] = _config.getboolean('server', 'debug', fallback=True)
 
-        from scrapy_eagle.dashboard.views import servers, processes, root, spiders
+        from scrapy_eagle.dashboard.views import servers, processes, root, spiders, react_app
 
         app.register_blueprint(root.root, url_prefix='/')
+        app.register_blueprint(react_app.react_app, url_prefix='/app')
         app.register_blueprint(servers.servers, url_prefix='/servers')
         app.register_blueprint(processes.processes, url_prefix='/processes')
         # app.register_blueprint(spiders.spiders, url_prefix='/spiders')
