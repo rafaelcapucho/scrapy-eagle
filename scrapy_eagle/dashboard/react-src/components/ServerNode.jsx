@@ -76,9 +76,9 @@ var ServerNode = React.createClass({
   },
   render: function(){
 
-    var listSubProcesses = this.state.subprocesses.map(function (item) {
+    var listSubProcesses = this.state.subprocesses.map(function (item, i) {
       return <ServerSubProcess
-        key={item.pid}
+        key={i}
         pid={item.pid}
         cpu_percent={item.cpu_percent}
         spider={item.spider}
@@ -88,9 +88,9 @@ var ServerNode = React.createClass({
         memory_used_mb={item.memory_used_mb} />;
     }.bind(this));
 
-    var listSpiders = this.state.spiders.map(function (item) {
+    var listSpiders = this.state.spiders.map(function (item, i) {
       return (
-          <option value={item}>{item}</option>
+          <option key={i} value={item}>{item}</option>
       );
     }.bind(this));
 
