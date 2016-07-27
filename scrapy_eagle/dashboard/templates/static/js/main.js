@@ -26213,7 +26213,7 @@ ReactDOM.render(React.createElement(
     Route,
     { path: '/app/', component: App },
     React.createElement(IndexRoute, { component: Home }),
-    React.createElement(Route, { path: '/app/monitoring', component: ServerSet })
+    React.createElement(Route, { path: 'monitoring', component: ServerSet })
   )
 ), document.getElementById('app'));
 

@@ -21,7 +21,7 @@ ReactDOM.render((
 
         <IndexRoute component={Home}/>
 
-        <Route path="/app/monitoring" component={ServerSet}/>
+        <Route path="monitoring" component={ServerSet}/>
 
     </Route>
 
