@@ -31,17 +31,18 @@ var ServerSet = React.createClass({
 
     var server_set_new = new Array();
 
-    this.serversRequest = $.get("http://" + document.domain + ":5000/servers/list", function(data) {
-
+    this.serversRequest = $.ajax({
+      url: "http://" + document.domain + ":5000/servers/list",
+      type: 'GET',
+      dataType: 'json',
+      cache: false
+    }).done(function(data) {
       data.forEach(function(elem, index){
         server_set_new.push({public_ip: elem.public_ip, hostname: elem.hostname})
       })
-
-    }).done(function() {
-    }).fail(function() {
-    }).always(function() {
+    }).always(function () {
       that.setState({'server_set': server_set_new});
-    }, dataType="json");
+    });
 
   },
 

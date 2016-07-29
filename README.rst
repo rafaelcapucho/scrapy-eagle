@@ -155,6 +155,8 @@ If you would like to change the client-side then you'll need to have NPM_ instal
 
 Then you can run ``npm start`` to compile and start monitoring any changes and recompiling automatically.
 
+To generate the production version, run ``npm run build``.
+
 To be easier to test the Dashboard you could use one simple http server instead of run the ``eagle_server``, like:
 
 .. code-block:: console

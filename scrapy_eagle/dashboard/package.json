@@ -4,18 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "watchify react-src/main.jsx -v -t [ babelify --presets [ react ] ] -o templates/static/js/main.js",
+    "start:babel": "watchify react-src/main.jsx -v -t [ babelify --presets [ react ] ] -o templates/static/js/main.js",
+    "build:dev": "./node_modules/webpack/bin/webpack.js -d --progress --colors --config webpack.config.dev.js",
+    "build:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p --progress --colors --config webpack.config.prod.js",
+    "start": "npm run build:dev -- --watch",
+    "build": "npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rafael Capucho",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-react": "^6.5.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
     "watchify": "^3.7.0",
+    "webpack": "^1.13.1",
     "whatwg-fetch": "^1.0.0"
   }
 }
