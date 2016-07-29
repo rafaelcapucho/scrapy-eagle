@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:babel": "watchify react-src/main.jsx -v -t [ babelify --presets [ react ] ] -o templates/static/js/main.js",
-    "start": "./node_modules/webpack/bin/webpack.js -d --progress --colors --config webpack.config.dev.js",
+    "build:dev": "./node_modules/webpack/bin/webpack.js -d --progress --colors --config webpack.config.dev.js",
     "build:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p --progress --colors --config webpack.config.prod.js",
+    "start": "npm run build:dev -- --watch",
     "build": "npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
