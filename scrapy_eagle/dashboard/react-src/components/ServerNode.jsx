@@ -22,7 +22,7 @@ var ServerNode = React.createClass({
     this.socket.on('resources_info', function (msg) {
 
       var buff = "[ ";
-      for(i = 0; i < msg.data.cpus.length; i++){
+      for(var i = 0; i < msg.data.cpus.length; i++){
         if(i+1 == msg.data.cpus.length){
           buff += msg.data.cpus[i] + " ";
 
