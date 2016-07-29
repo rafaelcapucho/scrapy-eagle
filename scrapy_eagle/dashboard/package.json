@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "watchify react-src/main.jsx -v -t [ babelify --presets [ react ] ] -o templates/static/js/main.js",
+    "start:babel": "watchify react-src/main.jsx -v -t [ babelify --presets [ react ] ] -o templates/static/js/main.js",
+    "start": "./node_modules/webpack/bin/webpack.js -d --progress --colors --config webpack.config.dev.js",
+    "build:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js -p --progress --colors --config webpack.config.prod.js",
+    "build": "npm run build:prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rafael Capucho",

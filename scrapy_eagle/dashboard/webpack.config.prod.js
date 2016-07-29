@@ -10,6 +10,19 @@ var config = {
     path: BUILD_JS_DIR,
     filename: 'bundle.js'
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
+    })
+  ],
   module : {
     loaders : [
       {
@@ -22,4 +35,3 @@ var config = {
 };
 
 module.exports = config;
-
