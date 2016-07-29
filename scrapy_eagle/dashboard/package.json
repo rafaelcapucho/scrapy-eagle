@@ -16,6 +16,7 @@
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
     "watchify": "^3.7.0",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^1.0.0",
+    "webpack": "^1.13.1"
   }
 }
