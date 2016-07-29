@@ -1,20 +1,13 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ReactRouter = require('react-router');
+import React from 'react'
+import { render } from 'react-dom'
+import { Router, Route, hashHistory, IndexRoute, browserHistory } from 'react-router'
 
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-var hashHistory = ReactRouter.hashHistory;
-var browserHistory = ReactRouter.browserHistory;
 
 var ServerSet = require('./components/ServerSet.jsx');
 var Home = require('./components/Home.jsx');
 var App = require('./components/App.jsx');
 
-// ReactDOM.render(<ServerNode public_ip="127.0.0.1" />, document.getElementById('server_node'));
-//ReactDOM.render(<ServerSet />, document.getElementById('server_set'));
-ReactDOM.render((
+render((
   <Router history={browserHistory}>
 
     <Route path="/app/" component={App}>
