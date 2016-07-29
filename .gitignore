@@ -1,4 +1,5 @@
 node_modules/
+**/static/js/bundle.js.map
 
 # Created by https://www.gitignore.io/api/pycharm,python,sublimetext,komodoedit,vim,linux
 
