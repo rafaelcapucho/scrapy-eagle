@@ -85,6 +85,7 @@ var ServerNode = React.createClass({
         public_ip={this.state.public_ip}
         base_dir={item.base_dir}
         command={item.command}
+        created_at={item.created_at}
         memory_used_mb={item.memory_used_mb} />;
     }.bind(this));
 

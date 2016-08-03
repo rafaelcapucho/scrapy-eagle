@@ -25,6 +25,7 @@ var ServerSubProcess = React.createClass({
           <li>Memory Used: {this.props.memory_used_mb}mb</li>
           <li>Spider: {this.props.spider}</li>
           <li>Base Dir: {this.props.base_dir}</li>
+          <li>Created At: {this.props.created_at}</li>
           <li>
             <button onClick={this.onClickKill}>Kill</button>
             <a href={this.state.link_open_buffer} target="_blank"><button>Open Buffer</button></a>
