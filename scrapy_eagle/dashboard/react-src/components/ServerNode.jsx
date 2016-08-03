@@ -78,7 +78,7 @@ var ServerNode = React.createClass({
 
     var listSubProcesses = this.state.subprocesses.map(function (item, i) {
       return <ServerSubProcess
-        key={i}
+        key={item.pid}
         pid={item.pid}
         cpu_percent={item.cpu_percent}
         spider={item.spider}
