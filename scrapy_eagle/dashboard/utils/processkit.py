@@ -3,6 +3,7 @@
 
 import os
 import subprocess
+from datetime import datetime
 
 import psutil
 import gevent
@@ -24,7 +25,10 @@ def new_subprocess(base_dir, subprocess_pids, queue_info_global, command=None, s
             universal_newlines=True
     ) as p:
 
-        identifier = (p.pid, spider, " ".join(command), base_dir)
+        # Turn it JSON serializable, the same of call .isoformat()
+        created_at = str(datetime.utcnow())
+
+        identifier = (p.pid, spider, " ".join(command), base_dir, created_at)
 
         subprocess_pids.add(identifier)
 

@@ -38,9 +38,20 @@ def send_resources_info(socketio, subprocess_pids, public_ip):
 
         subprocess_info_greenlets = []
 
-        for pid, spider, command, base_dir in subprocess_pids:
+        for pid, spider, command, base_dir, created_at in subprocess_pids:
 
-            info_greenlet = gevent.spawn(get_resources_info_from_pid, pid=pid, spider=spider, command=command, base_dir=base_dir)
+            # We pass all the parameters that we like to keep instead
+            # of simply use a .update() here because the returned instance
+            # is a Greenlet instead of a dict.
+
+            info_greenlet = gevent.spawn(
+                get_resources_info_from_pid,
+                pid=pid,
+                spider=spider,
+                command=command,
+                base_dir=base_dir,
+                created_at=created_at,
+            )
 
             subprocess_info_greenlets.append(info_greenlet)
 

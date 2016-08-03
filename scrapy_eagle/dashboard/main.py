@@ -35,7 +35,7 @@ def main():
 def shutdown():
 
     # Send a signal to all opened subprocess, closing them.
-    for pid, _, _, _ in settings.subprocess_pids:
+    for pid, _, _, _, _ in settings.subprocess_pids:
 
         print('killing subprocess: {pid}'.format(pid=pid))
 

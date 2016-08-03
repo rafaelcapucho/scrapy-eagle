@@ -73,7 +73,7 @@ def kill_subprocess(pid):
 
     safe = False
 
-    for _pid, _, _, _ in settings.subprocess_pids:
+    for _pid, _, _, _, _ in settings.subprocess_pids:
 
         if pid == _pid:
             safe = True
