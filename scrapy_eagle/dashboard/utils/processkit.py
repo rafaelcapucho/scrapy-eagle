@@ -25,8 +25,8 @@ def new_subprocess(base_dir, subprocess_pids, queue_info_global, command=None, s
             universal_newlines=True
     ) as p:
 
-        # Turn it JSON serializable, the same of call .isoformat()
-        created_at = str(datetime.utcnow())
+        # Turn it JSON serializable
+        created_at = datetime.utcnow().isoformat()
 
         identifier = (p.pid, spider, " ".join(command), base_dir, created_at)
 
