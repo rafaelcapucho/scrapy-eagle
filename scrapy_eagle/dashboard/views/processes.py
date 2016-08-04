@@ -57,14 +57,14 @@ def read_buffer(pid):
 
                 sent += 1
 
-                yield row
+                yield row+'<br>'
 
             gevent.sleep(0.5)
 
     return flask.Response(
         response=generate(),
         status=200,
-        mimetype="text/plain"
+        mimetype="text/html"
     )
 
 
