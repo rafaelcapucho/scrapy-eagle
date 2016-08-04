@@ -1,4 +1,5 @@
 var React = require('react');
+var moment = require('moment');
 
 var ServerSubProcess = React.createClass({
 
@@ -16,6 +17,10 @@ var ServerSubProcess = React.createClass({
     this.setState({'link_open_buffer': "http://"+this.props.public_ip+":5000/processes/read_buffer/"+this.props.pid});
   },
   render: function(){
+
+    var created_at = moment.utc(this.props.created_at);
+    var fromNow = created_at.fromNow();
+
     return (
       <li key={this.props.pid}>
         <ul>
@@ -25,6 +30,7 @@ var ServerSubProcess = React.createClass({
           <li>Memory Used: {this.props.memory_used_mb}mb</li>
           <li>Spider: {this.props.spider}</li>
           <li>Base Dir: {this.props.base_dir}</li>
+          <li>Created At: {fromNow}</li>
           <li>
             <button onClick={this.onClickKill}>Kill</button>
             <a href={this.state.link_open_buffer} target="_blank"><button>Open Buffer</button></a>
