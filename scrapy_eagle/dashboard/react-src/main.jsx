@@ -13,16 +13,16 @@ import SpiderRoot from './components/spiders/Root.jsx'
 render((
   <Router history={browserHistory}>
 
-    <Route path="/app/" component={App}>
+    <Route name="Dashboard" path="/app/" component={App}>
 
       <IndexRoute component={Home}/>
 
-      <Route path="spiders" component={SpiderRoot}>
-        <Route path="config" component={SpiderConfig}/>
+      <Route name="Spiders" path="spiders" component={SpiderRoot}>
+        <Route name="Config" path="config" component={SpiderConfig}/>
       </Route>
 
-      <Route path="servers" component={ServerRoot}>
-        <Route path="monitoring" component={ServerSet}/>
+      <Route name="Servers" path="servers" component={ServerRoot}>
+        <Route name="Monitoring" path="monitoring" component={ServerSet}/>
       </Route>
 
     </Route>

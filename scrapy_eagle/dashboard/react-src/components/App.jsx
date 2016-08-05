@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
+var Breadcrumbs = require('react-breadcrumbs');
+
 export default class App extends React.Component {
   constructor(props){
     super(props);
@@ -11,7 +13,10 @@ export default class App extends React.Component {
       <div>
 
         <div className="container-fluid subheader">
-          Dashboard >
+          <Breadcrumbs
+            routes={this.props.routes}
+            params={this.props.params}
+          />
         </div>
 
         <div className="flexbox">
