@@ -43,10 +43,7 @@
         display: flex;
         overflow: hidden;
         flex-direction: row;
-      }
-
-      .flexbox .col {
-        /*flex: 1;*/
+        min-height: 100vh;
       }
 
       div.subheader {
@@ -62,28 +59,16 @@
 
       aside.sidebar {
         color: #001f3f;
-        /*display: block;*/
         min-height: 100%;
-        /*position: absolute;*/
-        float: left;
         padding: 114px 0 0 10px;
-        transition: all 0.1s ease-in-out 0s;
-        width: 240px;
         background-color: #DDFFDD;
-        flex: 0 0 240px;
-      }
-
-      aside.sidebar + section.main-content-wrapper {
-        margin-right: 240px;
-        transition: all 0.1s ease-in-out 0s;
-        width: auto;
+        flex: 0 0 280px;
       }
 
       section.main-content-wrapper {
         padding: 114px 10px 10px 10px;
-        margin-left: 0;
-        float: left;
-        border: 1px solid red;
+        /*border: 1px solid red;*/
+        min-height: 100%;
         flex: 1;
       }
 
@@ -103,15 +88,16 @@
 
     <div class="flexbox">
 
-    <section class="main-content-wrapper col">
+      <section class="main-content-wrapper">
 
-      <h1>Distributed Scrapy</h1>
-      <h2>Monitoring Dashboard</h2>
+        <h1>Distributed Scrapy</h1>
+        <h2>Monitoring Dashboard</h2>
 
-      <div id="app"></div>
+        <div id="app"></div>
 
-    </section>
-          <aside class="sidebar col">MENU</aside>
+      </section>
+
+      <aside class="sidebar">MENU</aside>
 
     </div>
 
@@ -121,14 +107,6 @@
 
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
     <script src="/static/js/bundle.js"></script>
-    <!--<script src="https://raw.githubusercontent.com/marcj/css-element-queries/93626d81fd9c0f14adbe1bcf82a06e7beaaafbdb/src/ResizeSensor.js"></script>-->
-    <!--<script type="text/javascript">-->
-      <!--$(function() {-->
-        <!--new ResizeSensor($('.main-content-wrapper'), function(){-->
-          <!--$('aside.sidebar').css({'height':($(".main-content-wrapper").height()+'px')});-->
-        <!--});-->
-      <!--});-->
-    <!--</script>-->
 
   </body>
 </html>
