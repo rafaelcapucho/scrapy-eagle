@@ -18,12 +18,43 @@
         position: relative;
         text-rendering: optimizelegibility;
       }
-      h1  {
-        /*font-size: 32px;*/
+
+      a:link, a:visited {
+        color: white;
+        outline: medium none;
+        text-decoration: none;
       }
-      h2 {
-        /*font-size: 19px;*/
+      a:hover, a:active {
+        color: white;
+        outline: medium none;
+        text-decoration: none;
       }
+
+
+      h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        color: whitesmoke;
+        font-family: "Montserrat",sans-serif;
+        margin: 0;
+      }
+      h1, .h1 {
+          font-size: 1.375em;
+      }
+      h2, .h2 {
+          font-size: 1.188em;
+      }
+      h3, .h3 {
+          font-size: 1.063em;
+      }
+      h4, .h4 {
+          font-size: 0.938em;
+      }
+      h5, .h5 {
+          font-size: 0.813em;
+      }
+      h6, .h6 {
+          font-size: 0.75em;
+      }
+
       div#server_set li#server-node {
         margin-bottom: 20px;
       }
@@ -139,8 +170,8 @@
     border-color: transparent;
 }
 .sidebar .nav-pills {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 12px;
 }
 .sidebar .nav-pills > li > a {
     font-size: 0.875em;
@@ -184,7 +215,7 @@
 .sidebar-left .active > a:focus,
 .sidebar-left .active > a:hover {
   /* Cor do item ativo dentro da categoria */
-  color: red;
+  color: #1d2939;
 }
 
 .sidebar-mini .sidebar-left .nav > li.open > a {
@@ -192,37 +223,23 @@
   color: pink;
 }
 .sidebar-left .nav > li > a:focus {
-  background-color: transparent;
-  color: #9d223c;
+  /* A cor que fica o texto depois de clicar na categoria (focus) */
+  background-color: #27b6af;
+  color: #fff;
 }
 
 .sidebar .nav-pills > li > a > .badge {
   margin: 3px 0;
 }
 
-.label.label-circle {
-  background-clip: padding-box;
-  border-radius: 50%;
-  height: 20px;
-  padding: 4px;
-  width: 20px;
-}
-
-.badge-danger {
-  background-color: #e25d5d;
-}
-
 .pull-right {
     float: right !important;
 }
 
-.badge {
-  border-radius: 2px;
-  display: inline-block;
-  font-size: 0.688em;
-  font-weight: normal;
-  padding: 2px 7px 4px;
-  vertical-align: middle;
+.nav-pills > li > a > .tag {
+  margin-top: 2px;
+  font-size: 80%;
+  padding: 0.25em 0.4em 0.28em;
 }
 
     </style>
@@ -259,15 +276,15 @@
           <ul class="nav nav-pills nav-stacked">
 
             <li class="nav-item">
-              <a class="nav-link active" href="#">
-                Active
+              <a class="nav-link" href="#">
+                Option 1
                 <span class="pull-right tag tag-pill tag-primary">8</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link active" href="#">
-                Active
+              <a class="nav-link" href="#">
+                Option 2
                 <span class="pull-right tag tag-danger">new</span>
               </a>
             </li>
