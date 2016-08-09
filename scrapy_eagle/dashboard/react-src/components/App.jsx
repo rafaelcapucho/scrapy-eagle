@@ -24,7 +24,6 @@ export default class App extends React.Component {
           <section className="main-content-wrapper">
 
             <h1>Distributed Scrapy</h1>
-            <h2>Monitoring Dashboard</h2>
 
             <ul>
               <li><IndexLink to="/app/" activeClassName="active">/</IndexLink></li>
@@ -61,16 +60,19 @@ export default class App extends React.Component {
                 </li>
 
                 <li className="nav-item nav-dropdown">
-                  <a className="nav-link active" title="Dashboard 2" href="#">
-                    Dashboard Drop
-                  </a>
+                  <Link to="/app/servers" className="nav-link" activeClassName="active">Servers</Link>
                   <ul className="nav-sub" data-index="0" style={{display: 'none'}}>
-                    <li><a title="Buttons" href="#"> Buttons </a></li>
-                    <li className="active"><a title="Buttons" href="#"> Buttons </a></li>
-                    <li><a title="Buttons" href="#"> Buttons </a></li>
-                    <li><a title="Buttons" href="#"> Buttons </a></li>
+                    <li><Link to="/app/servers/monitoring" activeClassName="active">Monitoring</Link></li>
                   </ul>
                 </li>
+
+                <li className="nav-item nav-dropdown">
+                  <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders</Link>
+                  <ul className="nav-sub" data-index="0" style={{display: 'none'}}>
+                    <li><Link to="/app/spiders/config" activeClassName="active">Configuration</Link></li>
+                  </ul>
+                </li>
+
               </ul>
 
             </nav>

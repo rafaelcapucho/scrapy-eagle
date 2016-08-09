@@ -40,7 +40,25 @@
 
         $(subMenu).navgoco({
           caretHtml: false,
-          accordion: true
+          accordion: true,
+        });
+
+        $('ul.nav li.nav-item a.nav-link').on('click', function (event) {
+
+          if ($(this).attr('href') !== '#') {
+
+            var previous_url = $(this).attr('href');
+
+            event.preventDefault();
+
+            $(this).attr('href','#');
+
+            $(this).trigger('click');
+
+            $(this).attr('href', previous_url);
+
+          }
+
         });
 
       });
