@@ -44,10 +44,9 @@ var ServerSet = React.createClass({
         server_set_new.push({public_ip: elem.public_ip, hostname: elem.hostname});
       })
 
-      that.props.set_server_qty(data.length);
-
     }).always(function () {
       that.setState({'server_set': server_set_new});
+      that.props.set_server_qty(server_set_new.length);
     });
 
   },

@@ -104,7 +104,9 @@ var mapDispatchToProps = function(dispatch){
 
 export default connect(
   (state) => {
-    servers_qty: state.servers_qty
+    return {
+      servers_qty: state.servers_qty
+    }
   },
   mapDispatchToProps
 )(App)

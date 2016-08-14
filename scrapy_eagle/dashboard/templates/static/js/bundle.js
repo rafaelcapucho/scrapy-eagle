@@ -29465,7 +29465,9 @@
 	};
 	
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	  servers_qty: state.servers_qty;
+	  return {
+	    servers_qty: state.servers_qty
+	  };
 	}, mapDispatchToProps)(App);
 
 /***/ },
@@ -29627,10 +29629,9 @@
 	      data.forEach(function (elem, index) {
 	        server_set_new.push({ public_ip: elem.public_ip, hostname: elem.hostname });
 	      });
-	
-	      that.props.set_server_qty(data.length);
 	    }).always(function () {
 	      that.setState({ 'server_set': server_set_new });
+	      that.props.set_server_qty(server_set_new.length);
 	    });
 	  },
 	
