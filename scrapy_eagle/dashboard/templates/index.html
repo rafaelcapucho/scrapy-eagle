@@ -45,7 +45,7 @@
 
         $('ul.nav li.nav-item a.nav-link').on('click', function (event) {
 
-          if ($(this).attr('href') !== '#') {
+          if ($(this).attr('href') !== '#' && !$(this).hasClass('direct') ) {
 
             var previous_url = $(this).attr('href');
 

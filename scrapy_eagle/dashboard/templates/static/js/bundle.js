@@ -27913,37 +27913,9 @@
 	                  'li',
 	                  { className: 'nav-item' },
 	                  _react2.default.createElement(
-	                    'a',
-	                    { className: 'nav-link', href: '#' },
-	                    'Option 1',
-	                    _react2.default.createElement(
-	                      'span',
-	                      { className: 'pull-right tag tag-pill tag-primary' },
-	                      '8'
-	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  { className: 'nav-item' },
-	                  _react2.default.createElement(
-	                    'a',
-	                    { className: 'nav-link', href: '#' },
-	                    'Option 2',
-	                    _react2.default.createElement(
-	                      'span',
-	                      { className: 'pull-right tag tag-danger' },
-	                      'new'
-	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  { className: 'nav-item' },
-	                  _react2.default.createElement(
-	                    'a',
-	                    { className: 'nav-link', title: 'Dashboard', href: '#' },
-	                    'Dashboard'
+	                    _reactRouter.IndexLink,
+	                    { to: '/app/', className: 'nav-link direct', activeClassName: 'active' },
+	                    'Main'
 	                  )
 	                ),
 	                _react2.default.createElement(
@@ -27956,7 +27928,7 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'ul',
-	                    { className: 'nav-sub', 'data-index': '0', style: { display: 'none' } },
+	                    { className: 'nav-sub', 'data-index': '0' },
 	                    _react2.default.createElement(
 	                      'li',
 	                      null,
@@ -27978,7 +27950,7 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'ul',
-	                    { className: 'nav-sub', 'data-index': '0', style: { display: 'none' } },
+	                    { className: 'nav-sub', 'data-index': '1' },
 	                    _react2.default.createElement(
 	                      'li',
 	                      null,

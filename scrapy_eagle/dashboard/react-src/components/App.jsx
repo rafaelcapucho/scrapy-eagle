@@ -41,7 +41,7 @@ export default class App extends React.Component {
               <h5 className="sidebar-header">Navigation</h5>
               <ul className="nav nav-pills nav-stacked">
 
-                <li className="nav-item">
+                {/*<li className="nav-item">
                   <a className="nav-link" href="#">
                     Option 1
                     <span className="pull-right tag tag-pill tag-primary">8</span>
@@ -53,22 +53,22 @@ export default class App extends React.Component {
                     Option 2
                     <span className="pull-right tag tag-danger">new</span>
                   </a>
-                </li>
+                </li>*/}
 
                 <li className="nav-item">
-                  <a className="nav-link" title="Dashboard" href="#">Dashboard</a>
+                  <IndexLink to="/app/" className="nav-link direct" activeClassName="active">Main</IndexLink>
                 </li>
 
                 <li className="nav-item nav-dropdown">
                   <Link to="/app/servers" className="nav-link" activeClassName="active">Servers</Link>
-                  <ul className="nav-sub" data-index="0" style={{display: 'none'}}>
+                  <ul className="nav-sub" data-index="0">
                     <li><Link to="/app/servers/monitoring" activeClassName="active">Monitoring</Link></li>
                   </ul>
                 </li>
 
                 <li className="nav-item nav-dropdown">
                   <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders</Link>
-                  <ul className="nav-sub" data-index="0" style={{display: 'none'}}>
+                  <ul className="nav-sub" data-index="1">
                     <li><Link to="/app/spiders/config" activeClassName="active">Configuration</Link></li>
                   </ul>
                 </li>

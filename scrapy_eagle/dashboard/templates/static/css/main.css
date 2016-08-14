@@ -171,7 +171,12 @@ section.main-content-wrapper {
 
 .nav-pills .nav-item.open .nav-link,
 .nav-pills .nav-item.open .nav-link:focus,
-.nav-pills .nav-item.open .nav-link:hover,
+.nav-pills .nav-item.open .nav-link:hover {
+  background-color: #29d1ca;
+  color: #fff;
+  cursor: pointer;
+}
+
 .nav-pills .nav-link.active,
 .nav-pills .nav-link.active:focus,
 .nav-pills .nav-link.active:hover {
@@ -203,7 +208,7 @@ section.main-content-wrapper {
 }
 .sidebar-left .nav > li > a:focus {
   /* A cor que fica o texto depois de clicar na categoria (focus) */
-  background-color: #27b6af;
+  background-color: #29d1ca;
   color: #fff;
 }
 
