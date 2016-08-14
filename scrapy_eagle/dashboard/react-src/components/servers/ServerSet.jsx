@@ -1,4 +1,6 @@
-var React = require('react');
+import React from 'react'
+import { connect } from 'react-redux'
+
 var ServerNode = require('./ServerNode.jsx');
 
 var SetIntervalMixin = {
@@ -37,9 +39,13 @@ var ServerSet = React.createClass({
       dataType: 'json',
       cache: false
     }).done(function(data) {
+
       data.forEach(function(elem, index){
-        server_set_new.push({public_ip: elem.public_ip, hostname: elem.hostname})
+        server_set_new.push({public_ip: elem.public_ip, hostname: elem.hostname});
       })
+
+      that.props.set_server_qty(data.length);
+
     }).always(function () {
       that.setState({'server_set': server_set_new});
     });
@@ -67,4 +73,15 @@ var ServerSet = React.createClass({
   }
 });
 
-module.exports = ServerSet;
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    dispatch,
+    set_server_qty: (qty) => { dispatch({type: 'SET_SERVER_QTY', qty: qty}); }
+  }
+};
+
+export default connect(
+  (state) => { return {} },
+  mapDispatchToProps
+)(ServerSet)

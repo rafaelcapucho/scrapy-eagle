@@ -1,14 +1,17 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
 
+import { connect } from 'react-redux'
+
 var Breadcrumbs = require('react-breadcrumbs');
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props){
     super(props);
   }
 
   render(){
+    const { servers_qty } = this.props
     return (
       <div>
 
@@ -24,6 +27,9 @@ export default class App extends React.Component {
           <section className="main-content-wrapper">
 
             {/*<h1>Distributed Scrapy</h1>
+
+            <a onClick={() => {this.props.SET_SERVER_QTY(7)}}>{servers_qty}</a>
+            => <button onClick={() => { this.props.dispatch({type: 'SET_SERVER_QTY', qty:10}); }}>{servers_qty}</button>
 
             <ul>
               <li><IndexLink to="/app/" activeClassName="active">/</IndexLink></li>
@@ -61,7 +67,10 @@ export default class App extends React.Component {
                 </li>
 
                 <li className="nav-item nav-dropdown">
-                  <Link to="/app/servers" className="nav-link" activeClassName="active">Servers</Link>
+                  <Link to="/app/servers" className="nav-link" activeClassName="active">
+                    Servers
+                    <span className="pull-right tag tag-pill tag-primary">{ servers_qty }</span>
+                  </Link>
                   <ul className="nav-sub" data-index="0">
                     <li><Link to="/app/servers/monitoring" activeClassName="active">Monitoring</Link></li>
                   </ul>
@@ -86,3 +95,16 @@ export default class App extends React.Component {
       );
   }
 }
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    dispatch,
+  }
+};
+
+export default connect(
+  (state) => {
+    servers_qty: state.servers_qty
+  },
+  mapDispatchToProps
+)(App)
