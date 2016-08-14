@@ -27857,42 +27857,6 @@
 	          _react2.default.createElement(
 	            'section',
 	            { className: 'main-content-wrapper' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'Distributed Scrapy'
-	            ),
-	            _react2.default.createElement(
-	              'ul',
-	              null,
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.IndexLink,
-	                  { to: '/app/', activeClassName: 'active' },
-	                  '/'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/app/servers/monitoring', activeClassName: 'active' },
-	                  '/servers/monitoring'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/app/spiders/config', activeClassName: 'active' },
-	                  '/spiders/config'
-	                )
-	              )
-	            ),
 	            this.props.children
 	          ),
 	          _react2.default.createElement(

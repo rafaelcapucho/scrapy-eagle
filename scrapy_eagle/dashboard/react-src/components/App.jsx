@@ -23,13 +23,14 @@ export default class App extends React.Component {
 
           <section className="main-content-wrapper">
 
-            <h1>Distributed Scrapy</h1>
+            {/*<h1>Distributed Scrapy</h1>
 
             <ul>
               <li><IndexLink to="/app/" activeClassName="active">/</IndexLink></li>
               <li><Link to="/app/servers/monitoring" activeClassName="active">/servers/monitoring</Link></li>
               <li><Link to="/app/spiders/config" activeClassName="active">/spiders/config</Link></li>
             </ul>
+            */}
 
             {this.props.children}
 
