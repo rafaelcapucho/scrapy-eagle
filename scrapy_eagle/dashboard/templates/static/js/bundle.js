@@ -29352,6 +29352,58 @@
 	  }
 	
 	  _createClass(App, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.intervals = [];
+	    }
+	  }, {
+	    key: 'setInterval',
+	    value: function (_setInterval) {
+	      function setInterval() {
+	        return _setInterval.apply(this, arguments);
+	      }
+	
+	      setInterval.toString = function () {
+	        return _setInterval.toString();
+	      };
+	
+	      return setInterval;
+	    }(function () {
+	      this.intervals.push(setInterval.apply(null, arguments));
+	    })
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.intervals.forEach(clearInterval);
+	
+	      // Ref: https://facebook.github.io/react/tips/initial-ajax.html
+	      this.clientsRequest.abort();
+	    }
+	  }, {
+	    key: 'ajax_get_spiders_info',
+	    value: function ajax_get_spiders_info() {
+	
+	      this.clientsRequest = $.ajax({
+	        url: window.location.protocol + "//" + document.domain + ":" + location.port + "/spiders/list",
+	        type: 'GET',
+	        dataType: 'json',
+	        cache: false
+	      }).done(function (data) {
+	
+	        $.each(data, function (key, value) {
+	          console.log(key, value);
+	        });
+	      }).always(function () {
+	        // that.setState({'server_set': server_set_new});
+	      });
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.ajax_get_spiders_info();
+	      this.setInterval(this.ajax_get_spiders_info, 5000);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var servers_qty = this.props.servers_qty;
@@ -29413,7 +29465,7 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'ul',
-	                    { className: 'nav-sub', 'data-index': '0' },
+	                    { className: 'nav-sub' },
 	                    _react2.default.createElement(
 	                      'li',
 	                      null,
@@ -29435,7 +29487,7 @@
 	                  ),
 	                  _react2.default.createElement(
 	                    'ul',
-	                    { className: 'nav-sub', 'data-index': '1' },
+	                    { className: 'nav-sub' },
 	                    _react2.default.createElement(
 	                      'li',
 	                      null,
@@ -44446,6 +44498,31 @@
 	  }
 	
 	  _createClass(SpiderConfig, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.updateSpiders();
+	    }
+	  }, {
+	    key: 'updateSpiders',
+	    value: function updateSpiders() {
+	
+	      // this.serversRequest = $.ajax({
+	      //   url: "http://" + document.domain + ":5000/spiders/list",
+	      //   type: 'GET',
+	      //   dataType: 'json',
+	      //   cache: false
+	      // }).done((data) => {
+	      //
+	      //   $.each(data, (key, value) => {
+	      //     console.log(key, value);
+	      //   })
+	      //
+	      // }).always(() => {
+	      //   // that.setState({'server_set': server_set_new});
+	      // });
+	
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(

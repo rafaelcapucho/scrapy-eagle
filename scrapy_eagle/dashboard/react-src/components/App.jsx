@@ -10,8 +10,47 @@ class App extends React.Component {
     super(props);
   }
 
+  componentWillMount(){
+    this.intervals = [];
+  }
+
+  setInterval() {
+    this.intervals.push(setInterval.apply(null, arguments));
+  }
+
+  componentWillUnmount(){
+    this.intervals.forEach(clearInterval);
+    
+    // Ref: https://facebook.github.io/react/tips/initial-ajax.html
+    this.clientsRequest.abort();
+  }
+
+  ajax_get_spiders_info(){
+
+    this.clientsRequest = $.ajax({
+      url: window.location.protocol + "//" + document.domain + ":" + location.port + "/spiders/list",
+      type: 'GET',
+      dataType: 'json',
+      cache: false
+    }).done((data) => {
+
+      $.each(data, (key, value) => {
+        console.log(key, value);
+      })
+
+    }).always(() => {
+      // that.setState({'server_set': server_set_new});
+    });
+
+  }
+
+  componentDidMount(){
+    this.ajax_get_spiders_info();
+    this.setInterval(this.ajax_get_spiders_info, 5000);
+  }
+
   render(){
-    const { servers_qty } = this.props
+    const { servers_qty } = this.props;
     return (
       <div>
 
@@ -71,14 +110,14 @@ class App extends React.Component {
                     Servers
                     <span className="pull-right tag tag-pill tag-primary">{ servers_qty }</span>
                   </Link>
-                  <ul className="nav-sub" data-index="0">
+                  <ul className="nav-sub">
                     <li><Link to="/app/servers/monitoring" activeClassName="active">Monitoring</Link></li>
                   </ul>
                 </li>
 
                 <li className="nav-item nav-dropdown">
                   <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders</Link>
-                  <ul className="nav-sub" data-index="1">
+                  <ul className="nav-sub">
                     <li><Link to="/app/spiders/config" activeClassName="active">Configuration</Link></li>
                   </ul>
                 </li>
