@@ -116,7 +116,7 @@ class App extends React.Component {
                 </li>
 
                 <li className="nav-item nav-dropdown">
-                  <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders</Link>
+                  <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders & Commands</Link>
                   <ul className="nav-sub">
                     <li><Link to="/app/spiders/config" activeClassName="active">Configuration</Link></li>
                   </ul>
