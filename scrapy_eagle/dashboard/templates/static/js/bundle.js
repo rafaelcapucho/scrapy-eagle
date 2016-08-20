@@ -29428,12 +29428,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _props = this.props;
-	      var servers_qty = _props.servers_qty;
-	      var spiders = _props.spiders;
-	      var state = _props.state;
+	      var servers_qty = this.props.servers_qty;
 	
-	      console.log(state);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -29544,9 +29540,7 @@
 	
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return {
-	    servers_qty: state.servers.servers_qty,
-	    spiders: state.spiders,
-	    state: state
+	    servers_qty: state.servers.servers_qty
 	  };
 	}, mapDispatchToProps)(App);
 
@@ -44499,11 +44493,15 @@
 	  value: true
 	});
 	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 251);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -44532,31 +44530,36 @@
 	    }
 	  }, {
 	    key: 'updateSpiders',
-	    value: function updateSpiders() {
-	
-	      // this.serversRequest = $.ajax({
-	      //   url: "http://" + document.domain + ":5000/spiders/list",
-	      //   type: 'GET',
-	      //   dataType: 'json',
-	      //   cache: false
-	      // }).done((data) => {
-	      //
-	      //   $.each(data, (key, value) => {
-	      //     console.log(key, value);
-	      //   })
-	      //
-	      // }).always(() => {
-	      //   // that.setState({'server_set': server_set_new});
-	      // });
-	
-	    }
+	    value: function updateSpiders() {}
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var spiders = this.props.spiders;
+	
+	      // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
+	
+	      var list_spiders = spiders.entrySeq().map(function (_ref) {
+	        var _ref2 = _slicedToArray(_ref, 2);
+	
+	        var key = _ref2[0];
+	        var value = _ref2[1];
+	
+	        return _react2.default.createElement(
+	          'li',
+	          { key: key },
+	          key
+	        );
+	      });
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Spiders Configuration'
+	        'Spiders Configuration',
+	        _react2.default.createElement(
+	          'ul',
+	          null,
+	          list_spiders
+	        )
 	      );
 	    }
 	  }]);
@@ -44564,7 +44567,17 @@
 	  return SpiderConfig;
 	}(_react2.default.Component);
 	
-	exports.default = SpiderConfig;
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    dispatch: dispatch
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    spiders: state.spiders
+	  };
+	}, mapDispatchToProps)(SpiderConfig);
 
 /***/ },
 /* 371 */
@@ -44710,9 +44723,6 @@
 	}(SpiderRecord);
 	
 	var SpidersMap = (0, _immutable.OrderedMap)({});
-	
-	//export const INCREASE_SERVER = 'INCREASE_SERVER';
-	//export const SET_SERVER_QTY = 'SET_SERVER_QTY';
 	
 	exports.default = function () {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? SpidersMap : arguments[0];

@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class SpiderConfig extends React.Component {
+import { connect } from 'react-redux'
+
+class SpiderConfig extends React.Component {
 
   constructor(props){
     super(props);
@@ -13,27 +15,37 @@ export default class SpiderConfig extends React.Component {
 
   updateSpiders(){
 
-    // this.serversRequest = $.ajax({
-    //   url: "http://" + document.domain + ":5000/spiders/list",
-    //   type: 'GET',
-    //   dataType: 'json',
-    //   cache: false
-    // }).done((data) => {
-    //
-    //   $.each(data, (key, value) => {
-    //     console.log(key, value);
-    //   })
-    //
-    // }).always(() => {
-    //   // that.setState({'server_set': server_set_new});
-    // });
 
   }
 
   render(){
+    const { spiders } = this.props;
+
+    // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
+    var list_spiders = spiders.entrySeq().map( ([key, value]) => {
+        return <li key={key}>{key}</li>;
+    });
+
     return (
-      <div>Spiders Configuration</div>
+      <div>Spiders Configuration
+      <ul>{list_spiders}</ul>
+      </div>
     );
   }
 
 }
+
+var mapDispatchToProps = function(dispatch){
+  return {
+    dispatch
+  }
+};
+
+export default connect(
+  (state) => {
+    return {
+      spiders: state.spiders
+    }
+  },
+  mapDispatchToProps
+)(SpiderConfig)

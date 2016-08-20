@@ -66,8 +66,7 @@ class App extends React.Component {
   }
 
   render(){
-    const { servers_qty, spiders, state } = this.props;
-    console.log(state);
+    const { servers_qty } = this.props;
     return (
       <div>
 
@@ -154,16 +153,14 @@ class App extends React.Component {
 
 var mapDispatchToProps = function(dispatch){
   return {
-    dispatch,
+    dispatch
   }
 };
 
 export default connect(
   (state) => {
     return {
-      servers_qty: state.servers.servers_qty,
-      spiders: state.spiders,
-      state: state
+      servers_qty: state.servers.servers_qty
     }
   },
   mapDispatchToProps

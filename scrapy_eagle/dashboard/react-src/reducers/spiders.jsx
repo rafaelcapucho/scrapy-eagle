@@ -17,9 +17,6 @@ class SpiderInfo extends SpiderRecord {
 
 const SpidersMap = OrderedMap({});
 
-//export const INCREASE_SERVER = 'INCREASE_SERVER';
-//export const SET_SERVER_QTY = 'SET_SERVER_QTY';
-
 export default (state = SpidersMap, action) => {
 
   switch (action.type) {
