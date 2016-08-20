@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 
 import App from './components/App.jsx'
@@ -13,9 +13,15 @@ import ServerRoot from './components/servers/Root.jsx'
 import SpiderConfig from './components/spiders/SpiderConfig.jsx'
 import SpiderRoot from './components/spiders/Root.jsx'
 
-import stats from './reducers/stats.jsx'
+import servers from './reducers/servers.jsx'
+import spiders from './reducers/spiders.jsx'
 
-const store = createStore(stats);
+var reducers = combineReducers({
+  servers: servers,
+  spiders: spiders
+})
+
+const store = createStore(reducers);
 
 render((
   <Provider store={store}>

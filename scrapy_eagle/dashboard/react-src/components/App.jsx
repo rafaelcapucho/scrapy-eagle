@@ -27,6 +27,8 @@ class App extends React.Component {
 
   ajax_get_spiders_info(){
 
+    var that = this;
+
     this.clientsRequest = $.ajax({
       url: window.location.protocol + "//" + document.domain + ":" + location.port + "/spiders/list",
       type: 'GET',
@@ -35,7 +37,21 @@ class App extends React.Component {
     }).done((data) => {
 
       $.each(data, (key, value) => {
-        console.log(key, value);
+        // console.log(key, value);
+
+        that.props.dispatch(
+          {
+            type: 'UPDATE_SPIDER_INFO',
+            spider_id: key,
+            frequency_minutes: value.frequency_minutes,
+            last_started_at: value.last_started_at,
+            max_concurrency: value.max_concurrency,
+            min_concurrency: value.min_concurrency,
+            max_memory_mb: value.max_memory_mb,
+            priority: value.priority
+          }
+        );
+
       })
 
     }).always(() => {
@@ -46,11 +62,12 @@ class App extends React.Component {
 
   componentDidMount(){
     this.ajax_get_spiders_info();
-    this.setInterval(this.ajax_get_spiders_info, 5000);
+    this.setInterval(this.ajax_get_spiders_info.bind(this), 5000);
   }
 
   render(){
-    const { servers_qty } = this.props;
+    const { servers_qty, spiders, state } = this.props;
+    console.log(state);
     return (
       <div>
 
@@ -144,7 +161,9 @@ var mapDispatchToProps = function(dispatch){
 export default connect(
   (state) => {
     return {
-      servers_qty: state.servers_qty
+      servers_qty: state.servers.servers_qty,
+      spiders: state.spiders,
+      state: state
     }
   },
   mapDispatchToProps

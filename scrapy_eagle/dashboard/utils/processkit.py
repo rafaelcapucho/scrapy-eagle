@@ -10,6 +10,7 @@ import gevent
 
 from scrapy_eagle.dashboard.green_threads import heartbeat
 
+
 def new_subprocess(base_dir, subprocess_pids, queue_info_global, command=None, spider=None, buffers={}):
 
     if not command:
