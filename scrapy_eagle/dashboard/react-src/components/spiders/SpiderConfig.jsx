@@ -1,11 +1,13 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 class SpiderConfig extends React.Component {
 
   constructor(props){
     super(props);
+    //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.state = {};
   }
 
@@ -15,20 +17,53 @@ class SpiderConfig extends React.Component {
 
   updateSpiders(){
 
+  }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('entro componentWillReceiveProps');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return true;
+    //return nextProps.id !== this.props.id;
   }
 
   render(){
     const { spiders } = this.props;
 
+    console.log('render!');
+
     // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
     var list_spiders = spiders.entrySeq().map( ([key, value]) => {
-        return <li key={key}>{key}</li>;
+      return (
+        <div style={{border: '2px solid pink'}} className="col-sm-4" key={key}>
+          {key} -> {value.getPriority()}
+          <form method="GET" action="">
+
+            <div className="form-group row">
+              <label htmlFor="frequency_minutes" className="col-xs-2 col-form-label">Frequency Minutes</label>
+              <div className="col-xs-10">
+                <input className="form-control" name="frequency_minutes" type="text" defaultValue={value.frequency_minutes} id="frequency_minutes" />
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <label htmlFor="example-text-input" className="col-xs-2 col-form-label">Text</label>
+              <div className="col-xs-10">
+                <input className="form-control" type="text" defaultValue="Artisanal kale" id="example-text-input" />
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      );
     });
 
     return (
-      <div>Spiders Configuration
-      <ul>{list_spiders}</ul>
+      <div style={{border: '2px solid blue'}}>
+        <h1>Spiders Configuration</h1>
+        {list_spiders}
       </div>
     );
   }
