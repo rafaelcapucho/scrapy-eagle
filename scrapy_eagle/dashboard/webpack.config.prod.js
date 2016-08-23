@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 var BUILD_JS_DIR = path.resolve(__dirname, 'templates/static/js');
 var APP_DIR = path.resolve(__dirname, 'react-src');
 
@@ -21,6 +23,9 @@ var config = {
       compressor: {
         warnings: false
       }
+    }),
+    new ExtractTextPlugin('../css/bundle.css', {
+      allChunks: true
     })
   ],
   module : {
@@ -29,6 +34,11 @@ var config = {
         test : /\.jsx?/,
         include : APP_DIR,
         loader : 'babel'
+      },
+      {
+        test: /\.scss$/,
+        //loaders: ['style', 'css', 'sass']
+        loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
   }

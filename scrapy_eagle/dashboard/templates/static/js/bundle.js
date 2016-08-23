@@ -81,15 +81,15 @@
 	
 	var _SpiderConfig2 = _interopRequireDefault(_SpiderConfig);
 	
-	var _Root3 = __webpack_require__(/*! ./components/spiders/Root.jsx */ 371);
+	var _Root3 = __webpack_require__(/*! ./components/spiders/Root.jsx */ 372);
 	
 	var _Root4 = _interopRequireDefault(_Root3);
 	
-	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 372);
+	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 373);
 	
 	var _servers2 = _interopRequireDefault(_servers);
 	
-	var _spiders = __webpack_require__(/*! ./reducers/spiders.jsx */ 373);
+	var _spiders = __webpack_require__(/*! ./reducers/spiders.jsx */ 374);
 	
 	var _spiders2 = _interopRequireDefault(_spiders);
 	
@@ -44451,6 +44451,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	__webpack_require__(/*! ./style.scss */ 371);
+	
 	var SpiderConfig = function (_React$Component) {
 	  _inherits(SpiderConfig, _React$Component);
 	
@@ -44512,12 +44514,12 @@
 	              { className: 'form-group row' },
 	              _react2.default.createElement(
 	                'label',
-	                { htmlFor: 'frequency_minutes', className: 'col-xs-2 col-form-label' },
-	                'Frequency Minutes'
+	                { htmlFor: 'frequency_minutes', className: 'col-xs-3 col-form-label' },
+	                'Frequency'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'col-xs-10' },
+	                { className: 'col-xs-9' },
 	                _react2.default.createElement('input', { className: 'form-control', name: 'frequency_minutes', type: 'text', defaultValue: value.frequency_minutes, id: 'frequency_minutes' })
 	              )
 	            ),
@@ -44526,17 +44528,50 @@
 	              { className: 'form-group row' },
 	              _react2.default.createElement(
 	                'label',
-	                { htmlFor: 'example-text-input', className: 'col-xs-2 col-form-label' },
+	                { htmlFor: 'max_concurrency', className: 'col-xs-3 col-form-label' },
+	                'Max Concurrency'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-xs-9' },
+	                _react2.default.createElement('input', { className: 'form-control', name: 'max_concurrency', type: 'text', defaultValue: value.max_concurrency, id: 'max_concurrency' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group row' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'example-text-input', className: 'col-xs-3 col-form-label' },
 	                'Text'
 	              ),
 	              _react2.default.createElement(
 	                'div',
-	                { className: 'col-xs-10' },
+	                { className: 'col-xs-9' },
 	                _react2.default.createElement('input', { className: 'form-control', type: 'text', defaultValue: 'Artisanal kale', id: 'example-text-input' }),
 	                _react2.default.createElement(
 	                  'small',
 	                  { id: 'emailHelp', className: 'form-text text-muted' },
 	                  'We\'ll never share your email with anyone else.'
+	                )
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'form-group row' },
+	              _react2.default.createElement(
+	                'label',
+	                { htmlFor: 'max_memory_mb', className: 'col-xs-3 col-form-label' },
+	                'Max Memory (MB)'
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'col-xs-9' },
+	                _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', type: 'text', defaultValue: '200', id: 'max_memory_mb' }),
+	                _react2.default.createElement(
+	                  'small',
+	                  { id: 'emailHelp', className: 'form-text text-muted' },
+	                  'The processes are killed when reach this threshold.'
 	                )
 	              )
 	            )
@@ -44546,7 +44581,7 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { style: { border: '2px solid blue' } },
+	        { className: 'container-fluid scheduler', style: { border: '2px solid blue' } },
 	        _react2.default.createElement(
 	          'h1',
 	          null,
@@ -44672,6 +44707,15 @@
 
 /***/ },
 /* 371 */
+/*!*************************************************!*\
+  !*** ./react-src/components/spiders/style.scss ***!
+  \*************************************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 372 */
 /*!***********************************************!*\
   !*** ./react-src/components/spiders/Root.jsx ***!
   \***********************************************/
@@ -44719,7 +44763,7 @@
 	exports.default = SpiderRoot;
 
 /***/ },
-/* 372 */
+/* 373 */
 /*!****************************************!*\
   !*** ./react-src/reducers/servers.jsx ***!
   \****************************************/
@@ -44763,7 +44807,7 @@
 	}
 
 /***/ },
-/* 373 */
+/* 374 */
 /*!****************************************!*\
   !*** ./react-src/reducers/spiders.jsx ***!
   \****************************************/
@@ -44777,7 +44821,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _immutable = __webpack_require__(/*! immutable */ 374);
+	var _immutable = __webpack_require__(/*! immutable */ 375);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -44793,6 +44837,9 @@
 	  max_memory_mb: undefined,
 	  priority: 0
 	});
+	
+	// Adicionar no Record, o tipo (se é spider ou command)
+	// e Adicionr uma lista de start URLs
 	
 	var SpiderInfo = function (_SpiderRecord) {
 	  _inherits(SpiderInfo, _SpiderRecord);
@@ -44846,7 +44893,7 @@
 	};
 
 /***/ },
-/* 374 */
+/* 375 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
   \***************************************/

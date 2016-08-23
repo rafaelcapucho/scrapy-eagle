@@ -9,6 +9,9 @@ const SpiderRecord = Record({
   priority: 0
 });
 
+// Adicionar no Record, o tipo (se é spider ou command)
+// e Adicionr uma lista de start URLs
+
 class SpiderInfo extends SpiderRecord {
   getPriority(){
     return this.priority;
