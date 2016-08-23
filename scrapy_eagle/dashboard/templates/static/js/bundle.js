@@ -89,7 +89,7 @@
 	
 	var _servers2 = _interopRequireDefault(_servers);
 	
-	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 376);
+	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 374);
 	
 	var _jobs2 = _interopRequireDefault(_jobs);
 	
@@ -29277,6 +29277,10 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 248);
 	
+	var _reactBreadcrumbs = __webpack_require__(/*! react-breadcrumbs */ 256);
+	
+	var _reactBreadcrumbs2 = _interopRequireDefault(_reactBreadcrumbs);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29285,7 +29289,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Breadcrumbs = __webpack_require__(/*! react-breadcrumbs */ 256);
+	__webpack_require__(/*! ./App.scss */ 376);
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -29372,7 +29376,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'container-fluid subheader' },
-	          _react2.default.createElement(Breadcrumbs, {
+	          _react2.default.createElement(_reactBreadcrumbs2.default, {
 	            routes: this.props.routes,
 	            params: this.props.params
 	          })
@@ -44807,7 +44811,93 @@
 	}
 
 /***/ },
-/* 374 */,
+/* 374 */
+/*!*************************************!*\
+  !*** ./react-src/reducers/jobs.jsx ***!
+  \*************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _immutable = __webpack_require__(/*! immutable */ 375);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var JobRecord = (0, _immutable.Record)({
+	  frequency_minutes: undefined,
+	  last_started_at: undefined,
+	  max_concurrency: undefined,
+	  min_concurrency: undefined,
+	  max_memory_mb: undefined,
+	  priority: 0,
+	  type: undefined, // 'spider' or 'command'
+	  start_urls: new _immutable.List()
+	});
+	
+	var JobInfo = function (_JobRecord) {
+	  _inherits(JobInfo, _JobRecord);
+	
+	  function JobInfo() {
+	    _classCallCheck(this, JobInfo);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(JobInfo).apply(this, arguments));
+	  }
+	
+	  _createClass(JobInfo, [{
+	    key: 'getPriority',
+	    value: function getPriority() {
+	      return this.priority;
+	    }
+	  }]);
+	
+	  return JobInfo;
+	}(JobRecord);
+	
+	var SpidersMap = (0, _immutable.OrderedMap)({});
+	
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? SpidersMap : arguments[0];
+	  var action = arguments[1];
+	
+	
+	  switch (action.type) {
+	
+	    case 'UPDATE_SPIDER_INFO':
+	
+	      // Check if there's already one Record from this Spider
+	      if (!state.has(action.spider_id)) {
+	        state = state.set(action.spider_id, new JobInfo());
+	      }
+	
+	      return state.update(action.spider_id, function (spider_record) {
+	        return spider_record.merge({
+	          'priority': action.priority,
+	          'frequency_minutes': action.frequency_minutes,
+	          'last_started_at': action.last_started_at,
+	          'max_concurrency': action.max_concurrency,
+	          'min_concurrency': action.min_concurrency,
+	          'max_memory_mb': action.max_memory_mb,
+	          'type': action.type,
+	          'start_urls': action.start_urls
+	        });
+	      });
+	
+	    default:
+	      return state;
+	  }
+	};
+
+/***/ },
 /* 375 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
@@ -49796,90 +49886,12 @@
 
 /***/ },
 /* 376 */
-/*!*************************************!*\
-  !*** ./react-src/reducers/jobs.jsx ***!
-  \*************************************/
-/***/ function(module, exports, __webpack_require__) {
+/*!***************************************!*\
+  !*** ./react-src/components/App.scss ***!
+  \***************************************/
+/***/ function(module, exports) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _immutable = __webpack_require__(/*! immutable */ 375);
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var JobRecord = (0, _immutable.Record)({
-	  frequency_minutes: undefined,
-	  last_started_at: undefined,
-	  max_concurrency: undefined,
-	  min_concurrency: undefined,
-	  max_memory_mb: undefined,
-	  priority: 0,
-	  type: undefined, // 'spider' or 'command'
-	  start_urls: new _immutable.List()
-	});
-	
-	var JobInfo = function (_JobRecord) {
-	  _inherits(JobInfo, _JobRecord);
-	
-	  function JobInfo() {
-	    _classCallCheck(this, JobInfo);
-	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(JobInfo).apply(this, arguments));
-	  }
-	
-	  _createClass(JobInfo, [{
-	    key: 'getPriority',
-	    value: function getPriority() {
-	      return this.priority;
-	    }
-	  }]);
-	
-	  return JobInfo;
-	}(JobRecord);
-	
-	var SpidersMap = (0, _immutable.OrderedMap)({});
-	
-	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? SpidersMap : arguments[0];
-	  var action = arguments[1];
-	
-	
-	  switch (action.type) {
-	
-	    case 'UPDATE_SPIDER_INFO':
-	
-	      // Check if there's already one Record from this Spider
-	      if (!state.has(action.spider_id)) {
-	        state = state.set(action.spider_id, new JobInfo());
-	      }
-	
-	      return state.update(action.spider_id, function (spider_record) {
-	        return spider_record.merge({
-	          'priority': action.priority,
-	          'frequency_minutes': action.frequency_minutes,
-	          'last_started_at': action.last_started_at,
-	          'max_concurrency': action.max_concurrency,
-	          'min_concurrency': action.min_concurrency,
-	          'max_memory_mb': action.max_memory_mb,
-	          'type': action.type,
-	          'start_urls': action.start_urls
-	        });
-	      });
-	
-	    default:
-	      return state;
-	  }
-	};
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

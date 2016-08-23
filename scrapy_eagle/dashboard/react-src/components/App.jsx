@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
-
 import { connect } from 'react-redux'
+import Breadcrumbs from 'react-breadcrumbs'
 
-var Breadcrumbs = require('react-breadcrumbs');
+require('./App.scss');
 
 class App extends React.Component {
   constructor(props){
