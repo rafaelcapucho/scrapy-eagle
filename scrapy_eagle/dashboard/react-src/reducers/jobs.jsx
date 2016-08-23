@@ -1,18 +1,17 @@
-import { Record, OrderedMap } from 'immutable';
+import { Record, OrderedMap, List } from 'immutable';
 
-const SpiderRecord = Record({
+const JobRecord = Record({
   frequency_minutes: undefined,
   last_started_at: undefined,
   max_concurrency: undefined,
   min_concurrency: undefined,
   max_memory_mb: undefined,
-  priority: 0
+  priority: 0,
+  type: undefined, // 'spider' or 'command'
+  start_urls: new List()
 });
 
-// Adicionar no Record, o tipo (se é spider ou command)
-// e Adicionr uma lista de start URLs
-
-class SpiderInfo extends SpiderRecord {
+class JobInfo extends JobRecord {
   getPriority(){
     return this.priority;
   }
@@ -28,7 +27,7 @@ export default (state = SpidersMap, action) => {
 
       // Check if there's already one Record from this Spider
       if(!state.has(action.spider_id)){
-        state = state.set(action.spider_id, new SpiderInfo());
+        state = state.set(action.spider_id, new JobInfo());
       }
 
       return state.update(action.spider_id,
@@ -39,7 +38,9 @@ export default (state = SpidersMap, action) => {
             'last_started_at': action.last_started_at,
             'max_concurrency': action.max_concurrency,
             'min_concurrency': action.min_concurrency,
-            'max_memory_mb': action.max_memory_mb
+            'max_memory_mb': action.max_memory_mb,
+            'type': action.type,
+            'start_urls': action.start_urls
           })
       );
 

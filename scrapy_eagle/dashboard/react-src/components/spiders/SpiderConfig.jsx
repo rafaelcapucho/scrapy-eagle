@@ -31,12 +31,12 @@ class SpiderConfig extends React.Component {
   }
 
   render(){
-    const { spiders } = this.props;
+    const { jobs } = this.props;
 
     console.log('render!');
 
     // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
-    var list_spiders = spiders.entrySeq().map( ([key, value]) => {
+    var list_jobs = jobs.entrySeq().map( ([key, value]) => {
       return (
         <div style={{border: '2px solid pink'}} className="col-sm-4" key={key}>
           {key} -> {value.getPriority()}
@@ -80,7 +80,7 @@ class SpiderConfig extends React.Component {
     return (
       <div className="container-fluid scheduler" style={{border: '2px solid blue'}}>
         <h1>Spiders Configuration</h1>
-        {list_spiders}
+        {list_jobs}
       </div>
     );
   }
@@ -96,7 +96,7 @@ var mapDispatchToProps = function(dispatch){
 export default connect(
   (state) => {
     return {
-      spiders: state.spiders
+      jobs: state.jobs
     }
   },
   mapDispatchToProps

@@ -14,12 +14,12 @@ import SpiderConfig from './components/spiders/SpiderConfig.jsx'
 import SpiderRoot from './components/spiders/Root.jsx'
 
 import servers from './reducers/servers.jsx'
-import spiders from './reducers/spiders.jsx'
+import jobs from './reducers/jobs.jsx'
 
 var reducers = combineReducers({
   servers: servers,
-  spiders: spiders
-})
+  jobs: jobs
+});
 
 const store = createStore(reducers);
 
