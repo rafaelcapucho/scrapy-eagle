@@ -22,7 +22,7 @@ a:hover, a:active {
 h1, h2, h3, h4, h5, h6 {
   color: whitesmoke;
   font-family: "Montserrat", sans-serif;
-  margin: 10px 0 10px 0; }
+  margin: 20px 0 25px 0; }
 
 h1 {
   font-size: 1.375em; }
@@ -43,5 +43,22 @@ h6 {
   font-size: 0.75em; }
 div.scheduler label.col-form-label {
   font-size: 80%; }
+
+div.scheduler div.odd {
+  background-color: #3b3e42; }
+
+div.scheduler div.even {
+  background-color: #2a2d2f; }
+
+div.scheduler div.jobTitle {
+  margin: 10px 0 16px 0;
+  font-size: 85%;
+  color: #00b280;
+  font-weight: bold; }
+
+div.scheduler div.box-legends {
+  margin-top: 35px; }
+  div.scheduler div.box-legends li {
+    font-size: 12px; }
 
 /*# sourceMappingURL=bundle.css.map*/

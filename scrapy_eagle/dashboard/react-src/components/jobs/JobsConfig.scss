@@ -1,0 +1,29 @@
+div.scheduler {
+  label.col-form-label {
+    font-size: 80%;
+  }
+
+  div.odd {
+    background-color: #3b3e42;
+  }
+
+  div.even {
+    background-color: #2a2d2f;
+  }
+
+  div.jobTitle {
+    margin: 10px 0 16px 0;
+    font-size: 85%;
+    color: #00b280;
+    font-weight: bold;
+  }
+
+  div.box-legends {
+    margin-top: 35px;
+
+    li {
+      font-size: 12px;
+    }
+
+  }
+}
