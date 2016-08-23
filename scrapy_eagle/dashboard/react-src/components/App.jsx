@@ -132,9 +132,9 @@ class App extends React.Component {
                 </li>
 
                 <li className="nav-item nav-dropdown">
-                  <Link to="/app/spiders" className="nav-link" activeClassName="active">Spiders & Commands</Link>
+                  <Link to="/app/jobs" className="nav-link" activeClassName="active">Spiders & Commands (Jobs)</Link>
                   <ul className="nav-sub">
-                    <li><Link to="/app/spiders/config" activeClassName="active">Configuration</Link></li>
+                    <li><Link to="/app/jobs/config" activeClassName="active">Configuration</Link></li>
                   </ul>
                 </li>
 

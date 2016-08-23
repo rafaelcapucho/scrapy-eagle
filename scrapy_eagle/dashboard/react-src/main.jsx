@@ -10,8 +10,8 @@ import Home from './components/Home.jsx'
 import ServerSet from './components/servers/ServerSet.jsx'
 import ServerRoot from './components/servers/Root.jsx'
 
-import SpiderConfig from './components/spiders/SpiderConfig.jsx'
-import SpiderRoot from './components/spiders/Root.jsx'
+import JobsConfig from './components/jobs/JobsConfig.jsx'
+import JobsRoot from './components/jobs/Root.jsx'
 
 import servers from './reducers/servers.jsx'
 import jobs from './reducers/jobs.jsx'
@@ -31,8 +31,8 @@ render((
 
         <IndexRoute component={Home}/>
 
-        <Route name="Spiders" path="spiders" component={SpiderRoot}>
-          <Route name="Config" path="config" component={SpiderConfig}/>
+        <Route name="Jobs" path="jobs" component={JobsRoot}>
+          <Route name="Config" path="config" component={JobsConfig}/>
         </Route>
 
         <Route name="Servers" path="servers" component={ServerRoot}>

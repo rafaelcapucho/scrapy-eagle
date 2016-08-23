@@ -1,3 +1,46 @@
+body {
+  /*font-size: 12px;*/
+  /*font-family: Arial, Verdana, sans-serif;*/
+  background-color: #323539;
+  color: whitesmoke;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  text-rendering: optimizelegibility; }
+
+a:link, a:visited {
+  color: white;
+  outline: medium none;
+  text-decoration: none; }
+
+a:hover, a:active {
+  color: white;
+  outline: medium none;
+  text-decoration: none; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: whitesmoke;
+  font-family: "Montserrat", sans-serif;
+  margin: 10px 0 10px 0; }
+
+h1 {
+  font-size: 1.375em; }
+
+h2 {
+  font-size: 1.188em; }
+
+h3 {
+  font-size: 1.063em; }
+
+h4 {
+  font-size: 0.938em; }
+
+h5 {
+  font-size: 0.813em; }
+
+h6 {
+  font-size: 0.75em; }
 div.scheduler label.col-form-label {
   font-size: 80%; }
 

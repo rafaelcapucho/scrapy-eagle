@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { connect } from 'react-redux'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
+//import PureRenderMixin from 'react-addons-pure-render-mixin'
 
 require('./style.scss');
 
-class SpiderConfig extends React.Component {
+class JobsConfig extends React.Component {
 
   constructor(props){
     super(props);
@@ -79,7 +79,7 @@ class SpiderConfig extends React.Component {
 
     return (
       <div className="container-fluid scheduler" style={{border: '2px solid blue'}}>
-        <h1>Spiders Configuration</h1>
+        <h1>Jobs Configuration</h1>
         {list_jobs}
       </div>
     );
@@ -100,4 +100,4 @@ export default connect(
     }
   },
   mapDispatchToProps
-)(SpiderConfig)
+)(JobsConfig)
