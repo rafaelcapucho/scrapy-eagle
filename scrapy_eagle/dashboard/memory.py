@@ -45,6 +45,15 @@ def get_job_object(key):
         return None
 
 
+def update_job_object(key, fields):
+
+    redis_conn = get_connection()
+
+    serialized = json.dumps(fields, sort_keys=True)
+
+    redis_conn.set('eagle_jobs:{key}'.format(key=key), serialized, xx=True)
+
+
 if __name__ == "__main__":
 
     from scrapy_eagle.dashboard.settings import setup_configuration
@@ -54,4 +63,24 @@ if __name__ == "__main__":
     init_memory()
 
     o = get_job_object(key='epocacosmeticos.com.br')
-    print(o.get('priority'))
+
+    print(o)
+
+    d = {
+        "active": True,
+        "max_memory_mb": 220,
+        "job_type": "spider",
+        "last_started_at": "2016-08-31T04:17:51.200187",
+        "priority": 6,
+        "start_urls": [
+            "http://epocacosmeticos.com.br/",
+            "http://www.epocacosmeticos.com.br/perfumes"
+        ],
+        "max_concurrency": 4,
+        "min_concurrency": 1,
+        "frequency_minutes": 1440
+    }
+
+    update_job_object(key='epocacosmeticos.com.br', fields=d)
+
+    print(get_job_object(key='epocacosmeticos.com.br'))

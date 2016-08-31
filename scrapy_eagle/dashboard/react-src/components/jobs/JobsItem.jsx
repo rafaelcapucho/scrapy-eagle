@@ -76,17 +76,13 @@ class JobsItem extends React.Component {
       // that.setState({});
     });
 
-
-    console.log(this.state);
-    //alert('save');
   }
 
-  onChange(value) {
+  SwitchonChange(value) {
     console.log(value);
   }
 
   render(){
-
 
     var show_start_urls = () => {
 
@@ -172,7 +168,7 @@ class JobsItem extends React.Component {
 
           {/*<Switch
             className="switch-class"
-            onChange={this.onChange}
+            onChange={this.SwitchonChange}
             label="testando"
             options={
               {

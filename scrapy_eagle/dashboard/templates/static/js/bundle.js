@@ -44828,13 +44828,10 @@
 	      }).always(function () {
 	        // that.setState({});
 	      });
-	
-	      console.log(this.state);
-	      //alert('save');
 	    }
 	  }, {
-	    key: 'onChange',
-	    value: function onChange(value) {
+	    key: 'SwitchonChange',
+	    value: function SwitchonChange(value) {
 	      console.log(value);
 	    }
 	  }, {
