@@ -25,12 +25,12 @@ class App extends React.Component {
     this.clientsRequest.abort();
   }
 
-  ajax_get_spiders_info(){
+  ajax_get_jobs_info(){
 
     var that = this;
 
     this.clientsRequest = $.ajax({
-      url: window.location.protocol + "//" + document.domain + ":" + location.port + "/spiders/list",
+      url: window.location.protocol + "//" + document.domain + ":" + location.port + "/jobs/list",
       type: 'GET',
       dataType: 'json',
       cache: false
@@ -63,8 +63,8 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    this.ajax_get_spiders_info();
-    this.setInterval(this.ajax_get_spiders_info.bind(this), 5000);
+    this.ajax_get_jobs_info();
+    this.setInterval(this.ajax_get_jobs_info.bind(this), 5000);
   }
 
   render(){

@@ -32,24 +32,43 @@ class JobsConfig extends React.Component {
     //return nextProps.id !== this.props.id;
   }
 
-  render(){
-    const { jobs } = this.props;
+  render() {
+    const {jobs} = this.props;
 
     // console.log('render!');
 
     var toggle_class = 'odd';
 
     // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
-    var list_jobs = jobs.entrySeq().map( ([key, value]) => {
+    var list_spiders = jobs.entrySeq().map(([key, value]) => {
 
-      toggle_class = (toggle_class == 'odd')? 'even' : 'odd';
+      if (value.job_type == 'spider') {
 
-      return <JobsItem
+        toggle_class = (toggle_class == 'odd') ? 'even' : 'odd';
+
+        return <JobsItem
           key={key}
           id={key}
           toggle_class={toggle_class}
           value={value}
-      />;
+        />;
+      }
+
+    });
+
+    var list_commands = jobs.entrySeq().map(([key, value]) => {
+
+      if (value.job_type == 'command') {
+
+        toggle_class = (toggle_class == 'odd') ? 'even' : 'odd';
+
+        return <JobsItem
+          key={key}
+          id={key}
+          toggle_class={toggle_class}
+          value={value}
+        />;
+      }
 
     });
 
@@ -57,9 +76,15 @@ class JobsConfig extends React.Component {
       <div className="container-fluid scheduler">
         <h1>Jobs Configuration</h1>
 
-        {list_jobs}
+        {list_spiders}
 
-        <div style={{'clear':'both'}}></div>
+        <div style={{'clear':'both', 'height':'40px'}}></div>
+
+        <h1>Commands Configuration</h1>
+
+        {list_commands}
+
+        <div style={{'clear':'both', 'height':'40px'}}></div>
 
         <div className="box-legends">
           <h2>Legends</h2>

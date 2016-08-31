@@ -29329,13 +29329,13 @@
 	      this.clientsRequest.abort();
 	    }
 	  }, {
-	    key: 'ajax_get_spiders_info',
-	    value: function ajax_get_spiders_info() {
+	    key: 'ajax_get_jobs_info',
+	    value: function ajax_get_jobs_info() {
 	
 	      var that = this;
 	
 	      this.clientsRequest = $.ajax({
-	        url: window.location.protocol + "//" + document.domain + ":" + location.port + "/spiders/list",
+	        url: window.location.protocol + "//" + document.domain + ":" + location.port + "/jobs/list",
 	        type: 'GET',
 	        dataType: 'json',
 	        cache: false
@@ -29364,8 +29364,8 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.ajax_get_spiders_info();
-	      this.setInterval(this.ajax_get_spiders_info.bind(this), 5000);
+	      this.ajax_get_jobs_info();
+	      this.setInterval(this.ajax_get_jobs_info.bind(this), 5000);
 	    }
 	  }, {
 	    key: 'render',
@@ -44511,21 +44511,44 @@
 	      var toggle_class = 'odd';
 	
 	      // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
-	      var list_jobs = jobs.entrySeq().map(function (_ref) {
+	      var list_spiders = jobs.entrySeq().map(function (_ref) {
 	        var _ref2 = _slicedToArray(_ref, 2);
 	
 	        var key = _ref2[0];
 	        var value = _ref2[1];
 	
 	
-	        toggle_class = toggle_class == 'odd' ? 'even' : 'odd';
+	        if (value.job_type == 'spider') {
 	
-	        return _react2.default.createElement(_JobsItem2.default, {
-	          key: key,
-	          id: key,
-	          toggle_class: toggle_class,
-	          value: value
-	        });
+	          toggle_class = toggle_class == 'odd' ? 'even' : 'odd';
+	
+	          return _react2.default.createElement(_JobsItem2.default, {
+	            key: key,
+	            id: key,
+	            toggle_class: toggle_class,
+	            value: value
+	          });
+	        }
+	      });
+	
+	      var list_commands = jobs.entrySeq().map(function (_ref3) {
+	        var _ref4 = _slicedToArray(_ref3, 2);
+	
+	        var key = _ref4[0];
+	        var value = _ref4[1];
+	
+	
+	        if (value.job_type == 'command') {
+	
+	          toggle_class = toggle_class == 'odd' ? 'even' : 'odd';
+	
+	          return _react2.default.createElement(_JobsItem2.default, {
+	            key: key,
+	            id: key,
+	            toggle_class: toggle_class,
+	            value: value
+	          });
+	        }
 	      });
 	
 	      return _react2.default.createElement(
@@ -44536,8 +44559,15 @@
 	          null,
 	          'Jobs Configuration'
 	        ),
-	        list_jobs,
-	        _react2.default.createElement('div', { style: { 'clear': 'both' } }),
+	        list_spiders,
+	        _react2.default.createElement('div', { style: { 'clear': 'both', 'height': '40px' } }),
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Commands Configuration'
+	        ),
+	        list_commands,
+	        _react2.default.createElement('div', { style: { 'clear': 'both', 'height': '40px' } }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'box-legends' },
