@@ -44764,15 +44764,15 @@
 	    };
 	
 	    if (_this3.props.value.start_urls) {
-	      _this3.state['start_urls'] = _this3.format(_this3.props.value.start_urls);
+	      _this3.state['start_urls'] = _this3.format_start_urls(_this3.props.value.start_urls);
 	    }
 	
 	    return _this3;
 	  }
 	
 	  _createClass(JobsItem, [{
-	    key: 'format',
-	    value: function format(mylist) {
+	    key: 'format_start_urls',
+	    value: function format_start_urls(mylist) {
 	      var buff = "";
 	      mylist.forEach(function (elem) {
 	        buff += elem + "\n";
@@ -44782,17 +44782,17 @@
 	  }, {
 	    key: 'onBlurFrequency',
 	    value: function onBlurFrequency(e) {
-	      this.setState({ 'frequency_minutes': e.target.value });
+	      this.setState({ 'frequency_minutes': $.trim(e.target.value) });
 	    }
 	  }, {
 	    key: 'onBlurMaxConcurrency',
 	    value: function onBlurMaxConcurrency(e) {
-	      this.setState({ 'max_concurrency': Number(e.target.value) });
+	      this.setState({ 'max_concurrency': $.trim(e.target.value) });
 	    }
 	  }, {
 	    key: 'onBlurMinConcurrency',
 	    value: function onBlurMinConcurrency(e) {
-	      this.setState({ 'min_concurrency': Number(e.target.value) });
+	      this.setState({ 'min_concurrency': $.trim(e.target.value) });
 	    }
 	  }, {
 	    key: 'onChangePriority',
@@ -44802,12 +44802,12 @@
 	  }, {
 	    key: 'onBlurMaxMemory',
 	    value: function onBlurMaxMemory(e) {
-	      this.setState({ 'max_memory_mb': e.target.value });
+	      this.setState({ 'max_memory_mb': $.trim(e.target.value) });
 	    }
 	  }, {
 	    key: 'onBlurStartURLs',
 	    value: function onBlurStartURLs(e) {
-	      this.setState({ 'start_urls': e.target.value });
+	      this.setState({ 'start_urls': $.trim(e.target.value) });
 	    }
 	  }, {
 	    key: 'handleSave',

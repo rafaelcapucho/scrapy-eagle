@@ -35,12 +35,12 @@ class JobsItem extends React.Component {
     };
 
     if(this.props.value.start_urls){
-      this.state['start_urls'] = this.format(this.props.value.start_urls);
+      this.state['start_urls'] = this.format_start_urls(this.props.value.start_urls);
     }
 
   }
 
-  format(mylist){
+  format_start_urls(mylist){
     let buff = "";
     mylist.forEach(elem => {
       buff += elem + "\n";
@@ -48,12 +48,12 @@ class JobsItem extends React.Component {
     return buff;
   }
 
-  onBlurFrequency(e){ this.setState({'frequency_minutes': e.target.value}); }
-  onBlurMaxConcurrency(e){ this.setState({'max_concurrency': Number(e.target.value)}); }
-  onBlurMinConcurrency(e){ this.setState({'min_concurrency': Number(e.target.value)}); }
-  onChangePriority(e){ this.setState({'priority': e.target.value}); }
-  onBlurMaxMemory(e){ this.setState({'max_memory_mb': e.target.value}); }
-  onBlurStartURLs(e){ this.setState({'start_urls': e.target.value}); }
+  onBlurFrequency(e){ this.setState({'frequency_minutes': $.trim(e.target.value)}) }
+  onBlurMaxConcurrency(e){ this.setState({'max_concurrency': $.trim(e.target.value)}) }
+  onBlurMinConcurrency(e){ this.setState({'min_concurrency': $.trim(e.target.value)}) }
+  onChangePriority(e){ this.setState({'priority': e.target.value}) }
+  onBlurMaxMemory(e){ this.setState({'max_memory_mb': $.trim(e.target.value)}) }
+  onBlurStartURLs(e){ this.setState({'start_urls': $.trim(e.target.value)}) }
 
   handleSave(){
 
