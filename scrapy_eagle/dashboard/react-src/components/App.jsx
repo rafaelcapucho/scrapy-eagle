@@ -48,7 +48,9 @@ class App extends React.Component {
             max_concurrency: value.max_concurrency,
             min_concurrency: value.min_concurrency,
             max_memory_mb: value.max_memory_mb,
-            priority: value.priority
+            priority: value.priority,
+            job_type: value.job_type,
+            active: value.active
           }
         );
 

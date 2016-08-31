@@ -46,6 +46,7 @@ class JobsConfig extends React.Component {
 
       return <JobsItem
           key={key}
+          id={key}
           toggle_class={toggle_class}
           value={value}
       />;

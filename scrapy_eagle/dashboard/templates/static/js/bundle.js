@@ -81,15 +81,15 @@
 	
 	var _JobsConfig2 = _interopRequireDefault(_JobsConfig);
 	
-	var _Root3 = __webpack_require__(/*! ./components/jobs/Root.jsx */ 371);
+	var _Root3 = __webpack_require__(/*! ./components/jobs/Root.jsx */ 372);
 	
 	var _Root4 = _interopRequireDefault(_Root3);
 	
-	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 372);
+	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 373);
 	
 	var _servers2 = _interopRequireDefault(_servers);
 	
-	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 373);
+	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 374);
 	
 	var _jobs2 = _interopRequireDefault(_jobs);
 	
@@ -29352,7 +29352,9 @@
 	            max_concurrency: value.max_concurrency,
 	            min_concurrency: value.min_concurrency,
 	            max_memory_mb: value.max_memory_mb,
-	            priority: value.priority
+	            priority: value.priority,
+	            job_type: value.job_type,
+	            active: value.active
 	          });
 	        });
 	      }).always(function () {
@@ -44452,9 +44454,9 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 248);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 369);
+	var _JobsItem = __webpack_require__(/*! ./JobsItem.jsx */ 369);
 	
-	var _classnames2 = _interopRequireDefault(_classnames);
+	var _JobsItem2 = _interopRequireDefault(_JobsItem);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -44465,7 +44467,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	//import PureRenderMixin from 'react-addons-pure-render-mixin'
 	
-	__webpack_require__(/*! ./JobsConfig.scss */ 375);
+	__webpack_require__(/*! ./JobsConfig.scss */ 371);
 	
 	var JobsConfig = function (_React$Component) {
 	  _inherits(JobsConfig, _React$Component);
@@ -44506,7 +44508,7 @@
 	
 	      // console.log('render!');
 	
-	      var toggle = 'odd';
+	      var toggle_class = 'odd';
 	
 	      // https://github.com/facebook/immutable-js/issues/667#issuecomment-220223640
 	      var list_jobs = jobs.entrySeq().map(function (_ref) {
@@ -44516,185 +44518,14 @@
 	        var value = _ref2[1];
 	
 	
-	        toggle = toggle == 'odd' ? 'even' : 'odd';
+	        toggle_class = toggle_class == 'odd' ? 'even' : 'odd';
 	
-	        return _react2.default.createElement(
-	          'div',
-	          { className: (0, _classnames2.default)('col-sm-4', toggle), key: key },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'jobTitle' },
-	            key
-	          ),
-	          _react2.default.createElement(
-	            'form',
-	            { method: 'GET', action: '' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'frequency_minutes', className: 'col-xs-3 col-form-label' },
-	                'Frequency'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement('input', { className: 'form-control', name: 'frequency_minutes', type: 'text', defaultValue: value.frequency_minutes, id: 'frequency_minutes' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'max_concurrency', className: 'col-xs-3 col-form-label' },
-	                'Max Concurrency'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement('input', { className: 'form-control', name: 'max_concurrency', type: 'text', defaultValue: value.max_concurrency, id: 'max_concurrency' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'min_concurrency', className: 'col-xs-3 col-form-label' },
-	                'Min Concurrency'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement('input', { className: 'form-control', name: 'min_concurrency', type: 'text', defaultValue: value.min_concurrency, id: 'min_concurrency' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'priority', className: 'col-xs-3 col-form-label' },
-	                'Priority'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement(
-	                  'select',
-	                  { className: 'form-control', id: 'priority' },
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '0'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '1'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '2'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '3'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '4'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '5'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '6'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '7'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '8'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '9'
-	                  ),
-	                  _react2.default.createElement(
-	                    'option',
-	                    null,
-	                    '10'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'max_memory_mb', className: 'col-xs-3 col-form-label' },
-	                'Max Memory'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', type: 'text', defaultValue: value.max_memory_mb, id: 'max_memory_mb' })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'start_urls', className: 'col-xs-3 col-form-label' },
-	                'Start URLs'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement(
-	                  'textarea',
-	                  { className: 'form-control', name: 'start_urls', id: 'start_urls', rows: '3' },
-	                  value.start_urls
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'form-group row' },
-	              _react2.default.createElement(
-	                'label',
-	                { htmlFor: 'example-text-input', className: 'col-xs-3 col-form-label' },
-	                'Last started at'
-	              ),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'col-xs-9' },
-	                _react2.default.createElement(
-	                  'small',
-	                  { id: 'emailHelp', style: { 'margin-top': '0.5rem', 'display': 'block', 'color': 'white' } },
-	                  '16 minutes ago'
-	                )
-	              )
-	            )
-	          )
-	        );
+	        return _react2.default.createElement(_JobsItem2.default, {
+	          key: key,
+	          id: key,
+	          toggle_class: toggle_class,
+	          value: value
+	        });
 	      });
 	
 	      return _react2.default.createElement(
@@ -44811,6 +44642,339 @@
 
 /***/ },
 /* 369 */
+/*!************************************************!*\
+  !*** ./react-src/components/jobs/JobsItem.jsx ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 248);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 370);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var BaseComponent = function (_React$Component) {
+	  _inherits(BaseComponent, _React$Component);
+	
+	  function BaseComponent() {
+	    _classCallCheck(this, BaseComponent);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(BaseComponent).apply(this, arguments));
+	  }
+	
+	  _createClass(BaseComponent, [{
+	    key: '_bind',
+	    value: function _bind() {
+	      var _this2 = this;
+	
+	      for (var _len = arguments.length, methods = Array(_len), _key = 0; _key < _len; _key++) {
+	        methods[_key] = arguments[_key];
+	      }
+	
+	      methods.forEach(function (method) {
+	        return _this2[method] = _this2[method].bind(_this2);
+	      });
+	    }
+	  }]);
+	
+	  return BaseComponent;
+	}(_react2.default.Component);
+	
+	var JobsItem = function (_React$Component2) {
+	  _inherits(JobsItem, _React$Component2);
+	
+	  function JobsItem(props) {
+	    _classCallCheck(this, JobsItem);
+	
+	    // this._bind('_handleClick', '_handleFoo');
+	    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(JobsItem).call(this, props));
+	
+	    _this3.handleSave = _this3.handleSave.bind(_this3);
+	    _this3.onBlurFrequency = _this3.onBlurFrequency.bind(_this3);
+	    _this3.onBlurMaxConcurrency = _this3.onBlurMaxConcurrency.bind(_this3);
+	    _this3.onBlurMinConcurrency = _this3.onBlurMinConcurrency.bind(_this3);
+	    _this3.onChangePriority = _this3.onChangePriority.bind(_this3);
+	    _this3.onBlurMaxMemory = _this3.onBlurMaxMemory.bind(_this3);
+	    _this3.onBlurStartURLs = _this3.onBlurStartURLs.bind(_this3);
+	    _this3.state = {
+	      'key': _this3.props.id,
+	      'active': _this3.props.value.active,
+	      'job_type': _this3.props.value.job_type,
+	      'frequency_minutes': _this3.props.value.frequency_minutes,
+	      'max_concurrency': _this3.props.value.max_concurrency,
+	      'min_concurrency': _this3.props.value.min_concurrency,
+	      'priority': _this3.props.value.priority,
+	      'max_memory_mb': _this3.props.value.max_memory_mb,
+	      'start_urls': _this3.props.value.start_urls
+	    };
+	    return _this3;
+	  }
+	
+	  _createClass(JobsItem, [{
+	    key: 'onBlurFrequency',
+	    value: function onBlurFrequency(e) {
+	      this.setState({ 'frequency_minutes': e.target.value });
+	    }
+	  }, {
+	    key: 'onBlurMaxConcurrency',
+	    value: function onBlurMaxConcurrency(e) {
+	      this.setState({ 'max_concurrency': Number(e.target.value) });
+	    }
+	  }, {
+	    key: 'onBlurMinConcurrency',
+	    value: function onBlurMinConcurrency(e) {
+	      this.setState({ 'min_concurrency': Number(e.target.value) });
+	    }
+	  }, {
+	    key: 'onChangePriority',
+	    value: function onChangePriority(e) {
+	      this.setState({ 'priority': e.target.value });
+	    }
+	  }, {
+	    key: 'onBlurMaxMemory',
+	    value: function onBlurMaxMemory(e) {
+	      this.setState({ 'max_memory_mb': e.target.value });
+	    }
+	  }, {
+	    key: 'onBlurStartURLs',
+	    value: function onBlurStartURLs(e) {
+	      this.setState({ 'start_urls': e.target.value });
+	    }
+	  }, {
+	    key: 'handleSave',
+	    value: function handleSave() {
+	      console.log(this.state);
+	      //alert('save');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: (0, _classnames2.default)('col-sm-4', this.props.toggle_class), key: this.props.id },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'jobTitle' },
+	          this.props.id
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { method: 'GET', action: '' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'frequency_minutes', className: 'col-xs-3 col-form-label' },
+	              'Frequency'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement('input', { className: 'form-control', name: 'frequency_minutes', type: 'text', onBlur: this.onBlurFrequency, defaultValue: this.props.value.frequency_minutes, id: 'frequency_minutes' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'max_concurrency', className: 'col-xs-3 col-form-label' },
+	              'Max Concurrency'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement('input', { className: 'form-control', name: 'max_concurrency', type: 'text', onBlur: this.onBlurMaxConcurrency, defaultValue: this.props.value.max_concurrency, id: 'max_concurrency' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'min_concurrency', className: 'col-xs-3 col-form-label' },
+	              'Min Concurrency'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement('input', { className: 'form-control', name: 'min_concurrency', type: 'text', onBlur: this.onBlurMinConcurrency, defaultValue: this.props.value.min_concurrency, id: 'min_concurrency' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'priority', className: 'col-xs-3 col-form-label' },
+	              'Priority'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement(
+	                'select',
+	                { className: 'form-control', id: 'priority', onChange: this.onChangePriority },
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '0'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '1'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '2'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '3'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '4'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '5'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '6'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '7'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '8'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '9'
+	                ),
+	                _react2.default.createElement(
+	                  'option',
+	                  null,
+	                  '10'
+	                )
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'max_memory_mb', className: 'col-xs-3 col-form-label' },
+	              'Max Memory'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', onBlur: this.onBlurMaxMemory, type: 'text', defaultValue: this.props.value.max_memory_mb, id: 'max_memory_mb' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'start_urls', className: 'col-xs-3 col-form-label' },
+	              'Start URLs'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement(
+	                'textarea',
+	                { className: 'form-control', name: 'start_urls', onBlur: this.onBlurStartURLs, id: 'start_urls', rows: '3' },
+	                this.props.value.start_urls
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'example-text-input', className: 'col-xs-3 col-form-label' },
+	              'Last started at'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-6' },
+	              _react2.default.createElement(
+	                'small',
+	                { id: 'emailHelp', style: { 'margin-top': '0.5rem', 'display': 'block', 'color': 'white' } },
+	                '16 minutes ago'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-3' },
+	              _react2.default.createElement(
+	                'button',
+	                { onClick: this.handleSave, className: 'btn btn-outline-success btn-sm', style: { 'float': 'right' }, type: 'button' },
+	                'Save'
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return JobsItem;
+	}(_react2.default.Component);
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    dispatch: dispatch
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    //jobs: state.jobs
+	  };
+	}, mapDispatchToProps)(JobsItem);
+
+/***/ },
+/* 370 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -44867,8 +45031,16 @@
 
 
 /***/ },
-/* 370 */,
 /* 371 */
+/*!***************************************************!*\
+  !*** ./react-src/components/jobs/JobsConfig.scss ***!
+  \***************************************************/
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 372 */
 /*!********************************************!*\
   !*** ./react-src/components/jobs/Root.jsx ***!
   \********************************************/
@@ -44916,7 +45088,7 @@
 	exports.default = SpiderRoot;
 
 /***/ },
-/* 372 */
+/* 373 */
 /*!****************************************!*\
   !*** ./react-src/reducers/servers.jsx ***!
   \****************************************/
@@ -44960,7 +45132,7 @@
 	}
 
 /***/ },
-/* 373 */
+/* 374 */
 /*!*************************************!*\
   !*** ./react-src/reducers/jobs.jsx ***!
   \*************************************/
@@ -44974,7 +45146,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _immutable = __webpack_require__(/*! immutable */ 374);
+	var _immutable = __webpack_require__(/*! immutable */ 375);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -44983,13 +45155,14 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var JobRecord = (0, _immutable.Record)({
+	  active: undefined, // true or false
 	  frequency_minutes: undefined,
 	  last_started_at: undefined,
 	  max_concurrency: undefined,
 	  min_concurrency: undefined,
 	  max_memory_mb: undefined,
 	  priority: 0,
-	  type: undefined, // 'spider' or 'command'
+	  job_type: undefined, // 'spider' or 'command'
 	  start_urls: new _immutable.List()
 	});
 	
@@ -45036,8 +45209,9 @@
 	          'max_concurrency': action.max_concurrency,
 	          'min_concurrency': action.min_concurrency,
 	          'max_memory_mb': action.max_memory_mb,
-	          'type': action.type,
-	          'start_urls': action.start_urls
+	          'job_type': action.job_type,
+	          'start_urls': action.start_urls,
+	          'active': action.active
 	        });
 	      });
 	
@@ -45047,7 +45221,7 @@
 	};
 
 /***/ },
-/* 374 */
+/* 375 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
   \***************************************/
@@ -50032,15 +50206,6 @@
 	  return Immutable;
 	
 	}));
-
-/***/ },
-/* 375 */
-/*!***************************************************!*\
-  !*** ./react-src/components/jobs/JobsConfig.scss ***!
-  \***************************************************/
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

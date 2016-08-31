@@ -30,13 +30,16 @@ def listing():
 
     for s in _spiders:
         d[s] = {}
+        d[s]['active'] = True
         d[s]['min_concurrency'] = 1
         d[s]['max_concurrency'] = 5
         d[s]['max_memory_mb'] = 200
         d[s]['priority'] = 7
         d[s]['frequency_minutes'] = 60
-        # d[s]['last_started_at'] = datetime.utcnow().isoformat()
+        d[s]['job_type'] = 'spider' # or 'command'
         d[s]['last_started_at'] = 20
+        d[s]['start_urls'] = []
+        # d[s]['last_started_at'] = datetime.utcnow().isoformat()
 
     return flask.Response(
         response=json.dumps(d, sort_keys=True),

@@ -1,13 +1,14 @@
 import { Record, OrderedMap, List } from 'immutable';
 
 const JobRecord = Record({
+  active: undefined, // true or false
   frequency_minutes: undefined,
   last_started_at: undefined,
   max_concurrency: undefined,
   min_concurrency: undefined,
   max_memory_mb: undefined,
   priority: 0,
-  type: undefined, // 'spider' or 'command'
+  job_type: undefined, // 'spider' or 'command'
   start_urls: new List()
 });
 
@@ -39,8 +40,9 @@ export default (state = SpidersMap, action) => {
             'max_concurrency': action.max_concurrency,
             'min_concurrency': action.min_concurrency,
             'max_memory_mb': action.max_memory_mb,
-            'type': action.type,
-            'start_urls': action.start_urls
+            'job_type': action.job_type,
+            'start_urls': action.start_urls,
+            'active': action.active
           })
       );
 
