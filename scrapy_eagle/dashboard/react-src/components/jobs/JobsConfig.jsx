@@ -106,9 +106,13 @@ class JobsConfig extends React.Component {
 
             <div className="form-group row">
               <label htmlFor="example-text-input" className="col-xs-3 col-form-label">Last started at</label>
-              <div className="col-xs-9">
+              <div className="col-xs-6">
                 <small id="emailHelp" style={{'margin-top': '0.5rem', 'display':'block', 'color':'white'}}>16 minutes ago</small>
               </div>
+              <div className="col-xs-3">
+                <button className="btn btn-outline-success btn-sm" style={{'float': 'right'}} type="submit">SAVE</button>
+              </div>
+
             </div>
 
           </form>
