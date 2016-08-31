@@ -94,7 +94,7 @@ class JobsConfig extends React.Component {
             <li><strong>Min Concurrency</strong>: Only dispatch this job when a minimum of resources are available.</li>
             <li><strong>Priority</strong>: Highest numbers is selected when the system need to choose between equals opportunities.</li>
             <li><strong>Max Memory</strong>: The processes are killed when reach this threshold (in megabytes) and could be reallocated in other server or in the same server.</li>
-            <li><strong>Start URLs</strong>: A list of URLs to use as starting point.</li>
+            <li><strong>Start URLs</strong>: A list of URLs to use as starting point, one by line.</li>
             <li><strong>Last started at</strong>: Last time this job was triggered.</li>
           </ul>
         </div>

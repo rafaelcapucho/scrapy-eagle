@@ -30,8 +30,20 @@ class JobsItem extends React.Component {
       'min_concurrency': this.props.value.min_concurrency,
       'priority': this.props.value.priority,
       'max_memory_mb': this.props.value.max_memory_mb,
-      'start_urls': this.props.value.start_urls
     };
+
+    if(this.props.value.start_urls){
+      this.state['start_urls'] = this.format(this.props.value.start_urls);
+    }
+
+  }
+
+  format(mylist){
+    let buff = "";
+    mylist.forEach(elem => {
+      buff += elem + "\n";
+    })
+    return buff;
   }
 
   onBlurFrequency(e){ this.setState({'frequency_minutes': e.target.value}); }
@@ -103,7 +115,7 @@ class JobsItem extends React.Component {
           <div className="form-group row">
             <label htmlFor="start_urls" className="col-xs-3 col-form-label">Start URLs</label>
             <div className="col-xs-9">
-              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls" rows="3">{this.state.start_urls}</textarea>
+              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls" defaultValue={this.state.start_urls} rows="3"></textarea>
             </div>
           </div>
 

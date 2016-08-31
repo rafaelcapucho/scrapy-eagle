@@ -50,7 +50,8 @@ class App extends React.Component {
             max_memory_mb: value.max_memory_mb,
             priority: value.priority,
             job_type: value.job_type,
-            active: value.active
+            active: value.active,
+            start_urls: value.start_urls
           }
         );
 

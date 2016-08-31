@@ -29354,7 +29354,8 @@
 	            max_memory_mb: value.max_memory_mb,
 	            priority: value.priority,
 	            job_type: value.job_type,
-	            active: value.active
+	            active: value.active,
+	            start_urls: value.start_urls
 	          });
 	        });
 	      }).always(function () {
@@ -44637,7 +44638,7 @@
 	                null,
 	                'Start URLs'
 	              ),
-	              ': A list of URLs to use as starting point.'
+	              ': A list of URLs to use as starting point, one by line.'
 	            ),
 	            _react2.default.createElement(
 	              'li',
@@ -44754,13 +44755,26 @@
 	      'max_concurrency': _this3.props.value.max_concurrency,
 	      'min_concurrency': _this3.props.value.min_concurrency,
 	      'priority': _this3.props.value.priority,
-	      'max_memory_mb': _this3.props.value.max_memory_mb,
-	      'start_urls': _this3.props.value.start_urls
+	      'max_memory_mb': _this3.props.value.max_memory_mb
 	    };
+	
+	    if (_this3.props.value.start_urls) {
+	      _this3.state['start_urls'] = _this3.format(_this3.props.value.start_urls);
+	    }
+	
 	    return _this3;
 	  }
 	
 	  _createClass(JobsItem, [{
+	    key: 'format',
+	    value: function format(mylist) {
+	      var buff = "";
+	      mylist.forEach(function (elem) {
+	        buff += elem + "\n";
+	      });
+	      return buff;
+	    }
+	  }, {
 	    key: 'onBlurFrequency',
 	    value: function onBlurFrequency(e) {
 	      this.setState({ 'frequency_minutes': e.target.value });
@@ -44949,11 +44963,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-9' },
-	              _react2.default.createElement(
-	                'textarea',
-	                { className: 'form-control', name: 'start_urls', onBlur: this.onBlurStartURLs, id: 'start_urls', rows: '3' },
-	                this.state.start_urls
-	              )
+	              _react2.default.createElement('textarea', { className: 'form-control', name: 'start_urls', onBlur: this.onBlurStartURLs, id: 'start_urls', defaultValue: this.state.start_urls, rows: '3' })
 	            )
 	          ),
 	          _react2.default.createElement(
