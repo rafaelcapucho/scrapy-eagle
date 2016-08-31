@@ -54,6 +54,7 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
     host = 127.0.0.1
     port = 6379
     db = 0
+    ;password = someverysecretpass
 
     [server]
     debug = True

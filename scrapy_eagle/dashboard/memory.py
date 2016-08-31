@@ -14,7 +14,8 @@ def init_memory():
     redis_pool = redis.ConnectionPool(
         host=config['redis']['host'],
         port=config['redis']['port'],
-        db=config['redis']['db']
+        db=config['redis']['db'],
+        password=config.get('redis', 'password', fallback='')
     )
 
 
