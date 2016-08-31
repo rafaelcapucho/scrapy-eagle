@@ -11,7 +11,40 @@ from scrapy_eagle.dashboard.memory import get_job_object
 jobs = flask.Blueprint('jobs', __name__)
 
 
-@jobs.route('/list')
+@jobs.route('/update', methods=['GET', 'POST'])
+def update():
+
+    #TODO: Ensure that the incoming request comes from the same IP (Security)
+
+    result = {}
+
+    key = flask.request.form.get('key', None)
+    active = flask.request.form.get('active', None)
+    job_type = flask.request.form.get('job_type', None)
+    frequency_minutes = flask.request.form.get('frequency_minutes', None)
+    max_concurrency = flask.request.form.get('max_concurrency', None)
+    min_concurrency = flask.request.form.get('min_concurrency', None)
+    priority = flask.request.form.get('priority', None)
+    start_urls = flask.request.form.get('start_urls', None)
+
+    if not start_urls and job_type == 'spider':
+        result.update({
+            'status': 'error',
+            'msg': 'You should provide the Start URLs information for spiders.'
+        })
+    else:
+        result.update({
+            'status': 'ok'
+        })
+
+    return flask.Response(
+        response=json.dumps(result, sort_keys=True),
+        status=200,
+        mimetype="application/json"
+    )
+
+
+@jobs.route('/list', methods=['GET'])
 def listing():
 
     _spiders = settings.get_spiders()

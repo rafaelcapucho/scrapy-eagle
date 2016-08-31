@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import cx from 'classnames'
+import Switch from 'react-switchery'
 
 class BaseComponent extends React.Component {
   _bind(...methods) {
@@ -21,6 +22,7 @@ class JobsItem extends React.Component {
     this.onChangePriority = this.onChangePriority.bind(this);
     this.onBlurMaxMemory = this.onBlurMaxMemory.bind(this);
     this.onBlurStartURLs = this.onBlurStartURLs.bind(this);
+    this.handleSave = this.handleSave.bind(this);
     this.state = {
       'key': this.props.id,
       'active': this.props.value.active,
@@ -54,8 +56,33 @@ class JobsItem extends React.Component {
   onBlurStartURLs(e){ this.setState({'start_urls': e.target.value}); }
 
   handleSave(){
+
+    $.ajax({
+      url: window.location.protocol + "//" + document.domain + ":" + location.port + "/jobs/update",
+      type: 'POST',
+      dataType: 'json',
+      data: this.state,
+    }).done((data) => {
+
+      if(data.status == 'error'){
+        alert(data.msg);
+      } else if(data.status == 'ok'){
+
+      }
+
+    }).fail(() => {
+      alert('The request failed, please try again.');
+    }).always(() => {
+      // that.setState({});
+    });
+
+
     console.log(this.state);
     //alert('save');
+  }
+
+  onChange(value) {
+    console.log(value);
   }
 
   render(){
@@ -129,6 +156,19 @@ class JobsItem extends React.Component {
             </div>
 
           </div>
+
+          {/*<Switch
+            className="switch-class"
+            onChange={this.onChange}
+            label="testando"
+            options={
+              {
+                color: '#474F79',
+                size: 'small'
+              }
+            }
+            checked
+          />*/}
 
         </form>
       </div>
