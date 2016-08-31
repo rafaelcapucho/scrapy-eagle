@@ -44840,13 +44840,36 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this4 = this;
+	
+	      var show_start_urls = function show_start_urls() {
+	
+	        if (_this4.state.job_type == 'spider') {
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'form-group row' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'start_urls', className: 'col-xs-3 col-form-label' },
+	              'Start URLs'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-xs-9' },
+	              _react2.default.createElement('textarea', { className: 'form-control', name: 'start_urls', onBlur: _this4.onBlurStartURLs, id: 'start_urls',
+	                defaultValue: _this4.state.start_urls, rows: '3' })
+	            )
+	          );
+	        }
+	      };
+	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: (0, _classnames2.default)('col-sm-4', this.props.toggle_class), key: this.props.id },
+	        { className: (0, _classnames2.default)('col-sm-4', this.props.toggle_class), key: this.state.key },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'jobTitle' },
-	          this.props.id
+	          this.state.key
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -44979,20 +45002,7 @@
 	              _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', onBlur: this.onBlurMaxMemory, type: 'text', defaultValue: this.state.max_memory_mb, id: 'max_memory_mb' })
 	            )
 	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'form-group row' },
-	            _react2.default.createElement(
-	              'label',
-	              { htmlFor: 'start_urls', className: 'col-xs-3 col-form-label' },
-	              'Start URLs'
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'col-xs-9' },
-	              _react2.default.createElement('textarea', { className: 'form-control', name: 'start_urls', onBlur: this.onBlurStartURLs, id: 'start_urls', defaultValue: this.state.start_urls, rows: '3' })
-	            )
-	          ),
+	          show_start_urls(),
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'form-group row' },

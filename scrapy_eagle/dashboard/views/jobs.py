@@ -11,7 +11,7 @@ from scrapy_eagle.dashboard.memory import get_job_object
 jobs = flask.Blueprint('jobs', __name__)
 
 
-@jobs.route('/update', methods=['GET', 'POST'])
+@jobs.route('/update', methods=['POST'])
 def update():
 
     #TODO: Ensure that the incoming request comes from the same IP (Security)
@@ -28,11 +28,7 @@ def update():
     start_urls = flask.request.form.get('start_urls', None)
     max_memory_mb = flask.request.form.get('max_memory_mb', None)
 
-    print('max_concurrency: ', max_concurrency, type(max_concurrency))
-    print('max_memory_mb: ', max_memory_mb, type(max_memory_mb))
-
     if not all([key, active, job_type, frequency_minutes, max_concurrency, min_concurrency, priority, max_memory_mb]):
-        print('entro #1')
         result.update({
             'status': 'error',
             'msg': 'You are missing some information, please check your form.'
@@ -45,7 +41,6 @@ def update():
         })
 
     else:
-        print('entro #3')
         result.update({
             'status': 'ok'
         })

@@ -86,9 +86,27 @@ class JobsItem extends React.Component {
   }
 
   render(){
+
+
+    var show_start_urls = () => {
+
+      if(this.state.job_type == 'spider') {
+        return (
+          <div className="form-group row">
+            <label htmlFor="start_urls" className="col-xs-3 col-form-label">Start URLs</label>
+            <div className="col-xs-9">
+              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls"
+                        defaultValue={this.state.start_urls} rows="3"></textarea>
+            </div>
+          </div>
+        )
+      }
+
+    };
+
     return (
-      <div className={cx('col-sm-4', this.props.toggle_class)} key={this.props.id}>
-        <div className="jobTitle">{this.props.id}</div>
+      <div className={cx('col-sm-4', this.props.toggle_class)} key={this.state.key}>
+        <div className="jobTitle">{this.state.key}</div>
         <form method="GET" action="">
 
           <div className="form-group row">
@@ -139,12 +157,7 @@ class JobsItem extends React.Component {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label htmlFor="start_urls" className="col-xs-3 col-form-label">Start URLs</label>
-            <div className="col-xs-9">
-              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls" defaultValue={this.state.start_urls} rows="3"></textarea>
-            </div>
-          </div>
+          {show_start_urls()}
 
           <div className="form-group row">
             <label htmlFor="example-text-input" className="col-xs-3 col-form-label">Last started at</label>
