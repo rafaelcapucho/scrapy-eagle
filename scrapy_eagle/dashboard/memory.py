@@ -1,3 +1,5 @@
+import json
+
 import redis
 
 from scrapy_eagle.dashboard.settings import get_config_file
@@ -29,3 +31,27 @@ def get_connection():
         init_memory()
 
     return redis.Redis(connection_pool=redis_pool)
+
+
+def get_job_object(key):
+
+    redis_conn = get_connection()
+
+    json_obj = redis_conn.get('eagle_jobs:{key}'.format(key=key))
+
+    if json_obj:
+        return json.loads(json_obj.decode('utf-8'))
+    else:
+        return None
+
+
+if __name__ == "__main__":
+
+    from scrapy_eagle.dashboard.settings import setup_configuration
+
+    _config = setup_configuration(config_file='/etc/scrapy-eagle.ini')
+
+    init_memory()
+
+    o = get_job_object(key='epocacosmeticos.com.br')
+    print(o.get('priority'))

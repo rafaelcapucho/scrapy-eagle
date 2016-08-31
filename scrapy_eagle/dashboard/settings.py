@@ -14,7 +14,7 @@ queue_info_global = []
 subprocess_pids = set()
 
 # Never import these directly
-# Use get_config and get_args instead
+# Use get_config_file and get_args instead
 _args = None
 _config = None
 _public_ip = None
@@ -22,7 +22,19 @@ _hostname = None
 _spiders = None
 
 
-def setup():
+def setup_configuration(config_file=None):
+
+    global _config
+
+    _config = configparser.RawConfigParser()
+    _config.read(config_file)
+
+    globals()['_config'] = _config
+
+    return _config
+
+
+def setup(config_file=None, output=True):
 
     global _args, _config, _public_ip, _hostname
 
@@ -31,20 +43,19 @@ def setup():
 
     _args = parser.parse_args()
 
-    if not _args.config_file:
+    if not _args.config_file and not config_file:
         print('You should specify a config file using --config-file parameter.')
         exit(0)
 
-    _config = configparser.RawConfigParser()
-    _config.read(_args.config_file)
+    _config = setup_configuration(config_file=_args.config_file or config_file)
 
-    globals()['config'] = _config
-
-    print('discovering your external entrypoint address... ', end='', flush=True)
+    if output:
+        print('discovering your external entrypoint address... ', end='', flush=True)
 
     _public_ip = ip.get_external_ip()
 
-    print(_public_ip)
+    if output:
+        print(_public_ip)
 
     _hostname = ip.get_hostname()
 
