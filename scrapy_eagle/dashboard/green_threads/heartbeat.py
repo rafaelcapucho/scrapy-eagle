@@ -12,7 +12,7 @@ def heartbeat_servers(redis_conn, ip, hostname):
         future = datetime.now() + timedelta(seconds=6)
 
         redis_conn.zadd(
-            'servers',
+            'eagle_servers',
             '{ip}-{hostname}'.format(ip=ip, hostname=hostname),
             int(future.timestamp())
         )

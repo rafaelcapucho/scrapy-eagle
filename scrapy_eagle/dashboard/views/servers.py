@@ -16,7 +16,7 @@ def listing():
 
     redis_conn = get_connection()
 
-    _servers = redis_conn.zrangebyscore('servers', now.timestamp(), max='+inf')
+    _servers = redis_conn.zrangebyscore('eagle_servers', now.timestamp(), max='+inf')
 
     results = []
 
