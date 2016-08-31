@@ -4,6 +4,7 @@ from scrapy_eagle.dashboard.settings import get_config_file
 
 redis_pool = None
 
+
 def init_memory():
 
     global redis_pool
@@ -16,8 +17,10 @@ def init_memory():
         db=config['redis']['db']
     )
 
+
 def get_redis_pool():
     return redis_pool
+
 
 def get_connection():
 
@@ -25,6 +28,3 @@ def get_connection():
         init_memory()
 
     return redis.Redis(connection_pool=redis_pool)
-
-def testando():
-    pass

@@ -3,6 +3,7 @@ import gevent
 from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard.utils import spiderskit
 
+
 def find_new_spiders():
 
     while True:

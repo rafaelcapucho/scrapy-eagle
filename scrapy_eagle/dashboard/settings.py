@@ -21,6 +21,7 @@ _public_ip = None
 _hostname = None
 _spiders = None
 
+
 def setup():
 
     global _args, _config, _public_ip, _hostname
@@ -49,17 +50,22 @@ def setup():
 
     return _args, _config
 
+
 def get_public_ip():
     return _public_ip
+
 
 def get_hostname():
     return _hostname
 
+
 def get_config_file():
     return _config
 
+
 def get_args():
     return _args
+
 
 def get_spiders():
     return _spiders
