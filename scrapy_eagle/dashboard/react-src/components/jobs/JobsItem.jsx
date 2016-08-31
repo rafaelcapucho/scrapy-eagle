@@ -55,28 +55,28 @@ class JobsItem extends React.Component {
           <div className="form-group row">
             <label htmlFor="frequency_minutes" className="col-xs-3 col-form-label">Frequency</label>
             <div className="col-xs-9">
-              <input className="form-control" name="frequency_minutes" type="text" onBlur={this.onBlurFrequency} defaultValue={this.props.value.frequency_minutes} id="frequency_minutes" />
+              <input className="form-control" name="frequency_minutes" type="text" onBlur={this.onBlurFrequency} defaultValue={this.state.frequency_minutes} id="frequency_minutes" />
             </div>
           </div>
 
           <div className="form-group row">
             <label htmlFor="max_concurrency" className="col-xs-3 col-form-label">Max Concurrency</label>
             <div className="col-xs-9">
-              <input className="form-control" name="max_concurrency" type="text" onBlur={this.onBlurMaxConcurrency} defaultValue={this.props.value.max_concurrency} id="max_concurrency" />
+              <input className="form-control" name="max_concurrency" type="text" onBlur={this.onBlurMaxConcurrency} defaultValue={this.state.max_concurrency} id="max_concurrency" />
             </div>
           </div>
 
           <div className="form-group row">
             <label htmlFor="min_concurrency" className="col-xs-3 col-form-label">Min Concurrency</label>
             <div className="col-xs-9">
-              <input className="form-control" name="min_concurrency" type="text" onBlur={this.onBlurMinConcurrency} defaultValue={this.props.value.min_concurrency} id="min_concurrency" />
+              <input className="form-control" name="min_concurrency" type="text" onBlur={this.onBlurMinConcurrency} defaultValue={this.state.min_concurrency} id="min_concurrency" />
             </div>
           </div>
 
           <div className="form-group row">
             <label htmlFor="priority" className="col-xs-3 col-form-label">Priority</label>
             <div className="col-xs-9">
-              <select className="form-control" id="priority" onChange={this.onChangePriority}>
+              <select className="form-control" value={this.state.priority} id="priority" onChange={this.onChangePriority}>
                 <option>0</option>
                 <option>1</option>
                 <option>2</option>
@@ -95,7 +95,7 @@ class JobsItem extends React.Component {
           <div className="form-group row">
             <label htmlFor="max_memory_mb" className="col-xs-3 col-form-label">Max Memory</label>
             <div className="col-xs-9">
-              <input className="form-control" name="max_memory_mb" onBlur={this.onBlurMaxMemory} type="text" defaultValue={this.props.value.max_memory_mb} id="max_memory_mb" />
+              <input className="form-control" name="max_memory_mb" onBlur={this.onBlurMaxMemory} type="text" defaultValue={this.state.max_memory_mb} id="max_memory_mb" />
               {/*<small id="emailHelp" className="form-text text-muted">The processes are killed when reach this threshold (megabytes).</small>*/}
             </div>
           </div>
@@ -103,7 +103,7 @@ class JobsItem extends React.Component {
           <div className="form-group row">
             <label htmlFor="start_urls" className="col-xs-3 col-form-label">Start URLs</label>
             <div className="col-xs-9">
-              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls" rows="3">{this.props.value.start_urls}</textarea>
+              <textarea className="form-control" name="start_urls" onBlur={this.onBlurStartURLs} id="start_urls" rows="3">{this.state.start_urls}</textarea>
             </div>
           </div>
 

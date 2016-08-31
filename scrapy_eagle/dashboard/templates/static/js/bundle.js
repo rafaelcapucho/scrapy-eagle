@@ -44821,7 +44821,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-9' },
-	              _react2.default.createElement('input', { className: 'form-control', name: 'frequency_minutes', type: 'text', onBlur: this.onBlurFrequency, defaultValue: this.props.value.frequency_minutes, id: 'frequency_minutes' })
+	              _react2.default.createElement('input', { className: 'form-control', name: 'frequency_minutes', type: 'text', onBlur: this.onBlurFrequency, defaultValue: this.state.frequency_minutes, id: 'frequency_minutes' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -44835,7 +44835,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-9' },
-	              _react2.default.createElement('input', { className: 'form-control', name: 'max_concurrency', type: 'text', onBlur: this.onBlurMaxConcurrency, defaultValue: this.props.value.max_concurrency, id: 'max_concurrency' })
+	              _react2.default.createElement('input', { className: 'form-control', name: 'max_concurrency', type: 'text', onBlur: this.onBlurMaxConcurrency, defaultValue: this.state.max_concurrency, id: 'max_concurrency' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -44849,7 +44849,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-9' },
-	              _react2.default.createElement('input', { className: 'form-control', name: 'min_concurrency', type: 'text', onBlur: this.onBlurMinConcurrency, defaultValue: this.props.value.min_concurrency, id: 'min_concurrency' })
+	              _react2.default.createElement('input', { className: 'form-control', name: 'min_concurrency', type: 'text', onBlur: this.onBlurMinConcurrency, defaultValue: this.state.min_concurrency, id: 'min_concurrency' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -44865,7 +44865,7 @@
 	              { className: 'col-xs-9' },
 	              _react2.default.createElement(
 	                'select',
-	                { className: 'form-control', id: 'priority', onChange: this.onChangePriority },
+	                { className: 'form-control', value: this.state.priority, id: 'priority', onChange: this.onChangePriority },
 	                _react2.default.createElement(
 	                  'option',
 	                  null,
@@ -44935,7 +44935,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-9' },
-	              _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', onBlur: this.onBlurMaxMemory, type: 'text', defaultValue: this.props.value.max_memory_mb, id: 'max_memory_mb' })
+	              _react2.default.createElement('input', { className: 'form-control', name: 'max_memory_mb', onBlur: this.onBlurMaxMemory, type: 'text', defaultValue: this.state.max_memory_mb, id: 'max_memory_mb' })
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -44952,7 +44952,7 @@
 	              _react2.default.createElement(
 	                'textarea',
 	                { className: 'form-control', name: 'start_urls', onBlur: this.onBlurStartURLs, id: 'start_urls', rows: '3' },
-	                this.props.value.start_urls
+	                this.state.start_urls
 	              )
 	            )
 	          ),
