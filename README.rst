@@ -109,7 +109,7 @@ Enable the components in your `settings.py` of your Scrapy project:
 
   # Specify the full Redis URL for connecting (optional).
   # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
-  REDIS_URL = "redis://user:pass@hostname:9001"
+  REDIS_URL = "redis://user:pass@hostname:6379"
   
 Once the configuration is finished, you should adapt each spider to use our Mixin:
 
