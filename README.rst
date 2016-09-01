@@ -63,8 +63,8 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
     port = 5000
 
     [scrapy]
-    base_dir = /project_venv/project_scrapy/project
     binary = /project_venv/bin/scrapy
+    base_dir = /project_venv/project_scrapy/project
 
     [commands]
     binary = /project_venv/bin/python3 
