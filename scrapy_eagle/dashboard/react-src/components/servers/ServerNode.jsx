@@ -18,7 +18,7 @@ var ServerNode = React.createClass({
   },
   componentWillMount: function() {
 
-    this.socket = io.connect('http://' + this.props.public_ip + ':5000/resources');
+    this.socket = io.connect(window.location.protocol + "//" + this.props.public_ip + ":" + location.port + "/resources");
     this.socket.on('resources_info', function (msg) {
 
       var buff = "[ ";
@@ -57,14 +57,14 @@ var ServerNode = React.createClass({
   },
   onClickExecCommand: function(e){
 
-    $.get("http://" + this.state.public_ip + ":5000/processes/exec_command", function(data) {
+    $.get(window.location.protocol + "//" + this.state.public_ip + ":" + location.port + "/processes/exec_command", function(data) {
 
     });
 
   },
   onClickStartWorker: function(e){
 
-    $.get("http://" + this.state.public_ip + ":5000/processes/start_spider/" + this.state.selected_spider, function(data) {
+    $.get(window.location.protocol + "//" + this.state.public_ip + ":" + location.port + "/processes/start_spider/" + this.state.selected_spider, function(data) {
 
     });
 

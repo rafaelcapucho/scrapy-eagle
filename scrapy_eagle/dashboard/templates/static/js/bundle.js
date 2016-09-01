@@ -81,15 +81,15 @@
 	
 	var _JobsConfig2 = _interopRequireDefault(_JobsConfig);
 	
-	var _Root3 = __webpack_require__(/*! ./components/jobs/Root.jsx */ 372);
+	var _Root3 = __webpack_require__(/*! ./components/jobs/Root.jsx */ 373);
 	
 	var _Root4 = _interopRequireDefault(_Root3);
 	
-	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 373);
+	var _servers = __webpack_require__(/*! ./reducers/servers.jsx */ 374);
 	
 	var _servers2 = _interopRequireDefault(_servers);
 	
-	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 374);
+	var _jobs = __webpack_require__(/*! ./reducers/jobs.jsx */ 375);
 	
 	var _jobs2 = _interopRequireDefault(_jobs);
 	
@@ -29646,7 +29646,7 @@
 	    var server_set_new = new Array();
 	
 	    this.serversRequest = $.ajax({
-	      url: "http://" + document.domain + ":5000/servers/list",
+	      url: window.location.protocol + "//" + document.domain + ":" + location.port + "/servers/list",
 	      type: 'GET',
 	      dataType: 'json',
 	      cache: false
@@ -29734,7 +29734,7 @@
 	  },
 	  componentWillMount: function componentWillMount() {
 	
-	    this.socket = io.connect('http://' + this.props.public_ip + ':5000/resources');
+	    this.socket = io.connect(window.location.protocol + "//" + this.props.public_ip + ":" + location.port + "/resources");
 	    this.socket.on('resources_info', function (msg) {
 	
 	      var buff = "[ ";
@@ -29769,11 +29769,11 @@
 	  },
 	  onClickExecCommand: function onClickExecCommand(e) {
 	
-	    $.get("http://" + this.state.public_ip + ":5000/processes/exec_command", function (data) {});
+	    $.get(window.location.protocol + "//" + this.state.public_ip + ":" + location.port + "/processes/exec_command", function (data) {});
 	  },
 	  onClickStartWorker: function onClickStartWorker(e) {
 	
-	    $.get("http://" + this.state.public_ip + ":5000/processes/start_spider/" + this.state.selected_spider, function (data) {});
+	    $.get(window.location.protocol + "//" + this.state.public_ip + ":" + location.port + "/processes/start_spider/" + this.state.selected_spider, function (data) {});
 	  },
 	  onChangeDataProvider: function onChangeDataProvider(e) {
 	
@@ -29926,10 +29926,10 @@
 	  },
 	  onClickKill: function onClickKill() {
 	
-	    $.get("http://" + this.props.public_ip + ":5000/processes/kill_subprocess/" + this.props.pid, function (data) {});
+	    $.get(window.location.protocol + "//" + this.props.public_ip + ":" + location.port + "/processes/kill_subprocess/" + this.props.pid, function (data) {});
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.setState({ 'link_open_buffer': "http://" + this.props.public_ip + ":5000/processes/read_buffer/" + this.props.pid });
+	    this.setState({ 'link_open_buffer': window.location.protocol + "//" + this.props.public_ip + ":" + location.port + "/processes/read_buffer/" + this.props.pid });
 	  },
 	  render: function render() {
 	
@@ -44468,7 +44468,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	//import PureRenderMixin from 'react-addons-pure-render-mixin'
 	
-	__webpack_require__(/*! ./JobsConfig.scss */ 371);
+	__webpack_require__(/*! ./JobsConfig.scss */ 372);
 	
 	var JobsConfig = function (_React$Component) {
 	  _inherits(JobsConfig, _React$Component);
@@ -44696,7 +44696,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _reactSwitchery = __webpack_require__(/*! react-switchery */ 376);
+	var _reactSwitchery = __webpack_require__(/*! react-switchery */ 371);
 	
 	var _reactSwitchery2 = _interopRequireDefault(_reactSwitchery);
 	
@@ -45106,6 +45106,150 @@
 
 /***/ },
 /* 371 */
+/*!******************************************!*\
+  !*** ./~/react-switchery/build/index.js ***!
+  \******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 370);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	/**
+	 * React switch input component. Note we are using
+	 * switchery jquery plugin.
+	 */
+	var Switch = function (_React$Component) {
+	  _inherits(Switch, _React$Component);
+	
+	  /**
+	   * Constructor
+	   */
+	  function Switch(props) {
+	    _classCallCheck(this, Switch);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).call(this, props));
+	
+	    _this.onChange = _this.onChange.bind(_this);
+	    return _this;
+	  }
+	
+	  /**
+	   * We initialize the Switchery object
+	   * once the component is mounted
+	   */
+	
+	
+	  _createClass(Switch, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var input = this.refs.switch;
+	
+	      /* eslint-disable no-undef, no-new */
+	      new Switchery(input, this.props.options);
+	      /* eslint-enable no-new, no-undef */
+	      input.onchange = this.onChange;
+	    }
+	
+	    /**
+	     * When the user makes a change
+	     * If an external onChange
+	     * function is provided, we call that.
+	     */
+	
+	  }, {
+	    key: 'onChange',
+	    value: function onChange(event) {
+	      if (this.props.onChange) {
+	        this.props.onChange(event.target.checked);
+	      }
+	    }
+	
+	    /**
+	     * renders the component
+	     */
+	
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            className: (0, _classnames2.default)([this.props.className, {
+	              required: this.props.required
+	            }])
+	          },
+	          _react2.default.createElement(
+	            'label',
+	            null,
+	            this.props.label
+	          ),
+	          _react2.default.createElement('input', {
+	            ref: 'switch',
+	            type: 'checkbox',
+	            onClick: this.onChange,
+	            defaultChecked: this.props.checked
+	          })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Switch;
+	}(_react2.default.Component);
+	
+	/**
+	 * Validating propTypes
+	 */
+	
+	
+	Switch.propTypes = {
+	  label: _react2.default.PropTypes.label,
+	  className: _react2.default.PropTypes.string,
+	  required: _react2.default.PropTypes.bool,
+	  checked: _react2.default.PropTypes.bool,
+	  options: _react2.default.PropTypes.object,
+	  onChange: _react2.default.PropTypes.func
+	};
+	
+	/**
+	 * Default Props
+	 */
+	Switch.defaultProps = {
+	  value: true,
+	  required: false
+	};
+	
+	/**
+	 * Exports the switchery component
+	 */
+	exports.default = Switch;
+
+/***/ },
+/* 372 */
 /*!***************************************************!*\
   !*** ./react-src/components/jobs/JobsConfig.scss ***!
   \***************************************************/
@@ -45114,7 +45258,7 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 372 */
+/* 373 */
 /*!********************************************!*\
   !*** ./react-src/components/jobs/Root.jsx ***!
   \********************************************/
@@ -45162,7 +45306,7 @@
 	exports.default = SpiderRoot;
 
 /***/ },
-/* 373 */
+/* 374 */
 /*!****************************************!*\
   !*** ./react-src/reducers/servers.jsx ***!
   \****************************************/
@@ -45206,7 +45350,7 @@
 	}
 
 /***/ },
-/* 374 */
+/* 375 */
 /*!*************************************!*\
   !*** ./react-src/reducers/jobs.jsx ***!
   \*************************************/
@@ -45220,7 +45364,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _immutable = __webpack_require__(/*! immutable */ 375);
+	var _immutable = __webpack_require__(/*! immutable */ 376);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -45295,7 +45439,7 @@
 	};
 
 /***/ },
-/* 375 */
+/* 376 */
 /*!***************************************!*\
   !*** ./~/immutable/dist/immutable.js ***!
   \***************************************/
@@ -50280,150 +50424,6 @@
 	  return Immutable;
 	
 	}));
-
-/***/ },
-/* 376 */
-/*!******************************************!*\
-  !*** ./~/react-switchery/build/index.js ***!
-  \******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 370);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	/**
-	 * React switch input component. Note we are using
-	 * switchery jquery plugin.
-	 */
-	var Switch = function (_React$Component) {
-	  _inherits(Switch, _React$Component);
-	
-	  /**
-	   * Constructor
-	   */
-	  function Switch(props) {
-	    _classCallCheck(this, Switch);
-	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Switch).call(this, props));
-	
-	    _this.onChange = _this.onChange.bind(_this);
-	    return _this;
-	  }
-	
-	  /**
-	   * We initialize the Switchery object
-	   * once the component is mounted
-	   */
-	
-	
-	  _createClass(Switch, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var input = this.refs.switch;
-	
-	      /* eslint-disable no-undef, no-new */
-	      new Switchery(input, this.props.options);
-	      /* eslint-enable no-new, no-undef */
-	      input.onchange = this.onChange;
-	    }
-	
-	    /**
-	     * When the user makes a change
-	     * If an external onChange
-	     * function is provided, we call that.
-	     */
-	
-	  }, {
-	    key: 'onChange',
-	    value: function onChange(event) {
-	      if (this.props.onChange) {
-	        this.props.onChange(event.target.checked);
-	      }
-	    }
-	
-	    /**
-	     * renders the component
-	     */
-	
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          {
-	            className: (0, _classnames2.default)([this.props.className, {
-	              required: this.props.required
-	            }])
-	          },
-	          _react2.default.createElement(
-	            'label',
-	            null,
-	            this.props.label
-	          ),
-	          _react2.default.createElement('input', {
-	            ref: 'switch',
-	            type: 'checkbox',
-	            onClick: this.onChange,
-	            defaultChecked: this.props.checked
-	          })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Switch;
-	}(_react2.default.Component);
-	
-	/**
-	 * Validating propTypes
-	 */
-	
-	
-	Switch.propTypes = {
-	  label: _react2.default.PropTypes.label,
-	  className: _react2.default.PropTypes.string,
-	  required: _react2.default.PropTypes.bool,
-	  checked: _react2.default.PropTypes.bool,
-	  options: _react2.default.PropTypes.object,
-	  onChange: _react2.default.PropTypes.func
-	};
-	
-	/**
-	 * Default Props
-	 */
-	Switch.defaultProps = {
-	  value: true,
-	  required: false
-	};
-	
-	/**
-	 * Exports the switchery component
-	 */
-	exports.default = Switch;
 
 /***/ }
 /******/ ]);

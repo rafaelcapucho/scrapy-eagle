@@ -34,7 +34,7 @@ var ServerSet = React.createClass({
     var server_set_new = new Array();
 
     this.serversRequest = $.ajax({
-      url: "http://" + document.domain + ":5000/servers/list",
+      url: window.location.protocol + "//" + document.domain + ":"+ location.port +"/servers/list",
       type: 'GET',
       dataType: 'json',
       cache: false
