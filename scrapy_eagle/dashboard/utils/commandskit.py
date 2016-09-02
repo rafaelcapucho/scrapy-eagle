@@ -5,22 +5,27 @@ from scrapy_eagle.dashboard import settings
 
 def load_commands_name(dir):
 
-    module_names = []
+    if os.path.exists(dir):
 
-    for d in os.listdir(dir):
-        if d.find("__init__") == -1 and d.endswith('.py'):
+        module_names = []
 
-            # Remove possible spaces
-            d = d.replace(" ", "")
+        for d in os.listdir(dir):
+            if d.find("__init__") == -1 and d.endswith('.py'):
 
-            # Remove the Extension
-            d = ".".join(d.split(".")[:-1])
+                # Remove possible spaces
+                d = d.replace(" ", "")
 
-            module_names.append(d)
+                # Remove the Extension
+                d = ".".join(d.split(".")[:-1])
 
-    module_names.sort()
+                module_names.append(d)
 
-    return module_names
+        module_names.sort()
+
+        return module_names
+
+    else:
+        return []
 
 
 def find_commands():
