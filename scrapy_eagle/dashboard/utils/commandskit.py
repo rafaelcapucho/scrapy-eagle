@@ -10,6 +10,9 @@ def load_commands_name(dir):
     for d in os.listdir(dir):
         if d.find("__init__") == -1 and d.endswith('.py'):
 
+            # Remove possible spaces
+            d = d.replace(" ", "")
+
             # Remove the Extension
             d = ".".join(d.split(".")[:-1])
 
