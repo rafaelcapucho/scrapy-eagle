@@ -19,7 +19,7 @@ def read_requirements(filename):
 
 
 setup(name='scrapy-eagle',
-    version='0.0.34',
+    version='0.0.35',
     description='Run Scrapy Distributed',
     long_description=LONG_DESC,
     author='Rafael Alfredo Capucho',
