@@ -20,6 +20,7 @@ _config = None
 _public_ip = None
 _hostname = None
 _spiders = None
+_commands = None
 
 
 def setup_configuration(config_file=None):
@@ -80,3 +81,7 @@ def get_args():
 
 def get_spiders():
     return _spiders
+
+
+def get_commands():
+    return _commands

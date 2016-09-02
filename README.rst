@@ -63,8 +63,12 @@ You should create one ``configparser`` configuration file (e.g. in /etc/scrapy-e
     port = 5000
 
     [scrapy]
-    base_dir = /project_venv/project/project
     binary = /project_venv/bin/scrapy
+    base_dir = /project_venv/project_scrapy/project
+
+    [commands]
+    binary = /project_venv/bin/python3 
+    base_dir = /project_venv/project_scrapy/project/commands
     
 Then you will be able to execute the `eagle_server` command like,
 

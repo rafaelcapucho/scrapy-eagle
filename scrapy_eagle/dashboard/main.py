@@ -19,7 +19,7 @@ except ImportError:
 
 from scrapy_eagle.dashboard import settings
 from scrapy_eagle.dashboard import memory
-from scrapy_eagle.dashboard.green_threads import heartbeat, stats, find_new_spiders
+from scrapy_eagle.dashboard.green_threads import heartbeat, stats, find_new_spiders, find_new_commands
 from scrapy_eagle.dashboard.utils import processkit
 
 
@@ -64,6 +64,7 @@ def start_periodics(socketio):
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
     gevent.spawn(stats.send_resources_info, socketio, settings.subprocess_pids, public_ip)
     gevent.spawn(find_new_spiders)
+    gevent.spawn(find_new_commands)
 
 
 def entry_point():

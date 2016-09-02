@@ -26,13 +26,19 @@ def update():
 
         key = flask.request.form.get('key', None)
         job_type = flask.request.form.get('job_type', None)
-        active = bool(flask.request.form.get('active', None))
         frequency_minutes = int(flask.request.form.get('frequency_minutes', None))
         max_concurrency = int(flask.request.form.get('max_concurrency', None))
         min_concurrency = int(flask.request.form.get('min_concurrency', None))
         priority = int(flask.request.form.get('priority', None))
         max_memory_mb = int(flask.request.form.get('max_memory_mb', None))
         start_urls = flask.request.form.get('start_urls', None)
+
+        if flask.request.form.get('active', None) == 'false':
+            active = False
+        elif flask.request.form.get('active', None) == 'true':
+            active = True
+        else:
+            active = False
 
     # Never trust in the user input type
     except ValueError:
@@ -44,7 +50,7 @@ def update():
 
     if not error:
 
-        if not all([key, active, job_type, frequency_minutes, max_concurrency, min_concurrency, priority, max_memory_mb]):
+        if not all([key, job_type, frequency_minutes, max_concurrency, min_concurrency, priority, max_memory_mb]):
             error = True
             result.update({
                 'status': 'error',
@@ -61,6 +67,10 @@ def update():
         else:
 
             actual_obj = get_job_object(key=key)
+
+            # A brand new
+            if not actual_obj:
+                actual_obj = {}
 
             actual_obj.update({
                 'active': active,
@@ -93,6 +103,7 @@ def update():
 def listing():
 
     _spiders = settings.get_spiders()
+    _commands = settings.get_commands()
 
     # May happen to request this route before we've
     # the settings filled by the gevent async execution `green_threads.find_new_spiders`
@@ -129,22 +140,23 @@ def listing():
         # d[s]['start_urls'] = []
         # d[s]['last_started_at'] = datetime.utcnow().isoformat()
 
-    # TODO: Iterate over all commands
-    obj = get_job_object(key='generator')
+    for file_name in _commands:
 
-    if obj:
-        d['generator'] = obj
+        obj = get_job_object(key=file_name)
 
-    # d['generator'] = {}
-    # d['generator']['active'] = True
-    # d['generator']['job_type'] = 'command'  # or 'command'
-    # d['generator']['min_concurrency'] = 1
-    # d['generator']['max_concurrency'] = 3
-    # d['generator']['max_memory_mb'] = 50
-    # d['generator']['priority'] = 2
-    # d['generator']['frequency_minutes'] = 5
-    # d['generator']['last_started_at'] = 20
-    # d['generator']['start_urls'] = None
+        if obj:
+            d[file_name] = obj
+
+        else:
+            d[file_name] = {}
+            d[file_name]['active'] = False
+            d[file_name]['job_type'] = 'command'
+            d[file_name]['min_concurrency'] = 1
+            d[file_name]['max_concurrency'] = 3
+            d[file_name]['max_memory_mb'] = 50
+            d[file_name]['priority'] = 2
+            d[file_name]['frequency_minutes'] = 60
+            d[file_name]['last_started_at'] = None
 
     return flask.Response(
         response=json.dumps(d, sort_keys=True),
