@@ -1,7 +1,7 @@
 import gevent
 
 from scrapy_eagle.dashboard import settings
-from scrapy_eagle.dashboard.utils import spiderskit
+from scrapy_eagle.dashboard.utils import spiderskit, commandskit
 
 
 def find_new_spiders():
@@ -15,3 +15,16 @@ def find_new_spiders():
         settings._spiders = _spiders
 
         gevent.sleep(10)
+
+
+def find_new_commands():
+
+    while True:
+
+        # Monitoring the command folder
+        _commands = commandskit.find_commands()
+
+        # Install the list of commands names
+        settings._commands = _commands
+
+        gevent.sleep(5)
