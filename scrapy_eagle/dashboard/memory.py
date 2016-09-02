@@ -51,8 +51,7 @@ def update_job_object(key, fields):
 
     serialized = json.dumps(fields, sort_keys=True)
 
-    redis_conn.set('eagle_jobs:{key}'.format(key=key), serialized, xx=True)
-
+    redis_conn.set('eagle_jobs:{key}'.format(key=key), serialized)
 
 if __name__ == "__main__":
 
