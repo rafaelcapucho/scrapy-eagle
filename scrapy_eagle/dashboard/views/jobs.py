@@ -105,8 +105,8 @@ def listing():
     _spiders = settings.get_spiders()
     _commands = settings.get_commands()
 
-    # May happen to request this route before we've
-    # the settings filled by the gevent async execution `green_threads.find_new_spiders`
+    # When the system is starting up, spiders may return empty because
+    # we're using async execution `green_threads.find_new_spiders`.
     if not _spiders:
         return flask.Response(
             response=json.dumps({}, sort_keys=True),
