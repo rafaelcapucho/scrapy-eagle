@@ -125,20 +125,17 @@ def listing():
         if obj:
             d[s] = obj
         else:
-            # TODO: How to proceed for newly jobs
-            pass
-
-        # d[s] = {}
-        # d[s]['active'] = True
-        # d[s]['job_type'] = 'spider' # or 'command'
-        # d[s]['min_concurrency'] = 1
-        # d[s]['max_concurrency'] = 5
-        # d[s]['max_memory_mb'] = 200
-        # d[s]['priority'] = 7
-        # d[s]['frequency_minutes'] = 60
-        # d[s]['last_started_at'] = 20
-        # d[s]['start_urls'] = []
-        # d[s]['last_started_at'] = datetime.utcnow().isoformat()
+            # Jobs without previous information, using default config
+            d[s] = {}
+            d[s]['active'] = True
+            d[s]['job_type'] = 'spider'
+            d[s]['min_concurrency'] = 1
+            d[s]['max_concurrency'] = 5
+            d[s]['max_memory_mb'] = 200
+            d[s]['priority'] = 7
+            d[s]['frequency_minutes'] = 60
+            d[s]['start_urls'] = []
+            d[s]['last_started_at'] = datetime.utcnow().isoformat()
 
     for file_name in _commands:
 
