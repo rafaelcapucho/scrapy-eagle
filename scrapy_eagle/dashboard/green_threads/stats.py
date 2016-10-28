@@ -72,8 +72,10 @@ def send_resources_info(socketio, subprocess_pids, public_ip):
         dict_info['sub'] = [x for x in dict_info['sub'] if x]
 
         _spiders = settings.get_spiders()
+        _commands = settings.get_commands()
 
         dict_info['spiders'] = _spiders or []
+        dict_info['commands'] = _commands or []
 
         print('\n\ndict_info: ', dict_info, '\n\n')
 

@@ -63,7 +63,7 @@ def start_periodics(socketio):
 
     gevent.spawn(heartbeat.heartbeat_servers, redis_conn, public_ip, hostname)
     gevent.spawn(stats.send_resources_info, socketio, settings.subprocess_pids, public_ip)
-    gevent.spawn(executor.dispatch, redis_conn)
+    gevent.spawn(executor.evaluation_loop)
     gevent.spawn(find_new_spiders)
     gevent.spawn(find_new_commands)
 

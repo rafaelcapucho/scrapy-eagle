@@ -44,7 +44,6 @@ def get_job_object(key):
     else:
         return None
 
-
 def update_job_object(key, fields):
 
     redis_conn = get_connection()
