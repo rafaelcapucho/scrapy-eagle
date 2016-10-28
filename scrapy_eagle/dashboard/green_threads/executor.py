@@ -21,12 +21,16 @@ def dispatch(redis_conn):
             for key in _spiders + _commands:
                 obj = get_job_object(key=key)
 
-                if obj and obj.get('last_started_at'):
+                if obj and obj.get('next_execution_at'):
 
-                    last = timestamp_to_utc(iso_to_timestamp(obj['last_started_at']))
+                    # last = timestamp_to_utc(iso_to_timestamp(obj['last_started_at']))
+                    next_execution_at = timestamp_to_utc(iso_to_timestamp(obj['next_execution_at']))
 
                     now = datetime.utcnow()
 
-                    print(now - last)
+                    if next_execution_at < now:
+                        print("executa: ", key)
+                    else:
+                        print("nao executa: ", key)
 
         gevent.sleep(3)

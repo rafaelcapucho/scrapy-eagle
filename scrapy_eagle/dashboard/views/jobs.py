@@ -1,6 +1,6 @@
 import json
 from collections import OrderedDict
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import flask
 
@@ -136,6 +136,7 @@ def listing():
             d[s]['frequency_minutes'] = 60
             d[s]['start_urls'] = []
             d[s]['last_started_at'] = datetime.utcnow().isoformat()
+            d[s]['next_execution_at'] = (datetime.utcnow() + timedelta(minutes=d[s]['frequency_minutes'])).isoformat()
 
     for file_name in _commands:
 
@@ -154,6 +155,7 @@ def listing():
             d[file_name]['priority'] = 2
             d[file_name]['frequency_minutes'] = 60
             d[file_name]['last_started_at'] = None
+            d[file_name]['next_execution_at'] = None
 
     return flask.Response(
         response=json.dumps(d, sort_keys=True),
