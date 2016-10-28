@@ -99,6 +99,7 @@ def kill_subprocess(pid):
         mimetype="application/json"
     )
 
+
 @processes.route('/start_spider/<spider>')
 def start_spider(spider):
 

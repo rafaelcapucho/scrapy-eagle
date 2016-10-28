@@ -71,6 +71,8 @@ def update():
             # A brand new
             if not actual_obj:
                 actual_obj = {}
+            else:
+                current_frequency = actual_obj['frequency_minutes']
 
             actual_obj.update({
                 'active': active,
@@ -81,6 +83,10 @@ def update():
                 'priority': priority,
                 'max_memory_mb': max_memory_mb
             })
+
+            # If the frequency change, recalculate the next execution
+            if current_frequency != frequency_minutes:
+                actual_obj['next_execution_at'] = (datetime.utcnow() + timedelta(minutes=frequency_minutes)).isoformat()
 
             if job_type == 'spider':
                 actual_obj.update({'start_urls': [x for x in start_urls.split("\n") if x]})
@@ -127,12 +133,12 @@ def listing():
         else:
             # Jobs without previous information, using default config
             d[s] = {}
-            d[s]['active'] = True
+            d[s]['active'] = False
             d[s]['job_type'] = 'spider'
             d[s]['min_concurrency'] = 1
             d[s]['max_concurrency'] = 5
             d[s]['max_memory_mb'] = 200
-            d[s]['priority'] = 7
+            d[s]['priority'] = 1
             d[s]['frequency_minutes'] = 60
             d[s]['start_urls'] = []
             d[s]['last_started_at'] = datetime.utcnow().isoformat()
@@ -150,9 +156,9 @@ def listing():
             d[file_name]['active'] = False
             d[file_name]['job_type'] = 'command'
             d[file_name]['min_concurrency'] = 1
-            d[file_name]['max_concurrency'] = 3
+            d[file_name]['max_concurrency'] = 1
             d[file_name]['max_memory_mb'] = 50
-            d[file_name]['priority'] = 2
+            d[file_name]['priority'] = 1
             d[file_name]['frequency_minutes'] = 60
             d[file_name]['last_started_at'] = None
             d[file_name]['next_execution_at'] = None
